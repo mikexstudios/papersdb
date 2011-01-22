@@ -1,0 +1,10 @@
+.DS_Store
+*.swp
+env/
+local_settings.py
+*.pyc
+pip-log.txt
+fcgi.pid
+celeryd.log
+celerybeat-schedule*
+development.db
