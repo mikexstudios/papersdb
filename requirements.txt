@@ -19,6 +19,11 @@ django-annoying
 #For easy database migrations!
 South
 
+#For handling registration, activation, and password stuff
+#-e hg+http://bitbucket.org/ubernostrum/django-registration#egg=django_registration
+#Some default templates for django-registration
+#-e git://github.com/yourcelf/django-registration-defaults.git#egg=django-registration-defaults
+
 #django-rpx-plus (depends on django-picklefield, automatically installed):
 #django-picklefield==0.1
 #-e git://github.com/mikexstudios/django-rpx-plus.git#egg=django_rpx_plus
