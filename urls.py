@@ -6,7 +6,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    (r'^', include('subscription.urls')),
+    (r'^', include('papers.urls')),
 
     ##Override for simple backend to redirect user to overview page on successful
     ##registration.
