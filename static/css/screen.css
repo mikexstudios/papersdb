@@ -1510,9 +1510,10 @@ textarea {
 
 /* line 39, ../sass/screen.sass */
 body {
+  background: url('../images/grid.png?1295807425');
   font-size: 1.1em;
 }
-/* line 41, ../sass/screen.sass */
+/* line 43, ../sass/screen.sass */
 body a, body a:link, body a:visited {
   text-decoration: none;
   color: #0033cc;
@@ -1521,12 +1522,12 @@ body a, body a:link, body a:visited {
 body a:hover, body a:link:hover, body a:visited:hover {
   text-decoration: underline;
 }
-/* line 44, ../sass/screen.sass */
+/* line 46, ../sass/screen.sass */
 body .logo {
   font-family: Georgia, Times, Times New Roman, serif;
   font-style: italic;
 }
-/* line 47, ../sass/screen.sass */
+/* line 49, ../sass/screen.sass */
 body #messages {
   margin-top: 0.5em;
   margin-bottom: 0.5em;
@@ -1563,14 +1564,14 @@ body #messages ul .error {
 body #messages ul .info {
   background-color: #aaddff;
 }
-/* line 50, ../sass/screen.sass */
+/* line 52, ../sass/screen.sass */
 body #container {
+  width: 950px;
   margin: 0 auto;
-  min-width: 800px;
-  max-width: 960px;
-  padding: 0 25px;
+  overflow: hidden;
+  *zoom: 1;
 }
-/* line 56, ../sass/screen.sass */
+/* line 59, ../sass/screen.sass */
 body #header {
   font-family: Georgia, Times, Times New Roman, serif;
   margin-top: 3px;
@@ -1582,31 +1583,31 @@ body #header {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 67, ../sass/screen.sass */
+/* line 70, ../sass/screen.sass */
 body #header h1 {
   margin-left: 5px;
   font-size: 1.2em;
   float: left;
   margin: 0;
 }
-/* line 72, ../sass/screen.sass */
+/* line 75, ../sass/screen.sass */
 body #header h1 a {
   color: #333333;
   text-decoration: none;
 }
-/* line 75, ../sass/screen.sass */
+/* line 78, ../sass/screen.sass */
 body #header h1 .sitename {
   font-size: 0.9em;
 }
-/* line 77, ../sass/screen.sass */
+/* line 80, ../sass/screen.sass */
 body #header h1 small {
   font-size: 0.5em;
 }
-/* line 79, ../sass/screen.sass */
+/* line 82, ../sass/screen.sass */
 body #header h1 small a:hover {
   text-decoration: underline;
 }
-/* line 81, ../sass/screen.sass */
+/* line 84, ../sass/screen.sass */
 body #header ul#navigation {
   font-variant: small-caps;
   font-size: 1.1em;
@@ -1638,17 +1639,17 @@ body #header ul#navigation li:first-child, body #header ul#navigation li.first {
 body #header ul#navigation li:last-child, body #header ul#navigation li.last {
   padding-right: 0;
 }
-/* line 88, ../sass/screen.sass */
+/* line 91, ../sass/screen.sass */
 body #header ul#navigation li {
   margin-left: 5px;
 }
-/* line 91, ../sass/screen.sass */
+/* line 94, ../sass/screen.sass */
 body #site-navigation {
   font-family: Georgia, Times, Times New Roman, serif;
   margin-top: 15px;
   margin-bottom: 5px;
 }
-/* line 97, ../sass/screen.sass */
+/* line 100, ../sass/screen.sass */
 body #site-navigation ul {
   margin: 0;
   padding: 0;
@@ -1684,66 +1685,64 @@ body #site-navigation ul li:first-child, body #site-navigation ul li.first {
 body #site-navigation ul li:last-child, body #site-navigation ul li.last {
   padding-right: 0;
 }
-/* line 104, ../sass/screen.sass */
+/* line 107, ../sass/screen.sass */
 body #site-navigation ul li {
   padding: 4px 15px !important;
   padding-top: 2px;
 }
-/* line 109, ../sass/screen.sass */
+/* line 112, ../sass/screen.sass */
 body #site-navigation ul li a {
   color: #000099;
 }
-/* line 112, ../sass/screen.sass */
+/* line 115, ../sass/screen.sass */
 body #site-navigation ul li.selected {
   background-color: #445a88;
 }
-/* line 118, ../sass/screen.sass */
+/* line 121, ../sass/screen.sass */
 body #site-navigation ul li.selected a {
   color: #eeeeee;
 }
-/* line 120, ../sass/screen.sass */
+/* line 123, ../sass/screen.sass */
 body #site-navigation ul li:hover {
   background-color: #d1d9e8;
   color: #555555;
 }
-/* line 124, ../sass/screen.sass */
+/* line 127, ../sass/screen.sass */
 body #site-navigation ul li:hover a {
   text-decoration: none;
 }
-/* line 127, ../sass/screen.sass */
+/* line 130, ../sass/screen.sass */
 body #content {
-  width: 800px;
-  margin: 0 auto;
   clear: both;
 }
-/* line 132, ../sass/screen.sass */
+/* line 135, ../sass/screen.sass */
 body #content #title {
   font-family: Georgia, Times, Times New Roman, serif;
   font-size: 1.8em;
   margin-bottom: 0px;
 }
-/* line 136, ../sass/screen.sass */
+/* line 139, ../sass/screen.sass */
 body #content #description {
   font-size: 0.9em;
   color: #555555;
   margin-bottom: 15px;
 }
-/* line 143, ../sass/screen.sass */
+/* line 146, ../sass/screen.sass */
 body h4 {
   margin-top: 0.9em;
   margin-bottom: 0.3em;
 }
-/* line 146, ../sass/screen.sass */
+/* line 149, ../sass/screen.sass */
 body h4.withedit {
   float: left;
   margin-top: 0;
   margin-right: 0.3em;
 }
-/* line 150, ../sass/screen.sass */
+/* line 153, ../sass/screen.sass */
 body small.edit {
   font-size: 0.7em;
 }
-/* line 153, ../sass/screen.sass */
+/* line 156, ../sass/screen.sass */
 body table {
   font-size: 0.8em;
   border-top: 2px solid #333333;
@@ -1767,92 +1766,92 @@ body table tbody tr.last th,
 body table tbody tr.last td, body table tfoot tr:last-child th, body table tfoot tr:last-child td, body table tfoot tr.last th, body table tfoot tr.last td {
   border-bottom-width: 0px;
 }
-/* line 160, ../sass/screen.sass */
+/* line 163, ../sass/screen.sass */
 body table th, body table td {
   border-bottom: none;
   padding: 6px 7px;
 }
-/* line 166, ../sass/screen.sass */
+/* line 169, ../sass/screen.sass */
 body table thead tr th {
   background-color: transparent;
   border-bottom: 4px double #333333;
 }
-/* line 172, ../sass/screen.sass */
+/* line 175, ../sass/screen.sass */
 body table tbody tr td {
   font-size: 0.85em;
 }
-/* line 174, ../sass/screen.sass */
+/* line 177, ../sass/screen.sass */
 body table tbody tr .center {
   text-align: center;
 }
-/* line 176, ../sass/screen.sass */
+/* line 179, ../sass/screen.sass */
 body table tbody tr .empty {
   color: #999999;
 }
-/* line 178, ../sass/screen.sass */
+/* line 181, ../sass/screen.sass */
 body table tbody tr.even {
   background-color: #eeeeee;
 }
-/* line 180, ../sass/screen.sass */
+/* line 183, ../sass/screen.sass */
 body table tbody tr.even td {
   background-color: transparent;
 }
-/* line 183, ../sass/screen.sass */
+/* line 186, ../sass/screen.sass */
 body table tbody tr:hover {
   background-color: #f3f5f9;
 }
-/* line 188, ../sass/screen.sass */
+/* line 191, ../sass/screen.sass */
 body form.admin {
   clear: both;
   width: 90%;
   margin: 0 auto;
   margin-top: -0.9em;
 }
-/* line 194, ../sass/screen.sass */
+/* line 197, ../sass/screen.sass */
 body form.admin h4 {
   margin-top: 0.9em;
   margin-bottom: 0.3em;
 }
-/* line 197, ../sass/screen.sass */
+/* line 200, ../sass/screen.sass */
 body form.admin .description {
   font-size: 0.8em;
   color: #555555;
   margin-top: -0.3em;
   margin-bottom: 0.8em;
 }
-/* line 202, ../sass/screen.sass */
+/* line 205, ../sass/screen.sass */
 body form.admin .field {
   clear: left;
   background-color: #f3f5f9;
   padding: 15px 20px;
   margin-bottom: 10px;
 }
-/* line 208, ../sass/screen.sass */
+/* line 211, ../sass/screen.sass */
 body form.admin .field a {
   color: #768dbb;
 }
-/* line 210, ../sass/screen.sass */
+/* line 213, ../sass/screen.sass */
 body form.admin .field label {
   display: block;
   float: left;
   width: 180px;
 }
-/* line 214, ../sass/screen.sass */
+/* line 217, ../sass/screen.sass */
 body form.admin .field label.optional {
   font-weight: normal;
 }
-/* line 216, ../sass/screen.sass */
+/* line 219, ../sass/screen.sass */
 body form.admin .field .right {
   margin-left: 180px;
 }
-/* line 219, ../sass/screen.sass */
+/* line 222, ../sass/screen.sass */
 body form.admin .field .right small {
   display: block;
   margin-top: 5px;
   font-size: 0.7em;
   color: #999999;
 }
-/* line 224, ../sass/screen.sass */
+/* line 227, ../sass/screen.sass */
 body form.admin .field .errorlist {
   text-align: center;
   padding-top: 5px;
@@ -1890,30 +1889,30 @@ body form.admin .field .errorlist li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 230, ../sass/screen.sass */
+/* line 233, ../sass/screen.sass */
 body form.admin .field input[type=text], body form.admin .field input[type=password] {
   font-size: 1.2em;
   padding: 4px;
   margin: 0;
   width: 450px;
 }
-/* line 235, ../sass/screen.sass */
+/* line 238, ../sass/screen.sass */
 body form.admin .field .input-helper {
   font-size: 1.2em;
 }
-/* line 239, ../sass/screen.sass */
+/* line 242, ../sass/screen.sass */
 body form.admin .actions {
   margin-top: 20px;
   text-align: right;
 }
-/* line 243, ../sass/screen.sass */
+/* line 246, ../sass/screen.sass */
 body .info {
   clear: left;
   background-color: #f3f5f9;
   overflow: hidden;
   *zoom: 1;
 }
-/* line 248, ../sass/screen.sass */
+/* line 251, ../sass/screen.sass */
 body .info dl {
   font-size: 0.9em;
   float: left;
@@ -1922,7 +1921,7 @@ body .info dl {
   background-color: transparent;
   margin-bottom: 0;
 }
-/* line 255, ../sass/screen.sass */
+/* line 258, ../sass/screen.sass */
 body .info dl dt {
   clear: left;
   float: left;
@@ -1930,22 +1929,22 @@ body .info dl dt {
   width: 115px;
   padding-right: 10px;
 }
-/* line 265, ../sass/screen.sass */
+/* line 268, ../sass/screen.sass */
 body .info dl dd small {
   font-size: 0.7em;
   color: #999999;
 }
-/* line 268, ../sass/screen.sass */
+/* line 271, ../sass/screen.sass */
 body .info dl dd input {
   margin: 1px 0;
   width: 225px;
 }
-/* line 271, ../sass/screen.sass */
+/* line 274, ../sass/screen.sass */
 body .info dl.left {
   padding-right: 5px;
   width: 46%;
 }
-/* line 276, ../sass/screen.sass */
+/* line 279, ../sass/screen.sass */
 body #footer {
   clear: both;
   margin-top: 20px;
@@ -1955,26 +1954,40 @@ body #footer {
   font-family: Georgia, Times, Times New Roman, serif;
   color: #cccccc;
 }
-/* line 285, ../sass/screen.sass */
+/* line 288, ../sass/screen.sass */
 body #footer a {
   color: #cccccc;
 }
 
-/* line 288, ../sass/screen.sass */
-body#dashboard {
-  width: 950px;
-  margin: 0 auto;
-  overflow: hidden;
-  *zoom: 1;
-  background: url('../images/grid.png?1295807425');
+/* line 293, ../sass/screen.sass */
+body#dashboard #left {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 150px;
+}
+/* line 138, ../../../../../.gem/ruby/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html body#dashboard #left {
+  overflow-x: hidden;
 }
 /* line 295, ../sass/screen.sass */
+body#dashboard #right {
+  display: inline;
+  float: left;
+  margin-right: 0;
+  width: 790px;
+}
+/* line 138, ../../../../../.gem/ruby/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html body#dashboard #right {
+  overflow-x: hidden;
+}
+/* line 299, ../sass/screen.sass */
 body#dashboard #right #search form input.search {
   font-size: 0.9em;
   padding: 4px;
   margin-right: 0;
 }
-/* line 299, ../sass/screen.sass */
+/* line 303, ../sass/screen.sass */
 body#dashboard #right #search form button {
   margin-bottom: 3px;
   margin-left: 0;

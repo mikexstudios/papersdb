@@ -37,6 +37,8 @@ $content_width: 800px
 
 
 body 
+  +showgrid
+
   font-size: 1.1em
   a, a:link, a:visited 
     +hover-link
@@ -48,10 +50,11 @@ body
     +messages-style
 
   #container 
-    margin: 0 auto
-    min-width: $content_width
-    max-width: $container_width
-    padding: 0 25px
+    +container
+    //margin: 0 auto
+    //min-width: $content_width
+    //max-width: $container_width
+    //padding: 0 25px
 
   #header
     font-family: $serif_font
@@ -125,8 +128,8 @@ body
           text-decoration: none
 
   #content
-    width: $content_width
-    margin: 0 auto
+    //width: $content_width
+    //margin: 0 auto
     clear: both
 
     #title
@@ -286,10 +289,11 @@ body
       color: #ccc
 
 body#dashboard
-  +container
-  +showgrid
-
+  $left-grid-columns: 4
+  #left
+    +column($left-grid-columns)
   #right
+    +column($blueprint-grid-columns - $left-grid-columns, true)
     #search
       form
         input.search
