@@ -24,7 +24,7 @@
 {% block content %}
 <div id="login_box"><!-- extra wrapper for centering -->
 
-    <h2>Logged out of <a href="{% url home %}" class="logo">PapersDB</a></h2>
+    <h2>Logged out of <a href="{% url home %}" class="logo">{{ SITENAME }}</a></h2>
     <p>
         <a href="{% url auth_login %}{% if request.META.HTTP_REFERER %}?next={{ request.META.HTTP_REFERER }}{% endif %}">Click here to login again</a>.<br />
         {% if request.META.HTTP_REFERER %}

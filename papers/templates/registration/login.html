@@ -25,7 +25,7 @@
 {% block content %}
 <div id="login_box"><!-- extra wrapper for centering -->
     
-    <h2>Login to <a href="{% url home %}" class="logo">PapersDB</a></h2>
+    <h2>Login to <a href="{% url home %}" class="logo">{{ SITENAME }}</a></h2>
 
     <form action="" method="POST" id="login_form">
         {% csrf_token %}
