@@ -7,11 +7,6 @@
 // Import the non-default scaffolding module.
 //@import blueprint/scaffolding
 
-// Generate the blueprint framework according to your configuration:
-+blueprint
-//+blueprint-scaffolding
-
-
 @import compass/utilities/general.scss
 //@import compass/utilities/text.scss
 @import compass/utilities/links.scss
@@ -29,6 +24,12 @@ $serif_font: Georgia, Times, Times New Roman, serif
 $monospace_font: Monaco, Courier New, DejaVu Sans Mono, Bitstream Vera Sans Mono, monospace
 $blueprint-font-family: $sans_serif_font
 @include blueprint-typography
+
+// Generate the blueprint framework according to your configuration:
+// (We put this after typography so that duplicate css code isn't generated.)
++blueprint
+//+blueprint-scaffolding
+
 
 $container_width: 960px
 $content_width: 800px
@@ -53,18 +54,20 @@ body
 
   #header
     font-family: $serif_font
-    margin-top: 10px
-    margin-bottom: 10px
+    margin-top: 3px
+    margin-bottom: 5px
+    padding-bottom: 3px
     border-bottom: 1px solid #ccc
     text-align: right
+    //Blueprint sets global line-height to 1.5, which introduces too much padding
+    //in the header.
+    line-height: 1
     +clearfix
     h1
       margin-left: 5px
       font-size: 1.2em
       float: left
       margin: 0
-      //Correction for blueprint:
-      line-height: 1.5
       a
         color: #333
         text-decoration: none
@@ -76,11 +79,13 @@ body
           text-decoration: underline
     ul#navigation
       font-variant: small-caps
-      font-size: 1.2em
-      margin-bottom: 0
-      +inline-list
+      font-size: 1.1em
+      +horizontal-list
+      float: right
+      //Slightly push nav down to align with logo text
+      margin-top: 3px
       li
-        margin-left: 10px
+        margin-left: 5px
 
   #site-navigation
     //Can't use this since it cuts off the left edge of background button.
