@@ -1,15 +1,35 @@
 {% extends "papers/base.html" %}
-{% block bodyid %}home{% endblock %}
+{% block bodyid %}login{% endblock %}
 
-{% block title %}home{% endblock %}
+{% block title %}Scientific Paper Management{% endblock %}
 
 {% block javascript %}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //Vertically center content
+            var top_margin = ($(window).height() - $('#login_box').height())/2;
+            //Correction factor.
+            top_margin = top_margin - 60;
+            //Still retain some top_margin if the window height is smaller than
+            //box height.
+            if (top_margin < 0) top_margin = 10;
+            $('#login_box').css('margin-top', top_margin);
+        });
+    </script>
 {% endblock %}
 
-{% block sitenav %}{% endblock %}
+{# We put our messages inside our box so we don't need the default ones #}
+{% block messages %}{% endblock %}
 
 {% block content %}
-asdf
+<div id="login_box"><!-- extra wrapper for centering -->
+    
+    <h1 class="logo">{{ SITENAME }}</h1>
+    <h4>elegant scientific paper management</h4>
 
+
+</div>
 {% endblock %}
 
+{% block footer %}{% endblock %}
