@@ -17,6 +17,28 @@
 
 {% block content %}
 
+<div id="left">
+    <div id="menu">
+        <a href="" id="papers-add-link" class="button light small">Add Paper</a>
+        <ul>
+            <li class="selected">All Papers</li>
+            <li>Recent</li>
+            <li>Starred &#9733;</li>
+            <li>Trash</li>
+        </ul>
+        <!-- TODO: Add Tags -->
+    </div>
+</div>
+
+<div id="right">
+    <div id="search">
+        <form action="" method="POST" name="search_form">
+            {% csrf_token %}
+            <input name="search" type="text" class="search" />
+            <button type="submit" class="light" name="submit" value="Submit">Search Papers</button>
+        </form>
+    </div>
+</div>
 
 {% endblock %}
 
