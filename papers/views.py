@@ -28,3 +28,8 @@ from annoying.decorators import render_to
 def home(request):
 
     return {}
+
+@render_to('papers/dashboard.html')
+def dashboard(request):
+
+    return {}

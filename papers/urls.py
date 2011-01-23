@@ -5,7 +5,7 @@ from django.conf.urls.defaults import *
 
 urlpatterns = patterns('papers.views',
     url(r'^$', 'home', name='home'), #default url
-    #url(r'^dashboard/$', 'dashboard', name='dashboard'),
+    url(r'^dashboard/$', 'dashboard', name='dashboard'),
 )
 
 #urlpatterns += patterns('',
