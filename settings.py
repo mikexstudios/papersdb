@@ -98,20 +98,21 @@ INSTALLED_APPS = (
     #'django.contrib.sites',
     'django.contrib.messages',
 
+    #Our app must come before registration to override their templates.
+    'papers',
+
     'annoying', #django-annoying
     'south', #migrations
     #'django_rpx_plus', 
     #'celery', #messaging queue
-    #'registration', #for email activation
+    'registration', #for email activation
     #Must come before admin app to override those templates.
-    #'registration_defaults', #django-registration default templates
+    'registration_defaults', #django-registration default templates
 
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-
-    'papers',
 )
 
 #The following is not in the default generated settings.py file:

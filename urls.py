@@ -8,15 +8,15 @@ admin.autodiscover()
 urlpatterns = patterns('',
     (r'^', include('papers.urls')),
 
-    ##Override for simple backend to redirect user to overview page on successful
-    ##registration.
-    #url(r'^accounts/register/$', 'registration.views.register',
-    #    {'backend': 'registration.backends.simple.SimpleBackend', 
-    #     'success_url': settings.LOGIN_REDIRECT_URL},
-    #    name='registration_register'),
-    ##For django-registration. `default` backend means email activation. 
-    ##`simple` backend means immediate activation and login.
-    #(r'^accounts/', include('registration.backends.simple.urls')),
+    #Override for simple backend to redirect user to overview page on successful
+    #registration.
+    url(r'^accounts/register/$', 'registration.views.register',
+        {'backend': 'registration.backends.simple.SimpleBackend', 
+         'success_url': settings.LOGIN_REDIRECT_URL},
+        name='registration_register'),
+    #For django-registration. `default` backend means email activation. 
+    #`simple` backend means immediate activation and login.
+    (r'^accounts/', include('registration.backends.simple.urls')),
 
 
     # Uncomment the admin/doc line below to enable admin documentation:
