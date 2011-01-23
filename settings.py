@@ -111,6 +111,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 
+    'papers',
 )
 
 #The following is not in the default generated settings.py file:
