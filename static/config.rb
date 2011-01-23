@@ -8,3 +8,5 @@ javascripts_dir = "js"
 # To enable relative paths to assets via compass helper functions. Uncomment:
 relative_assets = true
 preferred_syntax = :sass
+
+require 'fancy-buttons'
