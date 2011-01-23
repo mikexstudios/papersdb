@@ -1,7 +1,7 @@
 // This import applies a global reset to any page that imports this stylesheet.
 @import blueprint/reset
 // To configure blueprint, edit the partials/_base.sass file.
-//@import partials/base
+@import partials/base
 // Import all the default blueprint modules so that we can access their mixins.
 @import blueprint
 // Import the non-default scaffolding module.
@@ -13,6 +13,7 @@
 @import compass/utilities/lists.scss
 @import compass/utilities/tables.scss
 @import compass/css3
+@import fancy-buttons
 
 //Don't need since we have css3 included.
 //@import helpers/border-radius.sass
@@ -283,5 +284,33 @@ body
     color: #ccc
     a
       color: #ccc
+
+body#dashboard
+  +container
+  +showgrid
+
+  #right
+    #search
+      form
+        input.search
+          font-size: 0.90em
+          padding: 4px
+          margin-right: 0
+        button
+          margin-bottom: 3px
+          margin-left: 0
+          font-weight: normal
+          +fancy-button-size(0.85em, 3px)
+          +fancy-button-padding(5px, 10px, 1px) 
+          //Correction to padding (We slightly shift the text position higher):
+          padding-top: 4px
+          //This overextends the button by 1px in relation to the search box, but
+          //it looks right because of the small 1px white bar at the bottom of the
+          //button.
+          padding-bottom: 6px
+
+          
+
+
 
 @import helpers/registration.sass
