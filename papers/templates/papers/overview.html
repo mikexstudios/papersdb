@@ -1,0 +1,26 @@
+{% extends "papers/base.html" %}
+{% block bodyid %}dashboard{% endblock %}
+
+{% block title %}dashboard{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //10 sec delay.
+            $('#messages').delay(10000).fadeOut('slow');
+        });
+    </script>
+{% endblock %}
+
+{% block sitenav %}{% endblock %}
+
+{% block content %}
+<h2 id="title">Dashboard</h2>
+
+<div id="description">
+</div>
+
+
+{% endblock %}
+

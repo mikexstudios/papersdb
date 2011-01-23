@@ -1,0 +1,58 @@
+{% extends "papers/base.html" %}
+{% block bodyid %}login{% endblock %}
+
+{% block title %}Login{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //Vertically center content
+            var top_margin = ($(window).height() - $('#login_box').height())/2;
+            //Correction factor.
+            top_margin = top_margin - 60;
+            //Still retain some top_margin if the window height is smaller than
+            //box height.
+            if (top_margin < 0) top_margin = 10;
+            $('#login_box').css('margin-top', top_margin);
+        });
+    </script>
+{% endblock %}
+
+{# We put our messages inside our box so we don't need the default ones #}
+{% block messages %}{% endblock %}
+
+{% block content %}
+<div id="login_box"><!-- extra wrapper for centering -->
+    
+    <h2>Login to <a href="{% url home %}" class="logo">PapersDB</a></h2>
+
+    <form action="" method="POST" id="login_form">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="field">
+            <label for="id_username">Username</label> 
+            <div class="right">
+                {{ form.username.errors }}
+                {{ form.username }}
+            </div>
+        </div>
+        <div class="field">
+            <label for="id_password">Password</label> 
+            <div class="right">
+                {{ form.password.errors }}
+                {{ form.password }}
+            </div>
+        </div>
+        <div class="actions-left">
+            <a href="{% url auth_password_reset %}">Forgot your password?</a><br />
+            No account? <a href="{% url registration_register %}">Sign up here.</a>
+        </div>
+        <div class="actions">
+            <button type="submit" class="light" name="submit" value="Submit">Log in &raquo;</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

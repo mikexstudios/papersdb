@@ -1,0 +1,64 @@
+{% extends "papers/base.html" %}
+{% block bodyid %}register{% endblock %}
+
+{% block title %}Register{% endblock %}
+
+{% comment %}
+{% block javascript %}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+        });
+    </script>
+{% endblock %}
+{% endcomment %}
+
+{% block content %}
+<h2 id="title">Sign up for an account</h2>
+
+<div id="description">Registering for a new account is easy and takes a few seconds.
+Just fill out the form below. It's that easy!</div>
+
+<form action="" method="POST" id="register_form" class="admin">
+    {% csrf_token %}
+    <div class="field">
+        <label for="id_username">Username</label> 
+        <div class="right">
+            {{ form.username.errors }}
+            {{ form.username }}
+            <small class="helper"></small>
+        </div>
+    </div>
+    <div class="field">
+        <label for="id_email">Email Address</label> 
+        <div class="right">
+            {{ form.email.errors }}
+            {{ form.email }}
+            <small class="helper"></small>
+        </div>
+    </div>
+    <div class="field">
+        <label for="id_password1">Password</label> 
+        <div class="right">
+            {{ form.password1.errors }}
+            {{ form.password1 }}
+            <small class="helper"></small>
+        </div>
+    </div>
+    <div class="field">
+        <label for="id_password2">Password Again</label> 
+        <div class="right">
+            {{ form.password2.errors }}
+            {{ form.password2 }}
+            <small class="helper"></small>
+        </div>
+    </div>
+
+    <div class="actions">
+        <button type="submit" class="light" name="submit" value="Submit">Sign up &raquo;</button>
+    </div>
+</form>
+
+
+{% endblock %}
+
