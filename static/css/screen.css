@@ -1936,11 +1936,11 @@ body #footer a {
   color: #cccccc;
 }
 
-/* line 290, ../sass/screen.sass */
+/* line 3, ../sass/helpers/_registration.sass */
 body#login #header, body#login #footer, body#logout #header, body#logout #footer {
   display: none;
 }
-/* line 292, ../sass/screen.sass */
+/* line 5, ../sass/helpers/_registration.sass */
 body#login #login_box, body#logout #login_box {
   margin: 0px auto;
   margin-top: 100px;
@@ -1956,27 +1956,27 @@ body#login #login_box, body#logout #login_box {
   -khtml-border-radius: 10px;
   border-radius: 10px;
 }
-/* line 304, ../sass/screen.sass */
+/* line 17, ../sass/helpers/_registration.sass */
 body#login #login_box h2, body#logout #login_box h2 {
   margin-bottom: 0.2em;
   font-family: Georgia, Times, Times New Roman, serif;
 }
-/* line 307, ../sass/screen.sass */
+/* line 20, ../sass/helpers/_registration.sass */
 body#login #login_box h2 a, body#logout #login_box h2 a {
   color: #333333;
   text-decoration: none;
 }
-/* line 310, ../sass/screen.sass */
+/* line 23, ../sass/helpers/_registration.sass */
 body#login #login_box p, body#logout #login_box p {
   margin: 0;
 }
-/* line 312, ../sass/screen.sass */
+/* line 25, ../sass/helpers/_registration.sass */
 body#login #login_box form, body#logout #login_box form {
   text-align: left;
   width: 85%;
   margin: 0 auto;
 }
-/* line 316, ../sass/screen.sass */
+/* line 29, ../sass/helpers/_registration.sass */
 body#login #login_box form .errorlist, body#logout #login_box form .errorlist {
   text-align: center;
   padding-top: 5px;
@@ -2014,38 +2014,38 @@ body#login #login_box form .errorlist li, body#logout #login_box form .errorlist
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 322, ../sass/screen.sass */
+/* line 35, ../sass/helpers/_registration.sass */
 body#login #login_box form .field, body#logout #login_box form .field {
   margin-bottom: 10px;
 }
-/* line 324, ../sass/screen.sass */
+/* line 37, ../sass/helpers/_registration.sass */
 body#login #login_box form .field label, body#logout #login_box form .field label {
   font-size: 0.9em;
 }
-/* line 327, ../sass/screen.sass */
+/* line 40, ../sass/helpers/_registration.sass */
 body#login #login_box form .field input[type=text], body#login #login_box form .field input[type=password], body#logout #login_box form .field input[type=text], body#logout #login_box form .field input[type=password] {
   font-size: 1.2em;
   padding: 5px;
   margin: 0;
   width: 345px;
 }
-/* line 334, ../sass/screen.sass */
+/* line 47, ../sass/helpers/_registration.sass */
 body#login #login_box form .actions-left, body#logout #login_box form .actions-left {
   float: left;
   margin-top: 0.7em;
   font-size: 0.75em;
 }
-/* line 339, ../sass/screen.sass */
+/* line 52, ../sass/helpers/_registration.sass */
 body#login #login_box form .actions, body#logout #login_box form .actions {
   margin-top: 1.2em;
   text-align: right;
 }
 
-/* line 344, ../sass/screen.sass */
+/* line 57, ../sass/helpers/_registration.sass */
 body#register form, body#password_reset form, body#password_change form {
   margin-top: 1em;
 }
-/* line 347, ../sass/screen.sass */
+/* line 60, ../sass/helpers/_registration.sass */
 body#register form .field input#id_username, body#register form .field input#id_password1, body#register form .field input#id_password2, body#register form .field input#id_new_password1, body#register form .field input#id_new_password2, body#register form .field input#id_old_password, body#password_reset form .field input#id_username, body#password_reset form .field input#id_password1, body#password_reset form .field input#id_password2, body#password_reset form .field input#id_new_password1, body#password_reset form .field input#id_new_password2, body#password_reset form .field input#id_old_password, body#password_change form .field input#id_username, body#password_change form .field input#id_password1, body#password_change form .field input#id_password2, body#password_change form .field input#id_new_password1, body#password_change form .field input#id_new_password2, body#password_change form .field input#id_old_password {
   width: 300px;
 }
