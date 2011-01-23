@@ -1,0 +1,343 @@
+// This import applies a global reset to any page that imports this stylesheet.
+@import blueprint/reset
+// To configure blueprint, edit the partials/_base.sass file.
+//@import partials/base
+// Import all the default blueprint modules so that we can access their mixins.
+@import blueprint
+// Import the non-default scaffolding module.
+//@import blueprint/scaffolding
+
+// Generate the blueprint framework according to your configuration:
++blueprint
++blueprint-scaffolding
+
+
+@import compass/utilities/general.scss
+//@import compass/utilities/text.scss
+@import compass/utilities/links.scss
+@import compass/utilities/lists.scss
+@import compass/utilities/tables.scss
+@import compass/css3
+
+//Don't need since we have css3 included.
+//@import helpers/border-radius.sass
+@import helpers/common.sass
+
+
+$sans_serif_font: Helvetica, Arial, Verdana, sans-serif
+$serif_font: Georgia, Times, Times New Roman, serif
+$monospace_font: Monaco, Courier New, DejaVu Sans Mono, Bitstream Vera Sans Mono, monospace
+$blueprint-font-family: $sans_serif_font
+@include blueprint-typography
+
+$container_width: 960px
+$content_width: 800px
+
+
+body 
+  font-size: 1.1em
+  a, a:link, a:visited 
+    +hover-link
+    color: #03c
+  .logo 
+    font-family: $serif-font
+    font-style: italic
+  #messages
+    +messages-style
+
+  #container 
+    margin: 0 auto
+    min-width: $content_width
+    max-width: $container_width
+    padding: 0 25px
+
+  #header
+    font-family: $serif_font
+    margin-top: 10px
+    margin-bottom: 10px
+    border-bottom: 1px solid #ccc
+    text-align: right
+    +clearfix
+    h1
+      margin-left: 5px
+      font-size: 1.2em
+      float: left
+      margin: 0
+      //Correction for blueprint:
+      line-height: 1.5
+      a
+        color: #333
+        text-decoration: none
+      .sitename
+        font-size: 0.9em
+      small
+        font-size: 0.5em
+        a:hover
+          text-decoration: underline
+    ul#navigation
+      font-variant: small-caps
+      font-size: 1.2em
+      margin-bottom: 0
+      +inline-list
+      li
+        margin-left: 10px
+
+  #site-navigation
+    //Can't use this since it cuts off the left edge of background button.
+    //margin-left: -10px
+    font-family: $serif_font
+    margin-top: 15px
+    margin-bottom: 5px
+    ul
+      +horizontal-list
+      font-size: 0.85em
+      //background-color: #eee
+      background-color: #f3f5f9
+      //border: 1px solid #ddd
+      +border-radius(6px)
+      li
+        //Seems like horizontal-list mixin tries to override the first li by 
+        //setting left-margin to 0. We don't let it do that.
+        padding: 4px 15px !important
+        padding-top: 2px
+        a
+          //Dark blue
+          color: #009
+      li.selected
+        //We can't do bold since that expands the text slightly pushing the nav
+        //bar around. Not a big deal, but not excellent design either.
+        //font-weight: bold
+        //background-color: #555
+        background-color: #445a88
+        a
+          color: #eee
+      li:hover
+        //background-color: #aaa
+        background-color: #d1d9e8
+        color: #555
+        a
+          text-decoration: none
+
+  #content
+    width: $content_width
+    margin: 0 auto
+    clear: both
+
+    #title
+      font-family: $serif_font
+      font-size: 1.8em
+      margin-bottom: 0px
+    #description
+      font-size: 0.9em
+      color: #555
+      margin-bottom: 15px
+
+  //TODO: Find a way to unify this and form.admin's h4. The problem is that our
+  //small.edit float depends on that the h4 doesn't have a margin-top.
+  h4
+    margin-top: 0.9em
+    margin-bottom: 0.3em
+  h4.withedit
+    float: left
+    margin-top: 0
+    margin-right: 0.3em
+  small.edit
+    font-size: 0.7em
+
+  table
+    font-size: 0.8em
+    border-top: 2px solid #333
+    border-bottom: 2px solid #333
+    //We set inner borders, but then remove the horizontal borders.
+    +inner-table-borders(1px, #ddd)
+    margin-bottom: 0px
+    th, td
+      border-bottom: none
+      //Give breathing room around cells
+      padding: 6px 7px
+    thead
+      tr
+        th
+          background-color: transparent
+          //border-top: 2px solid #333
+          border-bottom: 4px double #333
+    tbody
+      tr
+        td
+          font-size: 0.85em
+        .center
+          text-align: center
+        .empty
+          color: #999
+      tr.even
+        background-color: #eee
+        td
+          //Get rid of blueprint default:
+          background-color: transparent
+      tr:hover
+        background-color: #f3f5f9
+
+  //We don't want all forms to automatically have this style (like login forms)
+  //so we give it a class.
+  form.admin
+    clear: both
+    width: 90%
+    margin: 0 auto
+    //Correction for the first h4 in the form. We want to pull it back up.
+    margin-top: -0.9em
+    h4
+      margin-top: 0.9em
+      margin-bottom: 0.3em
+    .description
+      font-size: 0.8em
+      color: #555
+      margin-top: -0.3em
+      margin-bottom: 0.8em
+    .field
+      clear: left
+      background-color: #f3f5f9
+      padding: 15px 20px
+      margin-bottom: 10px
+      //We want a slightly faded link color to match our light grey text.
+      a
+        color: #768dbb
+      label
+        display: block
+        float: left
+        width: 180px
+      label.optional
+        font-weight: normal
+      .right
+        //This left margin should match the label width
+        margin-left: 180px
+        small
+          display: block
+          margin-top: 5px
+          font-size: 0.7em
+          color: #999
+      .errorlist
+        +errorlist-style
+        background: transparent
+        border: none
+        text-align: left
+        padding: 0
+      input[type=text], input[type=password]
+        font-size: 1.2em
+        padding: 4px
+        margin: 0
+        width: 450px
+      .input-helper
+        font-size: 1.2em
+
+    //We use this to align the submit button to the right
+    .actions
+      margin-top: 20px
+      text-align: right
+
+  .info
+    clear: left
+    background-color: #f3f5f9
+    //Needed so that our .info div will wrap around the dl's
+    +clearfix
+    dl
+      font-size: 0.9em
+      float: left
+      width: 45%
+      padding: 15px 20px
+      background-color: transparent
+      margin-bottom: 0
+      dt
+        clear: left
+        float: left
+        //text-align: right
+        font-weight: bold
+        width: 115px
+        padding-right: 10px
+      //dt:after
+      //  content: ':'
+      dd
+        small
+          font-size: 0.7em
+          color: #999
+        input
+          margin: 1px 0
+          width: 225px
+    dl.left
+      //Decrease padding on right since this is inside the edges.
+      padding-right: 5px
+      width: 46%
+  
+  #footer
+    clear: both
+    //float: left
+    margin-top: 20px
+    margin-bottom: 10px
+    text-align: right
+    font-size: 0.6em
+    font-family: $serif_font
+    color: #ccc
+    a
+      color: #ccc
+
+
+body#login, body#logout
+  //background: #ccc
+  #header, #footer
+    display: none
+  #login_box
+    margin: 0px auto
+    //If user can't execute javascript, we set a default top margin.
+    margin-top: 100px
+    width: 420px
+    border: 10px solid #ccc
+    padding: 20px
+    //For some reason, seems like we need a bit more 
+    //for the bottom.
+    padding-bottom: 30px
+    text-align: center
+    +border-radius(10px)
+    h2
+      margin-bottom: 0.2em 
+      font-family: $serif_font
+      a
+        color: #333
+        text-decoration: none
+    p
+      margin: 0
+    form
+      text-align: left
+      width: 85%
+      margin: 0 auto
+      .errorlist
+        +errorlist-style
+        background: transparent
+        border: none
+        text-align: left
+        padding: 0
+      .field
+        margin-bottom: 10px
+        label
+          //font-family: $serif_font
+          font-size: 0.9em
+        input[type=text], input[type=password]
+          //We can't use 100% since the input box will overshoot the 100% (probably
+          //because of borders and padding. So we set a width that's about 100%
+          font-size: 1.2em
+          padding: 5px
+          margin: 0
+          width: 345px
+      .actions-left
+        float: left
+        margin-top: 0.70em
+        font-size: 0.75em
+      //We use this to align the submit button to the right
+      .actions
+        margin-top: 1.2em
+        text-align: right
+
+body#register, body#password_reset, body#password_change
+  form
+    margin-top: 1.0em
+    .field
+      input#id_username, input#id_password1, input#id_password2, input#id_new_password1, input#id_new_password2, input#id_old_password
+        width: 300px
