@@ -129,6 +129,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request', #for request object
     'django.contrib.messages.context_processors.messages',
     #Above are the default template context processors
+    'papers.context_processors.sitename',
     #'yourapp.helpers.context_processor',
 )
 
@@ -160,6 +161,9 @@ SEND_BROKEN_LINK_EMAILS = False
 ####################
 # papers settings: #
 ####################
+
+#Defines the name of the site/webapp. Templates use this variable.
+SITENAME = 'PapersDB'
 
 
 ###################
