@@ -24,7 +24,6 @@ $sans_serif_font: Helvetica, Arial, Verdana, sans-serif
 $serif_font: Georgia, Times, Times New Roman, serif
 $monospace_font: Monaco, Courier New, DejaVu Sans Mono, Bitstream Vera Sans Mono, monospace
 $blueprint-font-family: $sans_serif_font
-//@include blueprint-typography
 
 // Generate the blueprint framework according to your configuration:
 // (We put this after typography so that duplicate css code isn't generated.)
@@ -293,18 +292,17 @@ body#dashboard
   #left
     +column($left-grid-columns)
     #menu
+      font-size: 0.75em
       a#papers-add-link
-        +fancy-button-size(0.85em, 3px)
+        +fancy-button-size(1.00em, 3px)
         +fancy-button-padding(5px, 25px, 1px) 
         margin-bottom: 3px
         //Correction to padding (We slightly shift the text position higher):
-        padding-top: 4px
+        padding-top: 5px
         //This overextends the button by 1px in relation to the search box, but
         //it looks right because of the small 1px white bar at the bottom of the
         //button.
-        padding-bottom: 6px
-      ul
-        +no-bullets
+        padding-bottom: 7px
   #right
     +column($blueprint-grid-columns - $left-grid-columns, true)
     #search
@@ -319,14 +317,14 @@ body#dashboard
           margin-bottom: 3px
           margin-left: 0
           font-weight: normal
-          +fancy-button-size(0.85em, 3px)
-          +fancy-button-padding(5px, 10px, 1px) 
+          +fancy-button-size(0.75em, 3px)
+          +fancy-button-padding(5px, 12px, 1px) 
           //Correction to padding (We slightly shift the text position higher):
-          padding-top: 4px
+          padding-top: 5px
           //This overextends the button by 1px in relation to the search box, but
           //it looks right because of the small 1px white bar at the bottom of the
           //button.
-          padding-bottom: 6px
+          padding-bottom: 7px
 
           
 
