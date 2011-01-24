@@ -1749,18 +1749,17 @@ body#dashboard #left #menu a#papers-add-link {
   line-height: 1.2em;
   padding: 0.3em 1em;
   border-width: 1px;
-  padding: 5px 25px;
+  padding: 5px 33px;
   border-width: 1px;
-  margin-bottom: 3px;
   padding-top: 5px;
   padding-bottom: 7px;
 }
-/* line 306, ../sass/screen.sass */
+/* line 305, ../sass/screen.sass */
 body#dashboard #left #menu ul {
   list-style: none;
   margin: 0;
   padding: 0;
-  margin-top: 15px;
+  margin-top: 20px;
   line-height: 1.7;
 }
 /* line 11, ../../../../../.gem/ruby/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/lists/_bullets.scss */
@@ -1769,7 +1768,7 @@ body#dashboard #left #menu ul li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 313, ../sass/screen.sass */
+/* line 312, ../sass/screen.sass */
 body#dashboard #left #menu ul li a {
   padding-left: 2.2em;
   color: #333333;
@@ -1777,21 +1776,25 @@ body#dashboard #left #menu ul li a {
   display: block;
   width: 100%;
 }
-/* line 321, ../sass/screen.sass */
+/* line 320, ../sass/screen.sass */
+body#dashboard #left #menu ul li .star {
+  color: #fccf05;
+}
+/* line 322, ../sass/screen.sass */
 body#dashboard #left #menu ul li.selected {
   font-weight: bold;
   background-color: #dfdfdf;
   padding-left: 2.2em;
 }
-/* line 326, ../sass/screen.sass */
+/* line 327, ../sass/screen.sass */
 body#dashboard #left #menu ul li.selected:hover {
   background-color: #dfdfdf;
 }
-/* line 328, ../sass/screen.sass */
+/* line 329, ../sass/screen.sass */
 body#dashboard #left #menu ul li:hover {
   background-color: #efefef;
 }
-/* line 332, ../sass/screen.sass */
+/* line 333, ../sass/screen.sass */
 body#dashboard #right {
   display: inline;
   float: left;
@@ -1802,18 +1805,18 @@ body#dashboard #right {
 * html body#dashboard #right {
   overflow-x: hidden;
 }
-/* line 336, ../sass/screen.sass */
+/* line 337, ../sass/screen.sass */
 body#dashboard #right .padding {
   padding-left: 10px;
 }
-/* line 340, ../sass/screen.sass */
+/* line 341, ../sass/screen.sass */
 body#dashboard #right #search form input.search {
   font-size: 0.9em;
   padding: 4px;
   margin: 0;
   width: 400px;
 }
-/* line 346, ../sass/screen.sass */
+/* line 347, ../sass/screen.sass */
 body#dashboard #right #search form button {
   margin-bottom: 3px;
   margin-left: 0;
@@ -1832,6 +1835,12 @@ body#dashboard #right #search form button {
   border-width: 1px;
   padding-top: 5px;
   padding-bottom: 7px;
+}
+/* line 360, ../sass/screen.sass */
+body#dashboard #right #actionsbar {
+  margin-top: 17px;
+  font-size: 0.8em;
+  border-bottom: 1px solid #eeeeee;
 }
 
 /* line 3, ../sass/helpers/_registration.sass */

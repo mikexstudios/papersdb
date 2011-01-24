@@ -295,8 +295,7 @@ body#dashboard
       font-size: 0.75em
       a#papers-add-link
         +fancy-button-size(1.00em, 3px)
-        +fancy-button-padding(5px, 25px, 1px) 
-        margin-bottom: 3px
+        +fancy-button-padding(5px, 33px, 1px) 
         //Correction to padding (We slightly shift the text position higher):
         padding-top: 5px
         //This overextends the button by 1px in relation to the search box, but
@@ -307,7 +306,7 @@ body#dashboard
         +no-bullets
         margin: 0
         padding: 0
-        margin-top: 15px
+        margin-top: 20px
         line-height: 1.7
         li
           a
@@ -318,6 +317,8 @@ body#dashboard
             text-decoration: none
             display: block
             width: 100%
+          .star
+            color: #FCCF05
         li.selected
           font-weight: bold
           background-color: #dfdfdf
@@ -355,6 +356,11 @@ body#dashboard
           //it looks right because of the small 1px white bar at the bottom of the
           //button.
           padding-bottom: 7px
+
+    #actionsbar
+      margin-top: 17px
+      font-size: 0.80em
+      border-bottom: 1px solid #eee
 
           
 
