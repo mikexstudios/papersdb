@@ -292,6 +292,17 @@ body#dashboard
   $left-grid-columns: 4
   #left
     +column($left-grid-columns)
+    #menu
+      a#papers-add-link
+        +fancy-button-size(0.85em, 3px)
+        +fancy-button-padding(5px, 25px, 1px) 
+        margin-bottom: 3px
+        //Correction to padding (We slightly shift the text position higher):
+        padding-top: 4px
+        //This overextends the button by 1px in relation to the search box, but
+        //it looks right because of the small 1px white bar at the bottom of the
+        //button.
+        padding-bottom: 6px
   #right
     +column($blueprint-grid-columns - $left-grid-columns, true)
     #search
@@ -299,7 +310,9 @@ body#dashboard
         input.search
           font-size: 0.90em
           padding: 4px
-          margin-right: 0
+          margin: 0
+          //TODO: Should make this auto expand to screen width
+          width: 400px
         button
           margin-bottom: 3px
           margin-left: 0

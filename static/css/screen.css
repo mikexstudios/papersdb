@@ -1970,7 +1970,25 @@ body#dashboard #left {
 * html body#dashboard #left {
   overflow-x: hidden;
 }
-/* line 295, ../sass/screen.sass */
+/* line 296, ../sass/screen.sass */
+body#dashboard #left #menu a#papers-add-link {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
+  font-size: 0.85em;
+  line-height: 1.2em;
+  padding: 0.3em 1em;
+  border-width: 1px;
+  padding: 5px 25px;
+  border-width: 1px;
+  margin-bottom: 3px;
+  padding-top: 4px;
+  padding-bottom: 6px;
+}
+/* line 306, ../sass/screen.sass */
 body#dashboard #right {
   display: inline;
   float: left;
@@ -1981,13 +1999,14 @@ body#dashboard #right {
 * html body#dashboard #right {
   overflow-x: hidden;
 }
-/* line 299, ../sass/screen.sass */
+/* line 310, ../sass/screen.sass */
 body#dashboard #right #search form input.search {
   font-size: 0.9em;
   padding: 4px;
-  margin-right: 0;
+  margin: 0;
+  width: 400px;
 }
-/* line 303, ../sass/screen.sass */
+/* line 316, ../sass/screen.sass */
 body#dashboard #right #search form button {
   margin-bottom: 3px;
   margin-left: 0;
