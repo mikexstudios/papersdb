@@ -36,7 +36,7 @@ $content_width: 800px
 
 
 body 
-  +showgrid
+  //+showgrid
 
   font-size: 1.1em
   a, a:link, a:visited 
@@ -58,7 +58,7 @@ body
   #header
     font-family: $serif_font
     margin-top: 3px
-    margin-bottom: 5px
+    margin-bottom: 15px
     padding-bottom: 3px
     border-bottom: 1px solid #ccc
     text-align: right
@@ -303,8 +303,38 @@ body#dashboard
         //it looks right because of the small 1px white bar at the bottom of the
         //button.
         padding-bottom: 7px
+      ul
+        +no-bullets
+        margin: 0
+        padding: 0
+        margin-top: 15px
+        line-height: 1.7
+        li
+          a
+            //We put padding in here so that the entire li is clickable.
+            padding-left: 2.2em
+            //Normal font color
+            color: $font-color
+            text-decoration: none
+            display: block
+            width: 100%
+        li.selected
+          font-weight: bold
+          background-color: #dfdfdf
+          //Need to reduplicate padding here since selected isn't a link.
+          padding-left: 2.2em
+        li.selected:hover
+          background-color: #dfdfdf
+        li:hover
+          background-color: #efefef
+          
+
   #right
     +column($blueprint-grid-columns - $left-grid-columns, true)
+    //Need to use another padding div so that we don't add to the width of the
+    //#right div.
+    .padding
+      padding-left: 10px
     #search
       form
         input.search

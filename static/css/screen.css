@@ -1274,7 +1274,6 @@ textarea {
 
 /* line 38, ../sass/screen.sass */
 body {
-  background: url('../images/grid.png?1295807425');
   font-size: 1.1em;
 }
 /* line 42, ../sass/screen.sass */
@@ -1339,7 +1338,7 @@ body #container {
 body #header {
   font-family: Georgia, Times, Times New Roman, serif;
   margin-top: 3px;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
   padding-bottom: 3px;
   border-bottom: 1px solid #cccccc;
   text-align: right;
@@ -1757,6 +1756,42 @@ body#dashboard #left #menu a#papers-add-link {
   padding-bottom: 7px;
 }
 /* line 306, ../sass/screen.sass */
+body#dashboard #left #menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-top: 15px;
+  line-height: 1.7;
+}
+/* line 11, ../../../../../.gem/ruby/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/lists/_bullets.scss */
+body#dashboard #left #menu ul li {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0px;
+}
+/* line 313, ../sass/screen.sass */
+body#dashboard #left #menu ul li a {
+  padding-left: 2.2em;
+  color: #333333;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+}
+/* line 321, ../sass/screen.sass */
+body#dashboard #left #menu ul li.selected {
+  font-weight: bold;
+  background-color: #dfdfdf;
+  padding-left: 2.2em;
+}
+/* line 326, ../sass/screen.sass */
+body#dashboard #left #menu ul li.selected:hover {
+  background-color: #dfdfdf;
+}
+/* line 328, ../sass/screen.sass */
+body#dashboard #left #menu ul li:hover {
+  background-color: #efefef;
+}
+/* line 332, ../sass/screen.sass */
 body#dashboard #right {
   display: inline;
   float: left;
@@ -1767,14 +1802,18 @@ body#dashboard #right {
 * html body#dashboard #right {
   overflow-x: hidden;
 }
-/* line 310, ../sass/screen.sass */
+/* line 336, ../sass/screen.sass */
+body#dashboard #right .padding {
+  padding-left: 10px;
+}
+/* line 340, ../sass/screen.sass */
 body#dashboard #right #search form input.search {
   font-size: 0.9em;
   padding: 4px;
   margin: 0;
   width: 400px;
 }
-/* line 316, ../sass/screen.sass */
+/* line 346, ../sass/screen.sass */
 body#dashboard #right #search form button {
   margin-bottom: 3px;
   margin-left: 0;

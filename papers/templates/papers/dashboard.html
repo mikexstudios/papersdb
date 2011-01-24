@@ -19,18 +19,19 @@
 
 <div id="left">
     <div id="menu">
-        <a href="" id="papers-add-link" class="button light small">Add Paper</a>
+        <a href="" id="papers-add-link" class="button light small">Add Papers</a>
         <ul>
             <li class="selected">All Papers</li>
-            <li>Recent</li>
-            <li>Starred &#9733;</li>
-            <li>Trash</li>
+            <li><a href="">Recent</a></li>
+            <li><a href="">Starred &#9733;</a></li>
+            <li><a href="">Trash</a></li>
         </ul>
         <!-- TODO: Add Tags -->
     </div>
 </div>
 
 <div id="right">
+<div class="padding">
     <div id="search">
         <form action="" method="POST" name="search_form">
             {% csrf_token %}
@@ -38,6 +39,7 @@
             <button type="submit" class="light" name="submit" value="Submit">Search Papers</button>
         </form>
     </div>
+</div>
 </div>
 
 {% endblock %}
