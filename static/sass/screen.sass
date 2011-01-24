@@ -362,6 +362,49 @@ body#dashboard
       font-size: 0.80em
       border-bottom: 1px solid #eee
 
+    #library
+      font-size: 0.75em
+      margin-top: 10px
+      .odd
+        .middle, .right
+          background-color: #eee
+      .entry
+        margin-bottom: 5px
+        .left
+          float: left
+
+        .middle
+          margin-left: 20px
+          line-height: 1.2
+          padding: 2px 5px
+          .title
+            a
+              color: $font-color
+          .journal
+            font-style: italic
+          //Temporary, until a better way is found:
+          .authors, .year
+            display: inline
+            color: #444
+          .journal, .volpage
+            display: inline
+            color: #555
+
+        .right
+          float: right
+          border-left: 2px solid white
+          padding: 2px 5px
+          text-align: right
+          .year
+            font-weight: bold
+          ul.actions
+            +no-bullets
+            margin: 0
+            padding: 0
+            font-size: 0.8em
+            line-height: 1.2
+
+
           
 
 

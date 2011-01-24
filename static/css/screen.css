@@ -329,7 +329,7 @@ tfoot {
 
 /* line 101, ../../../../../.gem/ruby/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 caption {
-  background: #eeeeee;
+  background: white;
 }
 
 /* line 102, ../../../../../.gem/ruby/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
@@ -1841,6 +1841,72 @@ body#dashboard #right #actionsbar {
   margin-top: 17px;
   font-size: 0.8em;
   border-bottom: 1px solid #eeeeee;
+}
+/* line 365, ../sass/screen.sass */
+body#dashboard #right #library {
+  font-size: 0.75em;
+  margin-top: 10px;
+}
+/* line 369, ../sass/screen.sass */
+body#dashboard #right #library .odd .middle, body#dashboard #right #library .odd .right {
+  background-color: #eeeeee;
+}
+/* line 371, ../sass/screen.sass */
+body#dashboard #right #library .entry {
+  margin-bottom: 5px;
+}
+/* line 373, ../sass/screen.sass */
+body#dashboard #right #library .entry .left {
+  float: left;
+}
+/* line 376, ../sass/screen.sass */
+body#dashboard #right #library .entry .middle {
+  margin-left: 20px;
+  line-height: 1.2;
+  padding: 2px 5px;
+}
+/* line 381, ../sass/screen.sass */
+body#dashboard #right #library .entry .middle .title a {
+  color: #333333;
+}
+/* line 383, ../sass/screen.sass */
+body#dashboard #right #library .entry .middle .journal {
+  font-style: italic;
+}
+/* line 386, ../sass/screen.sass */
+body#dashboard #right #library .entry .middle .authors, body#dashboard #right #library .entry .middle .year {
+  display: inline;
+  color: #444444;
+}
+/* line 389, ../sass/screen.sass */
+body#dashboard #right #library .entry .middle .journal, body#dashboard #right #library .entry .middle .volpage {
+  display: inline;
+  color: #555555;
+}
+/* line 393, ../sass/screen.sass */
+body#dashboard #right #library .entry .right {
+  float: right;
+  border-left: 2px solid white;
+  padding: 2px 5px;
+  text-align: right;
+}
+/* line 398, ../sass/screen.sass */
+body#dashboard #right #library .entry .right .year {
+  font-weight: bold;
+}
+/* line 400, ../sass/screen.sass */
+body#dashboard #right #library .entry .right ul.actions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.8em;
+  line-height: 1.2;
+}
+/* line 11, ../../../../../.gem/ruby/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/lists/_bullets.scss */
+body#dashboard #right #library .entry .right ul.actions li {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0px;
 }
 
 /* line 3, ../sass/helpers/_registration.sass */
