@@ -1908,6 +1908,24 @@ body#dashboard #right #library .entry .right ul.actions li {
   list-style-type: none;
   margin-left: 0px;
 }
+/* line 407, ../sass/screen.sass */
+body#dashboard #right #pagesbar {
+  margin-top: 20px;
+  font-size: 0.75em;
+  border-top: 1px solid #eeeeee;
+}
+/* line 411, ../sass/screen.sass */
+body#dashboard #right #pagesbar .entries {
+  float: left;
+}
+/* line 413, ../sass/screen.sass */
+body#dashboard #right #pagesbar .nav {
+  float: right;
+}
+/* line 415, ../sass/screen.sass */
+body#dashboard #right #pagesbar .pages {
+  text-align: center;
+}
 
 /* line 3, ../sass/helpers/_registration.sass */
 body#login #header, body#login #footer, body#logout #header, body#logout #footer {
