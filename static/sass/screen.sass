@@ -24,7 +24,7 @@ $sans_serif_font: Helvetica, Arial, Verdana, sans-serif
 $serif_font: Georgia, Times, Times New Roman, serif
 $monospace_font: Monaco, Courier New, DejaVu Sans Mono, Bitstream Vera Sans Mono, monospace
 $blueprint-font-family: $sans_serif_font
-@include blueprint-typography
+//@include blueprint-typography
 
 // Generate the blueprint framework according to your configuration:
 // (We put this after typography so that duplicate css code isn't generated.)
@@ -303,6 +303,8 @@ body#dashboard
         //it looks right because of the small 1px white bar at the bottom of the
         //button.
         padding-bottom: 6px
+      ul
+        +no-bullets
   #right
     +column($blueprint-grid-columns - $left-grid-columns, true)
     #search
