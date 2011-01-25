@@ -152,38 +152,38 @@ body
   small.edit
     font-size: 0.7em
 
-  table
-    font-size: 0.8em
-    border-top: 2px solid #333
-    border-bottom: 2px solid #333
-    //We set inner borders, but then remove the horizontal borders.
-    +inner-table-borders(1px, #ddd)
-    margin-bottom: 0px
-    th, td
-      border-bottom: none
-      //Give breathing room around cells
-      padding: 6px 7px
-    thead
-      tr
-        th
-          background-color: transparent
-          //border-top: 2px solid #333
-          border-bottom: 4px double #333
-    tbody
-      tr
-        td
-          font-size: 0.85em
-        .center
-          text-align: center
-        .empty
-          color: #999
-      tr.even
-        background-color: #eee
-        td
-          //Get rid of blueprint default:
-          background-color: transparent
-      tr:hover
-        background-color: #f3f5f9
+  //table
+  //  font-size: 0.8em
+  //  border-top: 2px solid #333
+  //  border-bottom: 2px solid #333
+  //  //We set inner borders, but then remove the horizontal borders.
+  //  +inner-table-borders(1px, #ddd)
+  //  margin-bottom: 0px
+  //  th, td
+  //    border-bottom: none
+  //    //Give breathing room around cells
+  //    padding: 6px 7px
+  //  thead
+  //    tr
+  //      th
+  //        background-color: transparent
+  //        //border-top: 2px solid #333
+  //        border-bottom: 4px double #333
+  //  tbody
+  //    tr
+  //      td
+  //        font-size: 0.85em
+  //      .center
+  //        text-align: center
+  //      .empty
+  //        color: #999
+  //    tr.even
+  //      background-color: #eee
+  //      td
+  //        //Get rid of blueprint default:
+  //        background-color: transparent
+  //    tr:hover
+  //      background-color: #f3f5f9
 
   //We don't want all forms to automatically have this style (like login forms)
   //so we give it a class.
@@ -362,6 +362,57 @@ body#dashboard
       font-size: 0.80em
       border-bottom: 1px solid #eee
 
+    #library-tbl
+      font-size: 0.75em
+      margin-top: 10px
+      tr.odd
+        .middle, .right
+          background-color: #eee
+      tr.even
+        td
+          //Get rid of blueprint default:
+          background-color: transparent
+
+      tr
+        td
+          border-bottom: 5px solid $blueprint-background-color
+        .left
+          padding: 0
+          width: 20px
+        .middle
+          line-height: 1.2
+          padding: 2px 5px
+          .title
+            //font-weight: bold
+            //a
+            //  color: $font-color
+
+          .journal
+            font-style: italic
+          //Temporary, until a better way is found:
+          .authors, .year
+            display: inline
+            color: #444
+          .journal, .volpage
+            display: inline
+            color: #555
+        .right
+          width: 60px
+          border-left: 1px solid $blueprint-background-color
+          padding: 2px 5px
+          text-align: right
+          .year
+            font-weight: bold
+            font-size: 1.1em
+          ul.actions
+            +no-bullets
+            margin: 0
+            padding: 0
+            font-size: 0.8em
+            line-height: 1.2
+            a
+              color: $font-color
+      
     #library
       font-size: 0.75em
       margin-top: 10px
