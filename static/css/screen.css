@@ -1815,29 +1815,28 @@ body#dashboard #right #library-tbl tr .middle {
 body#dashboard #right #library-tbl tr .middle .journal {
   font-style: italic;
 }
-/* line 393, ../sass/screen.sass */
-body#dashboard #right #library-tbl tr .middle .authors, body#dashboard #right #library-tbl tr .middle .year {
-  display: inline;
+/* line 392, ../sass/screen.sass */
+body#dashboard #right #library-tbl tr .middle .authors {
   color: #444444;
 }
-/* line 396, ../sass/screen.sass */
-body#dashboard #right #library-tbl tr .middle .journal, body#dashboard #right #library-tbl tr .middle .volpage {
+/* line 395, ../sass/screen.sass */
+body#dashboard #right #library-tbl tr .middle .journal, body#dashboard #right #library-tbl tr .middle .year {
   display: inline;
   color: #555555;
 }
-/* line 399, ../sass/screen.sass */
+/* line 398, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr .right {
   width: 60px;
   border-left: 1px solid white;
   padding: 2px 5px;
   text-align: right;
 }
-/* line 404, ../sass/screen.sass */
+/* line 403, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr .right .year {
   font-weight: bold;
   font-size: 1.1em;
 }
-/* line 407, ../sass/screen.sass */
+/* line 406, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr .right ul.actions {
   list-style: none;
   margin: 0;
@@ -1851,90 +1850,25 @@ body#dashboard #right #library-tbl tr .right ul.actions li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 413, ../sass/screen.sass */
+/* line 412, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr .right ul.actions a {
   color: #333333;
 }
-/* line 416, ../sass/screen.sass */
-body#dashboard #right #library {
-  font-size: 0.75em;
-  margin-top: 10px;
-}
-/* line 420, ../sass/screen.sass */
-body#dashboard #right #library .odd .middle, body#dashboard #right #library .odd .right {
-  background-color: #eeeeee;
-}
-/* line 422, ../sass/screen.sass */
-body#dashboard #right #library .entry {
-  margin-bottom: 5px;
-}
-/* line 424, ../sass/screen.sass */
-body#dashboard #right #library .entry .left {
-  float: left;
-}
-/* line 427, ../sass/screen.sass */
-body#dashboard #right #library .entry .middle {
-  margin-left: 20px;
-  line-height: 1.2;
-  padding: 2px 5px;
-}
-/* line 432, ../sass/screen.sass */
-body#dashboard #right #library .entry .middle .title a {
-  color: #333333;
-}
-/* line 434, ../sass/screen.sass */
-body#dashboard #right #library .entry .middle .journal {
-  font-style: italic;
-}
-/* line 436, ../sass/screen.sass */
-body#dashboard #right #library .entry .middle .authors {
-  color: #444444;
-}
-/* line 439, ../sass/screen.sass */
-body#dashboard #right #library .entry .middle .journal {
-  display: inline;
-  color: #555555;
-}
-/* line 443, ../sass/screen.sass */
-body#dashboard #right #library .entry .right {
-  float: right;
-  border-left: 2px solid white;
-  padding: 2px 5px;
-  text-align: right;
-}
-/* line 448, ../sass/screen.sass */
-body#dashboard #right #library .entry .right .year {
-  font-weight: bold;
-}
-/* line 450, ../sass/screen.sass */
-body#dashboard #right #library .entry .right ul.actions {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  font-size: 0.8em;
-  line-height: 1.2;
-}
-/* line 11, ../../../../../.gem/ruby/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/lists/_bullets.scss */
-body#dashboard #right #library .entry .right ul.actions li {
-  list-style-image: none;
-  list-style-type: none;
-  margin-left: 0px;
-}
-/* line 457, ../sass/screen.sass */
+/* line 415, ../sass/screen.sass */
 body#dashboard #right #pagesbar {
   margin-top: 20px;
   font-size: 0.75em;
   border-top: 1px solid #eeeeee;
 }
-/* line 461, ../sass/screen.sass */
+/* line 419, ../sass/screen.sass */
 body#dashboard #right #pagesbar .entries {
   float: left;
 }
-/* line 463, ../sass/screen.sass */
+/* line 421, ../sass/screen.sass */
 body#dashboard #right #pagesbar .nav {
   float: right;
 }
-/* line 465, ../sass/screen.sass */
+/* line 423, ../sass/screen.sass */
 body#dashboard #right #pagesbar .pages {
   text-align: center;
 }

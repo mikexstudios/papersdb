@@ -389,11 +389,10 @@ body#dashboard
 
           .journal
             font-style: italic
-          //Temporary, until a better way is found:
-          .authors, .year
-            display: inline
+          .authors
             color: #444
-          .journal, .volpage
+          //Temporary, until a better way is found:
+          .journal, .year
             display: inline
             color: #555
         .right
@@ -413,47 +412,6 @@ body#dashboard
             a
               color: $font-color
       
-    #library
-      font-size: 0.75em
-      margin-top: 10px
-      .odd
-        .middle, .right
-          background-color: #eee
-      .entry
-        margin-bottom: 5px
-        .left
-          float: left
-
-        .middle
-          margin-left: 20px
-          line-height: 1.2
-          padding: 2px 5px
-          .title
-            a
-              color: $font-color
-          .journal
-            font-style: italic
-          .authors
-            color: #444
-          //Temporary, until a better way is found:
-          .journal
-            display: inline
-            color: #555
-
-        .right
-          float: right
-          border-left: 2px solid white
-          padding: 2px 5px
-          text-align: right
-          .year
-            font-weight: bold
-          ul.actions
-            +no-bullets
-            margin: 0
-            padding: 0
-            font-size: 0.8em
-            line-height: 1.2
-
     #pagesbar
       margin-top: 20px
       font-size: 0.75em
