@@ -1886,28 +1886,27 @@ body#dashboard #right #library .entry .middle .title a {
 body#dashboard #right #library .entry .middle .journal {
   font-style: italic;
 }
-/* line 437, ../sass/screen.sass */
-body#dashboard #right #library .entry .middle .authors, body#dashboard #right #library .entry .middle .year {
-  display: inline;
+/* line 436, ../sass/screen.sass */
+body#dashboard #right #library .entry .middle .authors {
   color: #444444;
 }
-/* line 440, ../sass/screen.sass */
-body#dashboard #right #library .entry .middle .journal, body#dashboard #right #library .entry .middle .volpage {
+/* line 439, ../sass/screen.sass */
+body#dashboard #right #library .entry .middle .journal {
   display: inline;
   color: #555555;
 }
-/* line 444, ../sass/screen.sass */
+/* line 443, ../sass/screen.sass */
 body#dashboard #right #library .entry .right {
   float: right;
   border-left: 2px solid white;
   padding: 2px 5px;
   text-align: right;
 }
-/* line 449, ../sass/screen.sass */
+/* line 448, ../sass/screen.sass */
 body#dashboard #right #library .entry .right .year {
   font-weight: bold;
 }
-/* line 451, ../sass/screen.sass */
+/* line 450, ../sass/screen.sass */
 body#dashboard #right #library .entry .right ul.actions {
   list-style: none;
   margin: 0;
@@ -1921,21 +1920,21 @@ body#dashboard #right #library .entry .right ul.actions li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 458, ../sass/screen.sass */
+/* line 457, ../sass/screen.sass */
 body#dashboard #right #pagesbar {
   margin-top: 20px;
   font-size: 0.75em;
   border-top: 1px solid #eeeeee;
 }
-/* line 462, ../sass/screen.sass */
+/* line 461, ../sass/screen.sass */
 body#dashboard #right #pagesbar .entries {
   float: left;
 }
-/* line 464, ../sass/screen.sass */
+/* line 463, ../sass/screen.sass */
 body#dashboard #right #pagesbar .nav {
   float: right;
 }
-/* line 466, ../sass/screen.sass */
+/* line 465, ../sass/screen.sass */
 body#dashboard #right #pagesbar .pages {
   text-align: center;
 }
