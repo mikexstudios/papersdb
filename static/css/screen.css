@@ -1663,24 +1663,23 @@ body #footer {
 body #footer a {
   color: #cccccc;
 }
-
-/* line 292, ../sass/screen.sass */
-body#dashboard #left {
+/* line 293, ../sass/screen.sass */
+body #left {
   display: inline;
   float: left;
   margin-right: 10px;
   width: 150px;
 }
 /* line 138, ../../../../../.gem/ruby/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html body#dashboard #left {
+* html body #left {
   overflow-x: hidden;
 }
-/* line 294, ../sass/screen.sass */
-body#dashboard #left #menu {
+/* line 295, ../sass/screen.sass */
+body #left #menu {
   font-size: 0.75em;
 }
-/* line 296, ../sass/screen.sass */
-body#dashboard #left #menu a#papers-add-link {
+/* line 297, ../sass/screen.sass */
+body #left #menu a#papers-add-link {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   -o-border-radius: 3px;
@@ -1698,8 +1697,8 @@ body#dashboard #left #menu a#papers-add-link {
   width: 100%;
   text-align: center;
 }
-/* line 310, ../sass/screen.sass */
-body#dashboard #left #menu ul {
+/* line 311, ../sass/screen.sass */
+body #left #menu ul {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -1707,61 +1706,61 @@ body#dashboard #left #menu ul {
   line-height: 1.7;
 }
 /* line 11, ../../../../../.gem/ruby/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/lists/_bullets.scss */
-body#dashboard #left #menu ul li {
+body #left #menu ul li {
   list-style-image: none;
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 317, ../sass/screen.sass */
-body#dashboard #left #menu ul li a {
+/* line 318, ../sass/screen.sass */
+body #left #menu ul li a {
   padding-left: 2.2em;
   color: #333333;
   text-decoration: none;
   display: block;
   width: 100%;
 }
-/* line 325, ../sass/screen.sass */
-body#dashboard #left #menu ul li .star {
+/* line 326, ../sass/screen.sass */
+body #left #menu ul li .star {
   color: #fccf05;
 }
-/* line 327, ../sass/screen.sass */
-body#dashboard #left #menu ul li.selected {
+/* line 328, ../sass/screen.sass */
+body #left #menu ul li.selected {
   font-weight: bold;
   background-color: #dfdfdf;
   padding-left: 2.2em;
 }
-/* line 332, ../sass/screen.sass */
-body#dashboard #left #menu ul li.selected:hover {
+/* line 333, ../sass/screen.sass */
+body #left #menu ul li.selected:hover {
   background-color: #dfdfdf;
 }
-/* line 334, ../sass/screen.sass */
-body#dashboard #left #menu ul li:hover {
+/* line 335, ../sass/screen.sass */
+body #left #menu ul li:hover {
   background-color: #efefef;
 }
 /* line 338, ../sass/screen.sass */
-body#dashboard #right {
+body #right {
   display: inline;
   float: left;
   margin-right: 0;
   width: 790px;
 }
 /* line 138, ../../../../../.gem/ruby/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html body#dashboard #right {
+* html body #right {
   overflow-x: hidden;
 }
 /* line 342, ../sass/screen.sass */
-body#dashboard #right .padding {
+body #right .padding {
   padding-left: 10px;
 }
 /* line 346, ../sass/screen.sass */
-body#dashboard #right #search form input.search {
+body #right #search form input.search {
   font-size: 0.9em;
   padding: 4px;
   margin: 0;
   width: 400px;
 }
 /* line 352, ../sass/screen.sass */
-body#dashboard #right #search form button {
+body #right #search form button {
   margin-bottom: 3px;
   margin-left: 0;
   font-weight: normal;
@@ -1780,65 +1779,66 @@ body#dashboard #right #search form button {
   padding-top: 5px;
   padding-bottom: 7px;
 }
-/* line 365, ../sass/screen.sass */
+
+/* line 367, ../sass/screen.sass */
 body#dashboard #right #actionsbar {
   margin-top: 17px;
   font-size: 0.8em;
   border-bottom: 1px solid #eeeeee;
 }
-/* line 370, ../sass/screen.sass */
+/* line 372, ../sass/screen.sass */
 body#dashboard #right #library-tbl {
   font-size: 0.75em;
   margin-top: 10px;
 }
-/* line 374, ../sass/screen.sass */
+/* line 376, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr.odd .middle, body#dashboard #right #library-tbl tr.odd .right {
   background-color: #eeeeee;
 }
-/* line 377, ../sass/screen.sass */
+/* line 379, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr.even td {
   background-color: transparent;
 }
-/* line 382, ../sass/screen.sass */
+/* line 384, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr td {
   border-bottom: 5px solid white;
 }
-/* line 384, ../sass/screen.sass */
+/* line 386, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr .left {
   padding: 0;
   width: 20px;
 }
-/* line 387, ../sass/screen.sass */
+/* line 389, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr .middle {
   line-height: 1.2;
   padding: 2px 5px;
 }
-/* line 395, ../sass/screen.sass */
+/* line 397, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr .middle .journal {
   font-style: italic;
 }
-/* line 397, ../sass/screen.sass */
+/* line 399, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr .middle .authors {
   color: #444444;
 }
-/* line 400, ../sass/screen.sass */
+/* line 402, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr .middle .journal, body#dashboard #right #library-tbl tr .middle .year {
   display: inline;
   color: #555555;
 }
-/* line 403, ../sass/screen.sass */
+/* line 405, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr .right {
   width: 60px;
   border-left: 1px solid white;
   padding: 2px 5px;
   text-align: right;
 }
-/* line 408, ../sass/screen.sass */
+/* line 410, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr .right .year {
   font-weight: bold;
   font-size: 1.1em;
 }
-/* line 411, ../sass/screen.sass */
+/* line 413, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr .right ul.actions {
   list-style: none;
   margin: 0;
@@ -1852,25 +1852,25 @@ body#dashboard #right #library-tbl tr .right ul.actions li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 417, ../sass/screen.sass */
+/* line 419, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr .right ul.actions a {
   color: #333333;
 }
-/* line 420, ../sass/screen.sass */
+/* line 422, ../sass/screen.sass */
 body#dashboard #right #pagesbar {
   margin-top: 20px;
   font-size: 0.75em;
   border-top: 1px solid #eeeeee;
 }
-/* line 424, ../sass/screen.sass */
+/* line 426, ../sass/screen.sass */
 body#dashboard #right #pagesbar .entries {
   float: left;
 }
-/* line 426, ../sass/screen.sass */
+/* line 428, ../sass/screen.sass */
 body#dashboard #right #pagesbar .nav {
   float: right;
 }
-/* line 428, ../sass/screen.sass */
+/* line 430, ../sass/screen.sass */
 body#dashboard #right #pagesbar .pages {
   text-align: center;
 }

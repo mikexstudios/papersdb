@@ -287,7 +287,8 @@ body
     a
       color: #ccc
 
-body#dashboard
+  
+
   $left-grid-columns: 4
   #left
     +column($left-grid-columns)
@@ -333,7 +334,6 @@ body#dashboard
           background-color: #dfdfdf
         li:hover
           background-color: #efefef
-          
 
   #right
     +column($blueprint-grid-columns - $left-grid-columns, true)
@@ -362,6 +362,8 @@ body#dashboard
           //button.
           padding-bottom: 7px
 
+body#dashboard
+  #right
     #actionsbar
       margin-top: 17px
       font-size: 0.80em
