@@ -33,3 +33,8 @@ def home(request):
 def dashboard(request):
 
     return {}
+
+@render_to('papers/new_paper.html')
+def new_paper(request):
+
+    return {}
