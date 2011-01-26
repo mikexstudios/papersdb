@@ -86,8 +86,35 @@
 {% endif %}
 {% endblock %}
 
+<div id="left">
+    <div id="menu">
+        <a href="" id="papers-add-link" class="button light small">Add Paper</a>
+        <ul>
+            <li class="selected">All Papers</li>
+            <li><a href="">Recent</a></li>
+            <li><a href="">Starred <span class="star">&#9733;</span></a></li>
+            <li><a href="">Trash</a></li>
+        </ul>
+        <!-- TODO: Add Tags -->
+    </div>
+</div>
+
+<div id="right">
+<div class="padding">
+    <div id="search">
+        <form action="" method="POST" name="search_form">
+            {% csrf_token %}
+            <input name="search" type="text" class="search" />
+            <button type="submit" class="light" name="submit" value="Submit">Search Papers</button>
+        </form>
+    </div>
+
 {% block content %}
 {% endblock %}
+
+</div>
+</div>
+
 </div><!-- content -->
 
 {% block aftercontent %}{% endblock %}

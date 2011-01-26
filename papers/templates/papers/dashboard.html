@@ -16,110 +16,83 @@
 {% block sitenav %}{% endblock %}
 
 {% block content %}
-
-<div id="left">
-    <div id="menu">
-        <a href="" id="papers-add-link" class="button light small">Add Paper</a>
-        <ul>
-            <li class="selected">All Papers</li>
-            <li><a href="">Recent</a></li>
-            <li><a href="">Starred <span class="star">&#9733;</span></a></li>
-            <li><a href="">Trash</a></li>
-        </ul>
-        <!-- TODO: Add Tags -->
-    </div>
+<div id="actionsbar">
+    Select: <a href="">All</a>, <a href="">None</a> | 
+    <strong>Sort by:</strong> <a href="">Year</a>, <a href="">Author</a>, 
+                              <a href="">Journal</a> 
 </div>
 
-<div id="right">
-<div class="padding">
-    <div id="search">
-        <form action="" method="POST" name="search_form">
-            {% csrf_token %}
-            <input name="search" type="text" class="search" />
-            <button type="submit" class="light" name="submit" value="Submit">Search Papers</button>
-        </form>
+<table id="library-tbl">
+<tbody>
+    <tr class="odd">
+        <td class="left">
+            <input type="checkbox" name="ch[]" value="1" />
+        </td>
+        <td class="middle">
+            <div class="title"><a href="">NMR Chemical Shifts of Common Laboratory Solvents as Trace Impurities</a></div>
+            <div class="authors">Hugo E. Gottlieb, Vadim Kotlyar, Abraham Nudelman</div>
+            <div class="journal">The Journal of organic chemistry</div>
+            <div class="year">(1997)</div>
+        </td>
+        <td class="right">
+            <div class="year">1997</div>
+            <ul class="actions">
+                <li><a href="">Quick View</a></li>
+                <li><a href="">Download</a></li>
+            </ul>
+        </td>
+    </tr>
+
+    <tr class="even">
+        <td class="left">
+            <input type="checkbox" name="ch[]" value="1" />
+        </td>
+        <td class="middle">
+            <div class="title"><a href="">NMR Chemical Shifts of Common Laboratory Solvents as Trace Impurities</a></div>
+            <div class="authors">Hugo E. Gottlieb, Vadim Kotlyar, Abraham Nudelman</div>
+            <div class="journal">The Journal of organic chemistry</div>
+            <div class="year">(1997)</div>
+        </td>
+        <td class="right">
+            <div class="year">1997</div>
+            <ul class="actions">
+                <li><a href="">Quick View</a></li>
+                <li><a href="">Download</a></li>
+            </ul>
+        </td>
+    </tr>
+
+    <tr class="odd">
+        <td class="left">
+            <input type="checkbox" name="ch[]" value="1" />
+        </td>
+        <td class="middle">
+            <div class="title"><a href="">NMR Chemical Shifts of Common Laboratory Solvents as Trace Impurities</a></div>
+            <div class="authors">Hugo E. Gottlieb, Vadim Kotlyar, Abraham Nudelman</div>
+            <div class="journal">The Journal of organic chemistry</div>
+            <div class="year">(1997)</div>
+        </td>
+        <td class="right">
+            <div class="year">1997</div>
+            <ul class="actions">
+                <li><a href="">Quick View</a></li>
+                <li><a href="">Download</a></li>
+            </ul>
+        </td>
+    </tr>
+</tbody>
+</table>
+
+<div id="pagesbar">
+    <div class="entries">
+        <strong>1 - 10</strong> of <strong>500</strong>
     </div>
-
-    <div id="actionsbar">
-        Select: <a href="">All</a>, <a href="">None</a> | 
-        <strong>Sort by:</strong> <a href="">Year</a>, <a href="">Author</a>, 
-                                  <a href="">Journal</a> 
+    <div class="nav">
+        next &rarr;
     </div>
-
-    <table id="library-tbl">
-    <tbody>
-        <tr class="odd">
-            <td class="left">
-                <input type="checkbox" name="ch[]" value="1" />
-            </td>
-            <td class="middle">
-                <div class="title"><a href="">NMR Chemical Shifts of Common Laboratory Solvents as Trace Impurities</a></div>
-                <div class="authors">Hugo E. Gottlieb, Vadim Kotlyar, Abraham Nudelman</div>
-                <div class="journal">The Journal of organic chemistry</div>
-                <div class="year">(1997)</div>
-            </td>
-            <td class="right">
-                <div class="year">1997</div>
-                <ul class="actions">
-                    <li><a href="">Quick View</a></li>
-                    <li><a href="">Download</a></li>
-                </ul>
-            </td>
-        </tr>
-
-        <tr class="even">
-            <td class="left">
-                <input type="checkbox" name="ch[]" value="1" />
-            </td>
-            <td class="middle">
-                <div class="title"><a href="">NMR Chemical Shifts of Common Laboratory Solvents as Trace Impurities</a></div>
-                <div class="authors">Hugo E. Gottlieb, Vadim Kotlyar, Abraham Nudelman</div>
-                <div class="journal">The Journal of organic chemistry</div>
-                <div class="year">(1997)</div>
-            </td>
-            <td class="right">
-                <div class="year">1997</div>
-                <ul class="actions">
-                    <li><a href="">Quick View</a></li>
-                    <li><a href="">Download</a></li>
-                </ul>
-            </td>
-        </tr>
-
-        <tr class="odd">
-            <td class="left">
-                <input type="checkbox" name="ch[]" value="1" />
-            </td>
-            <td class="middle">
-                <div class="title"><a href="">NMR Chemical Shifts of Common Laboratory Solvents as Trace Impurities</a></div>
-                <div class="authors">Hugo E. Gottlieb, Vadim Kotlyar, Abraham Nudelman</div>
-                <div class="journal">The Journal of organic chemistry</div>
-                <div class="year">(1997)</div>
-            </td>
-            <td class="right">
-                <div class="year">1997</div>
-                <ul class="actions">
-                    <li><a href="">Quick View</a></li>
-                    <li><a href="">Download</a></li>
-                </ul>
-            </td>
-        </tr>
-    </tbody>
-    </table>
-
-    <div id="pagesbar">
-        <div class="entries">
-            <strong>1 - 10</strong> of <strong>500</strong>
-        </div>
-        <div class="nav">
-            next &rarr;
-        </div>
-        <div class="pages">
-            Page 1 2 3 4 5 ... 9 10 Last
-        </div>
+    <div class="pages">
+        Page 1 2 3 4 5 ... 9 10 Last
     </div>
 </div>
-</div>
-
 {% endblock %}
 
