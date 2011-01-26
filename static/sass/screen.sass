@@ -294,14 +294,19 @@ body#dashboard
     #menu
       font-size: 0.75em
       a#papers-add-link
+        //NOTE: Normally, we set the width of the button in the padding function.
+        //      However, since we always want the button to be 100% width, we over-
+        //      ride the width manually and set the horizontal padding to be zero.
         +fancy-button-size(1.00em, 3px)
-        +fancy-button-padding(5px, 33px, 1px) 
+        +fancy-button-padding(5px, 0px, 1px) 
         //Correction to padding (We slightly shift the text position higher):
         padding-top: 5px
         //This overextends the button by 1px in relation to the search box, but
         //it looks right because of the small 1px white bar at the bottom of the
         //button.
         padding-bottom: 7px
+        width: 100%
+        text-align: center
       ul
         +no-bullets
         margin: 0
