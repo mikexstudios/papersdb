@@ -16,5 +16,43 @@
 {% block sitenav %}{% endblock %}
 
 {% block content %}
+<h2 id="title">Add a New Paper</h2>
+
+<div id="description"></div>
+
+<form action="" method="POST" name="new_paper_form" id="new_paper_form" class="papers">
+    {% csrf_token %}
+    <h4>General Information</h4>
+    <div class="field">
+        <label for="id_title">Title</label> 
+        <div class="right">
+            <textarea id="id_title" name="title"></textarea>
+        </div>
+    </div>
+
+    <div class="field">
+        <label for="id_authors">Author(s)</label> 
+        <div class="right">
+            <textarea id="id_authors" name="authors"></textarea>
+            <small class="helper">Enter each author on a new line.</small>
+        </div>
+    </div>
+
+    <h4>Optional Fields</h4>
+    <div class="field">
+        <label for="id_name">Plan name</label> 
+        <div class="right">
+            <input id="id_name" type="text" name="name" maxlength="140">
+            <small class="helper">The name that customers are shown when
+            purchasing a plan. Examples include: Starter, Personal, Free,
+            Basic, Small, Mini, Plus, Medium, Max, Large, or Mega.</small>
+        </div>
+    </div>
+
+    <div class="actions">
+        <button type="submit" id="new_paper_submit" class="light" name="submit"
+            value="Submit">Add new paper &raquo;</button>
+    </div>
+</form>
 {% endblock %}
 
