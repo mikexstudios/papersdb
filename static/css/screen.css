@@ -1728,13 +1728,13 @@ body #right #search form button {
 
 /* line 304, ../sass/screen.sass */
 body#dashboard #right #actionsbar {
-  margin-top: 17px;
-  font-size: 0.8em;
+  margin-top: 14px;
+  font-size: 1.1em;
   border-bottom: 1px solid #eeeeee;
 }
 /* line 309, ../sass/screen.sass */
 body#dashboard #right #library-tbl {
-  font-size: 0.75em;
+  font-size: 1.05em;
   margin-top: 10px;
 }
 /* line 313, ../sass/screen.sass */
@@ -1805,7 +1805,6 @@ body#dashboard #right #library-tbl tr .right ul.actions a {
 /* line 359, ../sass/screen.sass */
 body#dashboard #right #pagesbar {
   margin-top: 20px;
-  font-size: 0.75em;
   border-top: 1px solid #eeeeee;
 }
 /* line 363, ../sass/screen.sass */
