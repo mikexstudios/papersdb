@@ -1596,7 +1596,7 @@ body form.papers .field input[type=text], body form.papers .field input[type=pas
 }
 /* line 211, ../sass/screen.sass */
 body form.papers .actions {
-  margin-top: 20px;
+  margin-top: 15px;
   text-align: right;
 }
 /* line 215, ../sass/screen.sass */
@@ -1835,6 +1835,21 @@ body#new_paper form#new_paper_form .field input#id_year {
 /* line 383, ../sass/screen.sass */
 body#new_paper form#new_paper_form .field input#id_volume, body#new_paper form#new_paper_form .field input#id_issue, body#new_paper form#new_paper_form .field input#id_pages {
   width: 100px;
+}
+/* line 386, ../sass/screen.sass */
+body#new_paper form#new_paper_form .actions button {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
+  font-size: 1.05em;
+  line-height: 1.2em;
+  padding: 0.3em 1em;
+  border-width: 1px;
+  padding: 6px 20px;
+  border-width: 1px;
 }
 
 /* line 1, ../sass/helpers/_registration.sass */
