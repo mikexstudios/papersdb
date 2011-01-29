@@ -1861,23 +1861,24 @@ body#login #login_box, body#logout #login_box {
 body#login #login_box h2, body#logout #login_box h2 {
   margin-bottom: 0.2em;
   font-family: Georgia, Times, Times New Roman, serif;
+  font-size: 2.8em;
 }
-/* line 20, ../sass/helpers/_registration.sass */
+/* line 21, ../sass/helpers/_registration.sass */
 body#login #login_box h2 a, body#logout #login_box h2 a {
   color: #333333;
   text-decoration: none;
 }
-/* line 23, ../sass/helpers/_registration.sass */
+/* line 24, ../sass/helpers/_registration.sass */
 body#login #login_box p, body#logout #login_box p {
   margin: 0;
 }
-/* line 25, ../sass/helpers/_registration.sass */
+/* line 26, ../sass/helpers/_registration.sass */
 body#login #login_box form, body#logout #login_box form {
   text-align: left;
   width: 85%;
   margin: 0 auto;
 }
-/* line 29, ../sass/helpers/_registration.sass */
+/* line 30, ../sass/helpers/_registration.sass */
 body#login #login_box form .errorlist, body#logout #login_box form .errorlist {
   text-align: center;
   padding-top: 5px;
@@ -1915,38 +1916,38 @@ body#login #login_box form .errorlist li, body#logout #login_box form .errorlist
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 35, ../sass/helpers/_registration.sass */
+/* line 36, ../sass/helpers/_registration.sass */
 body#login #login_box form .field, body#logout #login_box form .field {
   margin-bottom: 10px;
 }
-/* line 37, ../sass/helpers/_registration.sass */
+/* line 38, ../sass/helpers/_registration.sass */
 body#login #login_box form .field label, body#logout #login_box form .field label {
-  font-size: 0.9em;
+  font-size: 1.25em;
 }
-/* line 40, ../sass/helpers/_registration.sass */
+/* line 41, ../sass/helpers/_registration.sass */
 body#login #login_box form .field input[type=text], body#login #login_box form .field input[type=password], body#logout #login_box form .field input[type=text], body#logout #login_box form .field input[type=password] {
-  font-size: 1.2em;
+  font-size: 1.65em;
   padding: 5px;
   margin: 0;
   width: 345px;
 }
-/* line 47, ../sass/helpers/_registration.sass */
+/* line 48, ../sass/helpers/_registration.sass */
 body#login #login_box form .actions-left, body#logout #login_box form .actions-left {
   float: left;
   margin-top: 0.7em;
-  font-size: 0.75em;
+  font-size: 1em;
 }
-/* line 52, ../sass/helpers/_registration.sass */
+/* line 53, ../sass/helpers/_registration.sass */
 body#login #login_box form .actions, body#logout #login_box form .actions {
   margin-top: 1.2em;
   text-align: right;
 }
 
-/* line 57, ../sass/helpers/_registration.sass */
+/* line 58, ../sass/helpers/_registration.sass */
 body#register form, body#password_reset form, body#password_change form {
   margin-top: 1em;
 }
-/* line 60, ../sass/helpers/_registration.sass */
+/* line 61, ../sass/helpers/_registration.sass */
 body#register form .field input#id_username, body#register form .field input#id_password1, body#register form .field input#id_password2, body#register form .field input#id_new_password1, body#register form .field input#id_new_password2, body#register form .field input#id_old_password, body#password_reset form .field input#id_username, body#password_reset form .field input#id_password1, body#password_reset form .field input#id_password2, body#password_reset form .field input#id_new_password1, body#password_reset form .field input#id_new_password2, body#password_reset form .field input#id_old_password, body#password_change form .field input#id_username, body#password_change form .field input#id_password1, body#password_change form .field input#id_password2, body#password_change form .field input#id_new_password1, body#password_change form .field input#id_new_password2, body#password_change form .field input#id_old_password {
   width: 300px;
 }
