@@ -22,7 +22,6 @@
 
 <form action="" method="POST" name="new_paper_form" id="new_paper_form" class="papers">
     {% csrf_token %}
-    <h4>General Information</h4>
     <div class="field">
         <label for="id_title">Title</label> 
         <div class="right">
@@ -34,18 +33,51 @@
         <label for="id_authors">Author(s)</label> 
         <div class="right">
             <textarea id="id_authors" name="authors"></textarea>
-            <small class="helper">Enter each author on a new line.</small>
+            <small class="helper">Enter each author on a new line. You may
+            format each name like: <strong>First Middle Last</strong> or <strong>Last,
+            First Middle</strong>.</small>
         </div>
     </div>
 
-    <h4>Optional Fields</h4>
     <div class="field">
-        <label for="id_name">Plan name</label> 
+        <label for="id_journal">Journal</label> 
         <div class="right">
-            <input id="id_name" type="text" name="name" maxlength="140">
-            <small class="helper">The name that customers are shown when
-            purchasing a plan. Examples include: Starter, Personal, Free,
-            Basic, Small, Mini, Plus, Medium, Max, Large, or Mega.</small>
+            <input id="id_journal" type="text" name="journal" maxlength="255" />
+        </div>
+    </div>
+
+    <div class="field">
+        <label for="id_year">Year</label> 
+        <div class="right">
+            <input id="id_year" type="text" name="year" maxlength="4" />
+        </div>
+    </div>
+
+    <div class="field">
+        <label for="id_volume">Volume</label> 
+        <div class="right">
+            <input id="id_volume" type="text" name="volume" maxlength="10" />
+        </div>
+    </div>
+
+    <div class="field">
+        <label for="id_issue">Issue</label> 
+        <div class="right">
+            <input id="id_issue" type="text" name="issue" maxlength="50" />
+        </div>
+    </div>
+
+    <div class="field">
+        <label for="id_pages">Pages</label> 
+        <div class="right">
+            <input id="id_pages" type="text" name="pages" maxlength="50" />
+        </div>
+    </div>
+
+    <div class="field">
+        <label for="id_url">URL</label> 
+        <div class="right">
+            <input id="id_url" type="text" name="url" />
         </div>
     </div>
 

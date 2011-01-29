@@ -134,7 +134,7 @@ body
     #title
       font-family: $serif_font
       font-size: 1.3em
-      margin-bottom: 0px
+      padding-bottom: 5px
     #description
       font-size: 0.9em
       color: #555
@@ -189,7 +189,7 @@ body
   //so we give it a class.
   form.papers
     clear: both
-    width: 90%
+    width: 100%
     margin: 0
     //Correction for the first h4 in the form. We want to pull it back up.
     margin-top: -0.9em
@@ -220,13 +220,18 @@ body
       .right
         //This left margin should match the label width
         margin-left: 100px
-        //HACK: Correct for the extra space at the bottom of the div.
-        margin-bottom: -5px
+        //Correct for the extra space at the bottom of the div by removing the 
+        //contribution from line-height: 1.5. There's still a 1px space left so 
+        //we neutralize that too.
+        line-height: 1
+        margin-bottom: -1px
         small
           display: block
-          margin-top: 5px
+          margin-top: 0px
           font-size: 0.7em
-          color: #999
+          color: #777
+          //Back to default line-height
+          line-height: 1.5
       .errorlist
         +errorlist-style
         background: transparent
@@ -237,7 +242,9 @@ body
         font-size: 0.8em
         padding: 4px 5px
         margin: 0
-        width: 550px
+        //Setting a width like this isn't the best idea, especially if the outer
+        //width can be resized. Then this width won't scale the same way.
+        width: 99%
       .input-helper
         font-size: 1.2em
 
@@ -443,6 +450,12 @@ body#new_paper
         height: 40px
         //When text overflows, in chrome, the scrollbars don't have enough space
         //to show up. Thus, we instead make the textbox auto expand (TODO).
+      textarea#id_authors
+        height: 60px
+      input#id_year
+        width: 50px
+      input#id_volume, input#id_issue, input#id_pages
+        width: 100px
 
 
 
