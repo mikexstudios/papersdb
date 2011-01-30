@@ -18,8 +18,8 @@ from django.db import models #for aggregator methods
 from annoying.decorators import render_to
 #from annoying.functions import get_object_or_None
 
-#from .forms import 
-#from .models import 
+from .forms import NewPaperForm
+from .models import Paper
 #from .tasks import 
 
 #import datetime
@@ -36,5 +36,23 @@ def dashboard(request):
 
 @render_to('papers/new_paper.html')
 def new_paper(request):
+    if request.method == 'POST':
+        form = NewPaperForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            #print data
+            
+            p = Paper(title = data['title'], authors = data['authors'], 
+                      journal = data['journal'], year = data['year'],
+                      volume = data['volume'], issue = data['issue'], 
+                      pages = data['pages'], url = data['url'])
+            p.save()
 
-    return {}
+            #Redirect to dashboard.
+            messages.success(request, 'Paper was successfully added.')
+            return redirect('dashboard')
+    else: 
+        form = NewPaperForm()
+
+    return {'form': form}
+

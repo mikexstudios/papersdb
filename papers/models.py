@@ -14,7 +14,7 @@ class Paper(models.Model):
     authors = models.TextField()
     journal = models.CharField(blank = True, max_length = 255)
     year = models.PositiveSmallIntegerField(null = True, blank = True)
-    #NOTE: Volume and issue may not be numbers.
+    #NOTE: Volume and issue may not necessarily be numbers.
     volume = models.CharField(blank = True, max_length = 255)
     issue = models.CharField(blank = True, max_length = 255)
     pages = models.CharField(blank = True, max_length = 255)
