@@ -36,7 +36,7 @@
             <div class="year">{% if p.year %}({{ p.year }}){% endif %}</div>
         </td>
         <td class="right">
-            <div class="year">{{ p.year }}</div>
+            <div class="year">{{ p.year|default:'' }}</div>
             <ul class="actions">
                 <li><a href="">Quick View</a></li>
                 <li><a href="">Download</a></li>
