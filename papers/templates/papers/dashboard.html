@@ -24,62 +24,31 @@
 
 <table id="library-tbl">
 <tbody>
-    <tr class="odd">
+    {% for p in papers %}
+    <tr class="{% cycle 'odd' 'even' %}">
         <td class="left">
-            <input type="checkbox" name="ch[]" value="1" />
+            <input type="checkbox" name="ch[]" value="{{ p.id }}" />
         </td>
         <td class="middle">
-            <div class="title"><a href="">NMR Chemical Shifts of Common Laboratory Solvents as Trace Impurities</a></div>
-            <div class="authors">Hugo E. Gottlieb, Vadim Kotlyar, Abraham Nudelman</div>
-            <div class="journal">The Journal of organic chemistry</div>
-            <div class="year">(1997)</div>
+            <div class="title"><a href="">{{ p.title }}</a></div>
+            <div class="authors">{{ p.authors }}</div>
+            <div class="journal">{{ p.journal }}</div>
+            <div class="year">{% if p.year %}({{ p.year }}){% endif %}</div>
         </td>
         <td class="right">
-            <div class="year">1997</div>
+            <div class="year">{{ p.year }}</div>
             <ul class="actions">
                 <li><a href="">Quick View</a></li>
                 <li><a href="">Download</a></li>
             </ul>
         </td>
     </tr>
-
-    <tr class="even">
-        <td class="left">
-            <input type="checkbox" name="ch[]" value="1" />
-        </td>
-        <td class="middle">
-            <div class="title"><a href="">NMR Chemical Shifts of Common Laboratory Solvents as Trace Impurities</a></div>
-            <div class="authors">Hugo E. Gottlieb, Vadim Kotlyar, Abraham Nudelman</div>
-            <div class="journal">The Journal of organic chemistry</div>
-            <div class="year">(1997)</div>
-        </td>
-        <td class="right">
-            <div class="year">1997</div>
-            <ul class="actions">
-                <li><a href="">Quick View</a></li>
-                <li><a href="">Download</a></li>
-            </ul>
-        </td>
+    {% empty %}
+    <tr class="empty">
+        <td>No papers in your library yet! Get started by <strong>
+        <a href="{% url new_paper %}">adding a new paper &rarr;</a></strong></td>
     </tr>
-
-    <tr class="odd">
-        <td class="left">
-            <input type="checkbox" name="ch[]" value="1" />
-        </td>
-        <td class="middle">
-            <div class="title"><a href="">NMR Chemical Shifts of Common Laboratory Solvents as Trace Impurities</a></div>
-            <div class="authors">Hugo E. Gottlieb, Vadim Kotlyar, Abraham Nudelman</div>
-            <div class="journal">The Journal of organic chemistry</div>
-            <div class="year">(1997)</div>
-        </td>
-        <td class="right">
-            <div class="year">1997</div>
-            <ul class="actions">
-                <li><a href="">Quick View</a></li>
-                <li><a href="">Download</a></li>
-            </ul>
-        </td>
-    </tr>
+    {% endfor %}
 </tbody>
 </table>
 

@@ -1744,54 +1744,58 @@ body#dashboard #right #library-tbl {
   font-size: 1.05em;
   margin-top: 10px;
 }
-/* line 314, ../sass/screen.sass */
+/* line 315, ../sass/screen.sass */
+body#dashboard #right #library-tbl tr.empty td {
+  text-align: center;
+}
+/* line 318, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr.odd .middle, body#dashboard #right #library-tbl tr.odd .right {
   background-color: #eeeeee;
 }
-/* line 317, ../sass/screen.sass */
+/* line 321, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr.even td {
   background-color: transparent;
 }
-/* line 322, ../sass/screen.sass */
+/* line 326, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr td {
   border-bottom: 5px solid white;
 }
-/* line 324, ../sass/screen.sass */
+/* line 328, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr .left {
   padding: 0;
   width: 20px;
 }
-/* line 327, ../sass/screen.sass */
+/* line 331, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr .middle {
   line-height: 1.2;
   padding: 2px 5px;
 }
-/* line 335, ../sass/screen.sass */
+/* line 339, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr .middle .journal {
   font-style: italic;
 }
-/* line 337, ../sass/screen.sass */
+/* line 341, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr .middle .authors {
   color: #444444;
 }
-/* line 340, ../sass/screen.sass */
+/* line 344, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr .middle .journal, body#dashboard #right #library-tbl tr .middle .year {
   display: inline;
   color: #555555;
 }
-/* line 343, ../sass/screen.sass */
+/* line 347, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr .right {
   width: 60px;
   border-left: 1px solid white;
   padding: 2px 5px;
   text-align: right;
 }
-/* line 348, ../sass/screen.sass */
+/* line 352, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr .right .year {
   font-weight: bold;
   font-size: 1.1em;
 }
-/* line 351, ../sass/screen.sass */
+/* line 355, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr .right ul.actions {
   list-style: none;
   margin: 0;
@@ -1805,45 +1809,45 @@ body#dashboard #right #library-tbl tr .right ul.actions li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 357, ../sass/screen.sass */
+/* line 361, ../sass/screen.sass */
 body#dashboard #right #library-tbl tr .right ul.actions a {
   color: #333333;
 }
-/* line 360, ../sass/screen.sass */
+/* line 364, ../sass/screen.sass */
 body#dashboard #right #pagesbar {
   margin-top: 20px;
   border-top: 1px solid #eeeeee;
 }
-/* line 364, ../sass/screen.sass */
+/* line 368, ../sass/screen.sass */
 body#dashboard #right #pagesbar .entries {
   float: left;
 }
-/* line 366, ../sass/screen.sass */
+/* line 370, ../sass/screen.sass */
 body#dashboard #right #pagesbar .nav {
   float: right;
 }
-/* line 368, ../sass/screen.sass */
+/* line 372, ../sass/screen.sass */
 body#dashboard #right #pagesbar .pages {
   text-align: center;
 }
 
-/* line 375, ../sass/screen.sass */
+/* line 379, ../sass/screen.sass */
 body#new_paper form#new_paper_form .field textarea#id_title {
   height: 40px;
 }
-/* line 380, ../sass/screen.sass */
+/* line 384, ../sass/screen.sass */
 body#new_paper form#new_paper_form .field textarea#id_authors {
   height: 60px;
 }
-/* line 382, ../sass/screen.sass */
+/* line 386, ../sass/screen.sass */
 body#new_paper form#new_paper_form .field input#id_year {
   width: 50px;
 }
-/* line 384, ../sass/screen.sass */
+/* line 388, ../sass/screen.sass */
 body#new_paper form#new_paper_form .field input#id_volume, body#new_paper form#new_paper_form .field input#id_issue, body#new_paper form#new_paper_form .field input#id_pages {
   width: 100px;
 }
-/* line 387, ../sass/screen.sass */
+/* line 391, ../sass/screen.sass */
 body#new_paper form#new_paper_form .actions button {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
