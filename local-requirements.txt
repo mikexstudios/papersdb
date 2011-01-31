@@ -16,7 +16,7 @@
 #fabric
 
 #For testing
-#django-test-utils
+django-test-utils
 
 #For python 2.5:
 #multiprocessing

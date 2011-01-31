@@ -11,7 +11,9 @@
 #    }
 #}
 
-#from settings import MIDDLEWARE_CLASSES, INSTALLED_APPS
+from settings import MIDDLEWARE_CLASSES, INSTALLED_APPS
+INSTALLED_APPS.append('test_utils')
+
 ##For django-debug-toolbar
 #MIDDLEWARE_CLASSES.append('debug_toolbar.middleware.DebugToolbarMiddleware')
 #INSTALLED_APPS.append('debug_toolbar')
