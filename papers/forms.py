@@ -16,3 +16,10 @@ class NewPaperForm(forms.Form):
     issue = forms.CharField(required = False, max_length = 255, label = 'Issue')
     pages = forms.CharField(required = False, max_length = 255, label = 'Pages')
     url = forms.URLField(required = False, max_length = 9999, label = 'URL')
+
+    def clean_authors(self):
+        '''
+        Normalize newlines to \n. Also remove any unnecessary whitespace.
+        '''
+        authors = self.cleaned_data['authors']
+        return '\n'.join(authors.splitlines())
