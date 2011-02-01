@@ -4,7 +4,7 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 
 #from django.contrib.auth.models import User
-from .papers.models import Paper
+from papers.models import Paper
 
 #from .helpers import 
 
