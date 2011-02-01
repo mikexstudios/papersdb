@@ -31,8 +31,8 @@ def home(request):
 
 @render_to('papers/dashboard.html')
 def dashboard(request):
-    #Get papers
-    p = Paper.objects.all().order_by('pk')
+    #Get papers (latest first)
+    p = Paper.objects.all().order_by('-pk')
 
     return {'papers': p}
 
