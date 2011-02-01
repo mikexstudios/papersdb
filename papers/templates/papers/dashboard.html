@@ -34,7 +34,11 @@
         </td>
         <td class="middle">
             <div class="title"><a href="">{{ p.title }}</a></div>
-            <div class="authors">{{ p.authors|splitlines }}</div>
+            <div class="authors">
+                {% for a in p.authors|splitlines %}
+                {{ a }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </div>
             <div class="journal">{{ p.journal }}</div>
             <div class="year">{% if p.year %}({{ p.year }}){% endif %}</div>
         </td>
