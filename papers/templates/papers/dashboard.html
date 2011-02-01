@@ -1,7 +1,8 @@
 {% extends "papers/base.html" %}
+{% load split %}
 {% block bodyid %}dashboard{% endblock %}
 
-{% block title %}dashboard{% endblock %}
+{% block title %}Dashboard{% endblock %}
 
 {% block javascript %}
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
@@ -33,7 +34,7 @@
         </td>
         <td class="middle">
             <div class="title"><a href="">{{ p.title }}</a></div>
-            <div class="authors">{{ p.authors }}</div>
+            <div class="authors">{{ p.authors|splitlines }}</div>
             <div class="journal">{{ p.journal }}</div>
             <div class="year">{% if p.year %}({{ p.year }}){% endif %}</div>
         </td>
