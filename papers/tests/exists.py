@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.test import TestCase
 #from django.test.client import Client
+from django.core.urlresolvers import reverse
 
 #from django.contrib.auth.models import User
 #from .models import 
@@ -12,6 +13,26 @@ from django.test import TestCase
 #from annoying.functions import get_object_or_None
 
 import re
+
+class LoginRequiredTest(TestCase):
+    '''
+    Tests that specified pages require login.
+    '''
+
+    def setUp(self):
+        self.pages = (
+                '/dashboard/',
+                '/papers/new/',
+        )
+
+    def tearDown(self):
+        pass
+
+    def test_login_required(self):
+        for p in self.pages:
+            r = self.client.get(p, {})
+            self.assertRedirects(r, reverse('auth_login'))
+
 
 class PageExistsTest(TestCase):
 
