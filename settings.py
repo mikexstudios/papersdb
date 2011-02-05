@@ -166,6 +166,15 @@ SEND_BROKEN_LINK_EMAILS = False
 #Defines the name of the site/webapp. Templates use this variable.
 SITENAME = 'PapersDB'
 
+#Allowed file extensions for uploaded papers.
+ALLOWED_UPLOAD_EXTENSIONS = ('pdf', )
+
+#Maximum uploaded file size (in bytes)
+#NOTE: 1 megabyte = 1048576 bytes
+#      1 kilobyte = 1024 bytes
+#MAXIMUM_UPLOAD_SIZE_MB = 10
+#MAXIMUM_UPLOAD_SIZE_BYTES = MAXIMUM_UPLOAD_SIZE_MB * 1048576 
+
 
 ###################
 # south settings: #
