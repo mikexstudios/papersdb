@@ -175,6 +175,11 @@ ALLOWED_UPLOAD_EXTENSIONS = ('pdf', )
 MAXIMUM_UPLOAD_SIZE_MB = 10
 MAXIMUM_UPLOAD_SIZE_BYTES = MAXIMUM_UPLOAD_SIZE_MB * 1048576 
 
+#Absolute path to the directory that holds uploads
+UPLOAD_ROOT = os.path.join(SITE_ROOT, 'uploads')
+
+#Url to where the uploads can be accessed. No trailing slash.
+UPLOAD_URL = MEDIA_URL + 'papers'
 
 ###################
 # south settings: #
