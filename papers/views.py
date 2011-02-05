@@ -48,7 +48,8 @@ def new_paper(request):
                       journal = data['journal'], year = data['year'],
                       volume = data['volume'], issue = data['issue'], 
                       pages = data['pages'], url = data['url'])
-            p.file = data['file'].name
+            if data['file']:
+                p.file = data['file'].name
             p.save()
 
             #Redirect to dashboard.
