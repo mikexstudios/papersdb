@@ -14,11 +14,12 @@ from django.test import TestCase
 import re
 
 from papers.forms import NewPaperForm
+from django.core.files.uploadedfile import SimpleUploadedFile
 class AddPaperFormTest(TestCase):
 
     def setUp(self):
         #This is dummy valid data.
-        self.data = {'title': 'Test Title', 'url': 'http://example.com',
+        self.post = {'title': 'Test Title', 'url': 'http://example.com',
                 'journal': 'Journal of Test', 'year': '2011', 'submit':
                 'Submit', 'volume': '1', 'authors': 
                 "Author One\nAuthor Two\nAuthor Three", 'issue': '2', 'pages':
@@ -29,8 +30,8 @@ class AddPaperFormTest(TestCase):
 
     def test_empty_form_errors(self):
         #Make all the values in the data empty
-        data = dict((k, '') for (k, v) in self.data.iteritems())
-        f = NewPaperForm(data)
+        post = dict((k, '') for (k, v) in self.post.iteritems())
+        f = NewPaperForm(post)
 
         self.assertFalse(f.is_valid())
         self.assertEqual(f.errors, {
@@ -39,7 +40,7 @@ class AddPaperFormTest(TestCase):
         })
 
     def test_valid_form(self):
-        f = NewPaperForm(self.data)
+        f = NewPaperForm(self.post)
 
         self.assertTrue(f.is_valid())
 
@@ -50,7 +51,7 @@ class AddPaperFormTest(TestCase):
         are converted to '\n'.
         '''
         expected_authors = "Author One\nAuthor Two\nAuthor Three"
-        data = self.data.copy()
+        post = self.post.copy()
 
         cases = [
             #CR+LF newline (Windows)
@@ -66,8 +67,8 @@ class AddPaperFormTest(TestCase):
         ]
 
         for c in cases:
-            data['authors'] = c
+            post['authors'] = c
 
-            f = NewPaperForm(data)
+            f = NewPaperForm(post)
             self.assertTrue(f.is_valid())
             self.assertEqual(f.cleaned_data['authors'], expected_authors)
