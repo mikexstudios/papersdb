@@ -30,7 +30,7 @@ class AddPaperFormTest(TestCase):
         self.TEST_FILES_PATH = os.path.join(settings.SITE_ROOT, 'papers',
                                             'tests', 'files')
         f = open(os.path.join(self.TEST_FILES_PATH, 'blank.pdf'), 'rb')
-        self.file = {'file': SimpleUploadedFile(f.name, f.read())}
+        self.files = {'file': SimpleUploadedFile(f.name, f.read())}
         f.close()
 
     def tearDown(self):
@@ -48,7 +48,7 @@ class AddPaperFormTest(TestCase):
         })
 
     def test_valid_form(self):
-        f = NewPaperForm(self.post)
+        f = NewPaperForm(self.post, self.files)
 
         self.assertTrue(f.is_valid())
 
@@ -88,9 +88,24 @@ class AddPaperFormTest(TestCase):
         '''
         #This is a dummy blank png file, which is not allowed.
         f = open(os.path.join(self.TEST_FILES_PATH, 'blank.png'), 'rb')
-        invalid_file = self.file.copy()
-        invalid_file['file'] = SimpleUploadedFile(f.name, f.read())
+        invalid_files = self.files.copy()
+        invalid_files['file'] = SimpleUploadedFile(f.name, f.read())
         f.close()
         
-        f = NewPaperForm(self.post, invalid_file)
+        f = NewPaperForm(self.post, invalid_files)
         self.assertFalse(f.is_valid())
+
+    def test_oversized_upload_file(self):
+        '''
+        If uploaded file size is greater than
+        settings.MAXIMUM_UPLOAD_SIZE_BYTES, then file should be rejected.
+        '''
+        #Temporarily set maximum file size to 0.
+        temp = settings.MAXIMUM_UPLOAD_SIZE_BYTES
+        settings.MAXIMUM_UPLOAD_SIZE_BYTES = 0
+
+        f = NewPaperForm(self.post, self.files)
+        self.assertFalse(f.is_valid())
+
+        #Undo setting
+        settings.MAXIMUM_UPLOAD_SIZE_BYTES = temp
