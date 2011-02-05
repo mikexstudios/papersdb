@@ -29,6 +29,7 @@ def home(request):
 
     return {}
 
+@login_required
 @render_to('papers/dashboard.html')
 def dashboard(request):
     #Get papers (latest first)
@@ -36,6 +37,7 @@ def dashboard(request):
 
     return {'papers': p}
 
+@login_required
 @render_to('papers/new_paper.html')
 def new_paper(request):
     if request.method == 'POST':

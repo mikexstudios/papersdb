@@ -31,7 +31,7 @@ class LoginRequiredTest(TestCase):
     def test_login_required(self):
         for p in self.pages:
             r = self.client.get(p, {})
-            self.assertRedirects(r, reverse('auth_login'))
+            self.assertRedirects(r, '%s?next=%s' % (reverse('auth_login'), p))
 
 
 class PageExistsTest(TestCase):
