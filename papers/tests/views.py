@@ -3,7 +3,7 @@ from django.test import TestCase
 #from django.test.client import Client
 from django.core.urlresolvers import reverse
 
-#from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 from papers.models import Paper
 
 #from .helpers import 
@@ -18,7 +18,9 @@ import os
 class AddPaperViewTest(TestCase):
 
     def setUp(self):
-        pass
+        #Create and login test user.
+        u = User.objects.create_user('test', 'test@example.com', 'test')
+        self.client.login(username = 'test', password = 'test')
 
     def tearDown(self):
         pass
@@ -58,6 +60,10 @@ class AddPaperViewTest(TestCase):
 class DashboardViewTest(TestCase):
 
     def setUp(self):
+        #Create and login test user.
+        u = User.objects.create_user('test', 'test@example.com', 'test')
+        self.client.login(username = 'test', password = 'test')
+
         self.data = {'title': 'Test Title', 'url': 'http://example.com', 'journal':
         'Journal of Test', 'year': '2011', 'volume': '1', 'authors': 
         "Author One\nAuthor Two\nAuthor Three", 'issue': '2', 'pages': '3-4', }

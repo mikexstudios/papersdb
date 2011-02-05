@@ -3,7 +3,7 @@ from django.test import TestCase
 #from django.test.client import Client
 from django.core.urlresolvers import reverse
 
-#from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 #from .models import 
 
 #from .helpers import 
@@ -37,7 +37,9 @@ class LoginRequiredTest(TestCase):
 class PageExistsTest(TestCase):
 
     def setUp(self):
-        pass
+        #Create and login test user.
+        u = User.objects.create_user('test', 'test@example.com', 'test')
+        self.client.login(username = 'test', password = 'test')
 
     def tearDown(self):
         pass
