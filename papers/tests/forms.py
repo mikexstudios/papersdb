@@ -12,6 +12,7 @@ from django.test import TestCase
 #from annoying.functions import get_object_or_None
 
 import re
+import os
 
 from papers.forms import NewPaperForm
 from django.core.files.uploadedfile import SimpleUploadedFile
@@ -24,6 +25,13 @@ class AddPaperFormTest(TestCase):
                 'Submit', 'volume': '1', 'authors': 
                 "Author One\nAuthor Two\nAuthor Three", 'issue': '2', 'pages':
                 '3-4', }
+
+        #This is a dummy blank pdf.
+        self.TEST_FILES_PATH = os.path.join(settings.SITE_ROOT, 'papers',
+                                            'tests', 'files')
+        f = open(os.path.join(self.TEST_FILES_PATH, 'blank.pdf'), 'rb')
+        self.file = {'file': SimpleUploadedFile(f.name, f.read())}
+        f.close()
 
     def tearDown(self):
         pass
@@ -72,3 +80,17 @@ class AddPaperFormTest(TestCase):
             f = NewPaperForm(post)
             self.assertTrue(f.is_valid())
             self.assertEqual(f.cleaned_data['authors'], expected_authors)
+
+    def test_invalid_upload_file(self):
+        '''
+        If uploaded file does not have extension of
+        settings.ALLOWED_UPLOAD_EXTENSIONS, then file should be rejected.
+        '''
+        #This is a dummy blank png file, which is not allowed.
+        f = open(os.path.join(self.TEST_FILES_PATH, 'blank.png'), 'rb')
+        invalid_file = self.file.copy()
+        invalid_file['file'] = SimpleUploadedFile(f.name, f.read())
+        f.close()
+        
+        f = NewPaperForm(self.post, invalid_file)
+        self.assertFalse(f.is_valid())
