@@ -39,7 +39,7 @@ def dashboard(request):
 @render_to('papers/new_paper.html')
 def new_paper(request):
     if request.method == 'POST':
-        form = NewPaperForm(request.POST)
+        form = NewPaperForm(request.POST, request.FILES)
         if form.is_valid():
             data = form.cleaned_data
             #print data
@@ -48,6 +48,7 @@ def new_paper(request):
                       journal = data['journal'], year = data['year'],
                       volume = data['volume'], issue = data['issue'], 
                       pages = data['pages'], url = data['url'])
+            p.file = data['file'].name
             p.save()
 
             #Redirect to dashboard.

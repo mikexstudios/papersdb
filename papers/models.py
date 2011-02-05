@@ -20,6 +20,9 @@ class Paper(models.Model):
     pages = models.CharField(blank = True, max_length = 255)
     url = models.URLField(default = '', blank = True, 
                           verify_exists = False, max_length = 1000)
+    
+    #Longest valid filename roughly around 300 characters.
+    file = models.CharField(blank = True, max_length = 305) 
 
     def __unicode__(self):
         return '%s' % self.id
