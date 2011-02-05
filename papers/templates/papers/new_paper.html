@@ -89,6 +89,15 @@
         </div>
     </div>
 
+    <div class="field">
+        <label for="id_file" class="optional">File</label> 
+        <div class="right">
+            {{ form.file.errors }}
+            {{ form.file }}
+            <small class="helper">Select and upload the file that is associated with this paper.</small>
+        </div>
+    </div>
+
     <div class="actions">
         <button type="submit" id="new_paper_submit" class="light" name="submit"
             value="Submit">Add new paper &raquo;</button>
