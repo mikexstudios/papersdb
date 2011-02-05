@@ -50,11 +50,10 @@ class NewPaperForm(forms.Form):
             )
 
         #Check for allowed file size:
-        #if uploaded_file.size > settings.MAXIMUM_SONG_SIZE_BYTES:
-        #    raise forms.ValidationError(
-        #        "File is too large! Only files with size <= " +
-        #        str(settings.MAXIMUM_SONG_SIZE_MB) + " MB are allowed!"
-        #    )
+        if uploaded_file.size > settings.MAXIMUM_UPLOAD_SIZE_BYTES:
+            raise forms.ValidationError(
+                'File is too large! Only files with size <= %s MB are allowed!' % settings.MAXIMUM_UPLOAD_SIZE_MB
+            )
         
         #Otherwise, everything checks out:
         return uploaded_file
