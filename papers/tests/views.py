@@ -13,6 +13,7 @@ from papers.models import Paper
 #from annoying.functions import get_object_or_None
 
 import re
+import os
 
 class AddPaperViewTest(TestCase):
 
@@ -32,12 +33,27 @@ class AddPaperViewTest(TestCase):
         'authors': "Author One\nAuthor Two\nAuthor Three",
         'issue': '2', 'pages': '3-4', }
 
+        #Also add a file to upload. This is a dummy blank pdf.
+        self.TEST_FILES_PATH = os.path.join(settings.SITE_ROOT, 'papers',
+                                            'tests', 'files')
+        upload_filename = 'blank.pdf'
+        upload_file = open(os.path.join(self.TEST_FILES_PATH, upload_filename), 'rb')
+        data['file'] = upload_file
+
         r = self.client.post('/papers/new/', data)
+        upload_file.close()
         self.assertRedirects(r, reverse('dashboard'))
 
         #Also make sure information is saved to database. If not saved, will
         #raise DoesNotExist.
-        Paper.objects.get(title = data['title'], authors = data['authors'])
+        #NOTE: We don't check all of the fields. We assume that if the Paper
+        #      object exists, the information was saved correctly.
+        p = Paper.objects.get(title = data['title'], authors = data['authors'])
+
+        #Check that filename was saved to database.
+        self.assertEquals(p.file, upload_filename)
+
+
 
 class DashboardViewTest(TestCase):
 
