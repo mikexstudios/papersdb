@@ -57,8 +57,27 @@ body#login, body#logout
         text-align: right
 
 body#register, body#password_reset, body#password_change
+  #content
+    width: 550px
+    margin: 0 auto
+  h2#title
+    font-size: 2.5em
+    line-height: 1
+    margin-bottom: 10px
+
   form
     margin-top: 1.0em
     .field
+      padding: 10px 20px
+      .right
+        //This left margin should match the label width
+        margin-left: 150px
+      label
+        font-size: 1.2em
+        padding-top: 0.15em
+      input[type=text], input[type=password]
+        font-size: 1.1em
+        padding: 5px
+        margin: 0
       input#id_username, input#id_password1, input#id_password2, input#id_new_password1, input#id_new_password2, input#id_old_password
-        width: 300px
+        width: 200px
