@@ -1,5 +1,5 @@
 from django.db import models
-#from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 
 #from django_extend_model.utils import decorator as extend_model
 
@@ -10,6 +10,8 @@ class Paper(models.Model):
     Describes a paper entry.
     '''
     #id is auto-defined and is auto-incrementing
+    user = models.ForeignKey(User)
+
     title = models.TextField()
     authors = models.TextField()
     journal = models.CharField(blank = True, max_length = 255)
