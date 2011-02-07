@@ -19,7 +19,7 @@ class AddPaperViewTest(TestCase):
 
     def setUp(self):
         #Create and login test user.
-        u = User.objects.create_user('test', 'test@example.com', 'test')
+        self.user = User.objects.create_user('test', 'test@example.com', 'test')
         self.client.login(username = 'test', password = 'test')
 
     def tearDown(self):
@@ -55,6 +55,9 @@ class AddPaperViewTest(TestCase):
         #Check that filename was saved to database.
         self.assertEquals(p.file, upload_filename)
 
+        #Make sure that the added paper is associated with logged in user.
+        self.assertEqual(p.user, self.user)
+
 
 
 class DashboardViewTest(TestCase):
@@ -83,5 +86,23 @@ class DashboardViewTest(TestCase):
         #Assume that if we find the title of the dummy paper that the rest of
         #the information is there too.
         self.assertContains(r, self.data['title'], count = 1)
+
+    def test_display_only_user_own_papers(self):
+        '''
+        Make sure that the list of papers only displays the ones that the logged
+        in user has added (and not someone else's papers).
+        '''
+        #Add another paper under a different user (than the currently logged in 
+        #one).
+        data = self.data.copy()
+        data['title'] = 'Second Unique Title'
+        p = Paper(**data) #unpack dictionary to arguments
+        p.save()
+
+        #Make sure that the added paper does not show up in dashboard.
+        r = self.client.get('/dashboard/', {})
+        self.assertNotContains(r, data['title'])
+
+
 
 
