@@ -2008,38 +2008,3 @@ body#register form .field input[type=text], body#register form .field input[type
 body#register form .field input#id_username, body#register form .field input#id_password1, body#register form .field input#id_password2, body#register form .field input#id_new_password1, body#register form .field input#id_new_password2, body#register form .field input#id_old_password, body#password_reset form .field input#id_username, body#password_reset form .field input#id_password1, body#password_reset form .field input#id_password2, body#password_reset form .field input#id_new_password1, body#password_reset form .field input#id_new_password2, body#password_reset form .field input#id_old_password, body#password_change form .field input#id_username, body#password_change form .field input#id_password1, body#password_change form .field input#id_password2, body#password_change form .field input#id_new_password1, body#password_change form .field input#id_new_password2, body#password_change form .field input#id_old_password {
   width: 200px;
 }
-
-/* line 398, ../sass/screen.sass */
-body#register #content, body#password_reset #content, body#password_change #content {
-  width: 550px;
-  margin: 0 auto;
-}
-/* line 401, ../sass/screen.sass */
-body#register h2#title, body#password_reset h2#title, body#password_change h2#title {
-  font-size: 2.5em;
-  line-height: 1;
-  margin-bottom: 10px;
-}
-/* line 407, ../sass/screen.sass */
-body#register form .field, body#password_reset form .field, body#password_change form .field {
-  padding: 10px 20px;
-}
-/* line 409, ../sass/screen.sass */
-body#register form .field .right, body#password_reset form .field .right, body#password_change form .field .right {
-  margin-left: 150px;
-}
-/* line 412, ../sass/screen.sass */
-body#register form .field label, body#password_reset form .field label, body#password_change form .field label {
-  font-size: 1.2em;
-  padding-top: 0.15em;
-}
-/* line 415, ../sass/screen.sass */
-body#register form .field input[type=text], body#register form .field input[type=password], body#password_reset form .field input[type=text], body#password_reset form .field input[type=password], body#password_change form .field input[type=text], body#password_change form .field input[type=password] {
-  font-size: 1.1em;
-  padding: 5px;
-  margin: 0;
-}
-/* line 419, ../sass/screen.sass */
-body#register form .field input#id_username, body#register form .field input#id_password1, body#register form .field input#id_password2, body#register form .field input#id_new_password1, body#register form .field input#id_new_password2, body#register form .field input#id_old_password, body#password_reset form .field input#id_username, body#password_reset form .field input#id_password1, body#password_reset form .field input#id_password2, body#password_reset form .field input#id_new_password1, body#password_reset form .field input#id_new_password2, body#password_reset form .field input#id_old_password, body#password_change form .field input#id_username, body#password_change form .field input#id_password1, body#password_change form .field input#id_password2, body#password_change form .field input#id_new_password1, body#password_change form .field input#id_new_password2, body#password_change form .field input#id_old_password {
-  width: 200px;
-}
