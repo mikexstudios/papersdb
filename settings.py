@@ -140,7 +140,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 # Here are some settings related to auth urls. django has default values for them
 # as specified on page: http://docs.djangoproject.com/en/dev/ref/settings/. You
 # can override them if you like.
-#LOGIN_REDIRECT_URL = '' #default: '/accounts/profile/'
+LOGIN_REDIRECT_URL = '/dashboard/' #default: '/accounts/profile/'
 #LOGIN_URL = '' #default: '/accounts/login/'
 #LOGOUT_URL = '' #default: '/accounts/logout/'
 
