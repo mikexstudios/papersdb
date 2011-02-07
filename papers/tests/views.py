@@ -64,12 +64,14 @@ class DashboardViewTest(TestCase):
 
     def setUp(self):
         #Create and login test user.
-        u = User.objects.create_user('test', 'test@example.com', 'test')
+        self.user = User.objects.create_user('test', 'test@example.com', 'test')
         self.client.login(username = 'test', password = 'test')
 
-        self.data = {'title': 'Test Title', 'url': 'http://example.com', 'journal':
-        'Journal of Test', 'year': '2011', 'volume': '1', 'authors': 
-        "Author One\nAuthor Two\nAuthor Three", 'issue': '2', 'pages': '3-4', }
+        self.data = {'user': self.user, 'title': 'Test Title', 'url':
+                'http://example.com', 'journal': 'Journal of Test', 'year':
+                '2011', 'volume': '1', 'authors': 
+                "Author One\nAuthor Two\nAuthor Three", 'issue': '2', 'pages':
+                '3-4', }
 
         p = Paper(**self.data) #unpack dictionary to arguments
         p.save()
@@ -95,6 +97,8 @@ class DashboardViewTest(TestCase):
         #Add another paper under a different user (than the currently logged in 
         #one).
         data = self.data.copy()
+        second_user = User.objects.create_user('test2', 'test2@example.com', 'test2')
+        data['user'] = second_user
         data['title'] = 'Second Unique Title'
         p = Paper(**data) #unpack dictionary to arguments
         p.save()

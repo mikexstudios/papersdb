@@ -33,7 +33,7 @@ def home(request):
 @render_to('papers/dashboard.html')
 def dashboard(request):
     #Get papers (latest first)
-    p = Paper.objects.all().order_by('-pk')
+    p = Paper.objects.filter(user = request.user).order_by('-pk')
 
     return {'papers': p}
 
@@ -46,10 +46,11 @@ def new_paper(request):
             data = form.cleaned_data
             #print data
             
-            p = Paper(title = data['title'], authors = data['authors'], 
-                      journal = data['journal'], year = data['year'],
-                      volume = data['volume'], issue = data['issue'], 
-                      pages = data['pages'], url = data['url'])
+            p = Paper(user = request.user, title = data['title'], 
+                    authors = data['authors'], journal = data['journal'], 
+                    year = data['year'], volume = data['volume'], 
+                    issue = data['issue'], pages = data['pages'], 
+                    url = data['url'])
             if data['file']:
                 p.file = data['file'].name
             p.save()
