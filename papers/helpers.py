@@ -4,6 +4,7 @@
 
 #import datetime
 #import calendar
+import os
 import hashlib #encryption (MD5)
 import time, random #used to seed encryption
 
@@ -21,3 +22,22 @@ def random_md5(seed = ''):
     md5 = hashlib.md5()
     md5.update(s)
     return md5.hexdigest()
+
+def save_uploaded_file(f, path, filename = ''):
+    '''
+    Given an UploadedFile object, saves the data to disk.
+    See: http://docs.djangoproject.com/en/dev/topics/http/file-uploads/
+
+    @param f File object
+    @param path The path where the file will saved.
+    @param filename File name. Defaults to the file name of the File object.
+    '''
+    if filename == '':
+        filename = f.name
+    #Need to make the hash directory before saving file.
+    os.makedirs(path, mode = 0755)
+    save_path = os.path.join(path, filename)
+    destination = open(save_path, 'wb+')
+    for chunk in f.chunks():
+        destination.write(chunk)
+    destination.close()

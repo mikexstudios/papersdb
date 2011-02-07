@@ -23,6 +23,7 @@ class AddPaperViewTest(TestCase):
         self.client.login(username = 'test', password = 'test')
 
     def tearDown(self):
+        #TODO: Remove the sample uploaded file.
         pass
 
     def test_valid_form(self):
@@ -52,15 +53,19 @@ class AddPaperViewTest(TestCase):
         #      object exists, the information was saved correctly.
         p = Paper.objects.get(title = data['title'], authors = data['authors'])
 
-        #Check that filename was saved to database.
-        self.assertEquals(p.file, upload_filename)
-
         #Make sure that the added paper is associated with logged in user.
         self.assertEqual(p.user, self.user)
 
         #Check that a hash was generated for the paper
         self.assertEqual(len(p.hash), 32)
 
+        #Check that filename was saved to database.
+        self.assertEquals(p.file, upload_filename)
+
+        #Check that the file was saved to disk with format:
+        #/<upload files location>/username/<hash>/filename.ext
+        path = os.path.join(settings.UPLOAD_ROOT, p.user.username, p.hash, p.file)
+        self.assertTrue(os.path.exists(path))
 
 
 class DashboardViewTest(TestCase):
@@ -111,5 +116,22 @@ class DashboardViewTest(TestCase):
         self.assertNotContains(r, data['title'])
 
 
+class AccountsRegisterTest(TestCase):
 
+    def setUp(self):
+        pass
 
+    def tearDown(self):
+        pass
+
+    def test_user_upload_dir_created(self):
+        '''
+        When user signs up, an upload directory for that user should be created.
+        
+        ex. /<uploads path>/username/
+        '''
+        #Create new test user.
+        new_user = User.objects.create_user('test', 'test@example.com', 'test')
+
+        path = os.path.join(settings.UPLOAD_ROOT, new_user.username)
+        self.assertTrue(os.path.exists(path))

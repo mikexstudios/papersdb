@@ -29,3 +29,7 @@ class Paper(models.Model):
 
     def __unicode__(self):
         return '%s' % self.id
+
+
+# We handle signals in handlers.py. Make sure they are registered by importing:
+import handlers

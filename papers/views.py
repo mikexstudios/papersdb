@@ -21,9 +21,10 @@ from annoying.decorators import render_to
 from .forms import NewPaperForm
 from .models import Paper
 #from .tasks import 
-from .helpers import random_md5
+from .helpers import random_md5, save_uploaded_file
 
 #import datetime
+import os
 
 @render_to('papers/home.html')
 def home(request):
@@ -57,7 +58,13 @@ def new_paper(request):
             p.hash = random_md5()
 
             if data['file']:
+                #Save file. data.file is an UploadedFile object.
+                path = os.path.join(settings.UPLOAD_ROOT, request.user.username,
+                        p.hash)
+                save_uploaded_file(data['file'], path)
+
                 p.file = data['file'].name
+
             p.save()
 
             #Redirect to dashboard.
