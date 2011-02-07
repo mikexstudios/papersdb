@@ -58,6 +58,9 @@ class AddPaperViewTest(TestCase):
         #Make sure that the added paper is associated with logged in user.
         self.assertEqual(p.user, self.user)
 
+        #Check that a hash was generated for the paper
+        self.assertEqual(len(p.hash), 32)
+
 
 
 class DashboardViewTest(TestCase):

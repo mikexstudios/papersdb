@@ -11,6 +11,7 @@ class Paper(models.Model):
     '''
     #id is auto-defined and is auto-incrementing
     user = models.ForeignKey(User)
+    hash = models.CharField(db_index = True, max_length = 32) #Random MD5 hash
 
     title = models.TextField()
     authors = models.TextField()

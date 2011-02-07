@@ -21,6 +21,7 @@ from annoying.decorators import render_to
 from .forms import NewPaperForm
 from .models import Paper
 #from .tasks import 
+from .helpers import random_md5
 
 #import datetime
 
@@ -51,6 +52,10 @@ def new_paper(request):
                     year = data['year'], volume = data['volume'], 
                     issue = data['issue'], pages = data['pages'], 
                     url = data['url'])
+            #Generate a random hash that will be used as a non-guessable ID
+            #for this paper.
+            p.hash = random_md5()
+
             if data['file']:
                 p.file = data['file'].name
             p.save()
