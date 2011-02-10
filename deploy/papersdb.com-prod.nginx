@@ -19,10 +19,11 @@ server {
         #expires 1d;
     }
     
-    location /admineral/static {
+    location /admin/static {
         #autoindex on;
         #index index.html;
-        alias /home/papers/prod/papersdb/env/src/django/django/contrib/admin/media;
+        #alias /home/papers/prod/papersdb/env/src/django/django/contrib/admin/media;
+        alias /home/papers/dev/papersdb/env/lib/python2.5/site-packages/django/contrib/admin/media;
         #expires 1d;
     }
 
