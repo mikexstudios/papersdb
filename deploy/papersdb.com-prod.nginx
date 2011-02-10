@@ -1,0 +1,33 @@
+# nginx config file for serpapp.com (prod)
+
+server {
+    listen 80;
+    server_name www.papersdb.com;
+    rewrite ^/(.*) http://papersdb.com/$1 permanent;
+}
+
+server {
+    listen 80;
+    server_name papersdb.com;
+    access_log /home/papers/prod/logs/access.log;
+    error_log /home/papers/prod/logs/error.log;
+
+    location /static {
+        #autoindex on;
+        #index index.html;
+        root /home/papers/prod/papers/;
+        #expires 1d;
+    }
+    
+    location /admineral/static {
+        #autoindex on;
+        #index index.html;
+        alias /home/papers/prod/papers/env/src/django/django/contrib/admin/media;
+        #expires 1d;
+    }
+
+    location / {
+        include /etc/nginx/fastcgi_params;
+        fastcgi_pass 127.0.0.1:8089;
+    }
+}
