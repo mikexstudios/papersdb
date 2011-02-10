@@ -1,5 +1,6 @@
 {% extends "papers/app_base.html" %}
 {% load split %}
+{% load papers %}
 {% block bodyid %}dashboard{% endblock %}
 
 {% block title %}Dashboard{% endblock %}
@@ -45,7 +46,7 @@
         <td class="right">
             <div class="year">{{ p.year|default:'' }}</div>
             <ul class="actions">
-                <li><a href="">Quick View</a></li>
+                <li><a href="{% quickview p %}">Quick View</a></li>
                 <li><a href="">Download</a></li>
             </ul>
         </td>
