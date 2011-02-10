@@ -15,14 +15,14 @@ server {
     location /static {
         #autoindex on;
         #index index.html;
-        root /home/papers/prod/papers/;
+        root /home/papers/prod/papersdb/;
         #expires 1d;
     }
     
     location /admineral/static {
         #autoindex on;
         #index index.html;
-        alias /home/papers/prod/papers/env/src/django/django/contrib/admin/media;
+        alias /home/papers/prod/papersdb/env/src/django/django/contrib/admin/media;
         #expires 1d;
     }
 

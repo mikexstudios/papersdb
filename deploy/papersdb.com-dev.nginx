@@ -9,19 +9,19 @@ server {
     location /static {
         #autoindex on;
         #index index.html;
-        root /home/papers/dev/papers/;
+        root /home/papers/dev/papersdb/;
         #expires 1d;
     }
     
     location /admineral/static {
         #autoindex on;
         #index index.html;
-        alias /home/papers/dev/papers/env/src/django/django/contrib/admin/media;
+        alias /home/papers/dev/papersdb/env/src/django/django/contrib/admin/media;
         #expires 1d;
     }
 
     location / {
         include /etc/nginx/fastcgi_params;
-        fastcgi_pass 127.0.0.1:8088;
+        fastcgi_pass 127.0.0.1:8089;
     }
 }
