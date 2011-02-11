@@ -1871,14 +1871,14 @@ body#new_paper form#auto_new_paper_form {
   display: block;
   background-color: #f3f5f9;
   padding: 10px 15px;
-  width: 85%;
+  width: auto;
 }
 /* line 402, ../sass/screen.sass */
 body#new_paper form#auto_new_paper_form .field {
   padding: 0;
   margin-bottom: 0;
   margin-right: 10px;
-  width: 525px;
+  width: 610px;
   float: left;
   background-color: transparent;
 }
@@ -1900,6 +1900,16 @@ body#new_paper form#auto_new_paper_form .field input#id_url {
 /* line 418, ../sass/screen.sass */
 body#new_paper form#auto_new_paper_form .actions {
   margin-top: 0px;
+}
+/* line 422, ../sass/screen.sass */
+body#new_paper #select_manual_add {
+  text-align: right;
+  margin-top: 1em;
+  color: #555555;
+}
+/* line 426, ../sass/screen.sass */
+body#new_paper #select_manual_add a {
+  color: #717da3;
 }
 
 /* line 1, ../sass/helpers/_registration.sass */
