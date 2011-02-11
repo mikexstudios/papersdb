@@ -20,6 +20,27 @@
 
 <div id="description"></div>
 
+<p>Tell us the URL of the paper and we will try to fill in the citation information
+automatically:</p>
+
+<form action="" method="POST" enctype="multipart/form-data"
+    name="auto_new_paper_form" id="auto_new_paper_form" class="papers">
+    {% csrf_token %}
+
+    <div class="field">
+        <label for="id_url" class="optional">URL</label> 
+        <div class="right">
+            {{ form.url.errors }}
+            {{ form.url }}
+        </div>
+    </div>
+
+    <div class="actions">
+        <button type="submit" id="new_paper_submit" class="light" name="submit"
+            value="Submit">Add Paper &raquo;</button>
+    </div>
+</form>
+
 <form action="" method="POST" enctype="multipart/form-data"
     name="new_paper_form" id="new_paper_form" class="papers">
     {% csrf_token %}
