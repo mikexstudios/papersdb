@@ -215,7 +215,7 @@ BROKER_BACKEND = 'djkombu.transport.DatabaseTransport'
 #CELERYD_CONCURRENCY = '2' #default = number of CPU
 
 #List of modules to import when celery starts.
-CELERY_IMPORTS('papers.tasks', )
+CELERY_IMPORTS = ('papers.tasks', )
 
 ################################
 #django-registration settings: #
