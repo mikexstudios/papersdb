@@ -31,5 +31,16 @@ class Paper(models.Model):
         return '%s' % self.id
 
 
+class Import(models.Model):
+    '''
+    Describes an import url task.
+    '''
+    #id is auto-defined and is auto-incrementing
+    is_done = models.BooleanField(default = False)
+    #data contains the output from the import task.
+    data = models.TextField(blank = True)
+
+
+
 # We handle signals in handlers.py. Make sure they are registered by importing:
 import handlers
