@@ -18,7 +18,7 @@ from django.db import models #for aggregator methods
 from annoying.decorators import render_to
 #from annoying.functions import get_object_or_None
 
-from .forms import NewPaperForm, GetCitationForm
+from .forms import NewPaperForm, ImportURLForm
 from .models import Paper
 #from .tasks import 
 from .helpers import random_md5, save_uploaded_file
@@ -74,8 +74,10 @@ def new_paper(request):
         form = NewPaperForm()
 
     #Also create the get citation form
-    get_citation_form = GetCitationForm()
+    import_url_form = ImportURLForm()
 
 
-    return {'form': form, 'get_citation_form': get_citation_form}
+    return {'form': form, 'import_url_form': import_url_form}
+
+#def papers_import_url(request):
 

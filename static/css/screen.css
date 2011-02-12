@@ -1833,27 +1833,27 @@ body#dashboard #right #pagesbar .pages {
 }
 
 /* line 377, ../sass/screen.sass */
-body#new_paper form#new_paper_form, body#new_paper form#get_citation_form {
+body#new_paper form#new_paper_form, body#new_paper form#import_url_form {
   display: none;
 }
 /* line 381, ../sass/screen.sass */
-body#new_paper form#new_paper_form .field textarea#id_title, body#new_paper form#get_citation_form .field textarea#id_title {
+body#new_paper form#new_paper_form .field textarea#id_title, body#new_paper form#import_url_form .field textarea#id_title {
   height: 40px;
 }
 /* line 386, ../sass/screen.sass */
-body#new_paper form#new_paper_form .field textarea#id_authors, body#new_paper form#get_citation_form .field textarea#id_authors {
+body#new_paper form#new_paper_form .field textarea#id_authors, body#new_paper form#import_url_form .field textarea#id_authors {
   height: 60px;
 }
 /* line 388, ../sass/screen.sass */
-body#new_paper form#new_paper_form .field input#id_year, body#new_paper form#get_citation_form .field input#id_year {
+body#new_paper form#new_paper_form .field input#id_year, body#new_paper form#import_url_form .field input#id_year {
   width: 50px;
 }
 /* line 390, ../sass/screen.sass */
-body#new_paper form#new_paper_form .field input#id_volume, body#new_paper form#new_paper_form .field input#id_issue, body#new_paper form#new_paper_form .field input#id_pages, body#new_paper form#get_citation_form .field input#id_volume, body#new_paper form#get_citation_form .field input#id_issue, body#new_paper form#get_citation_form .field input#id_pages {
+body#new_paper form#new_paper_form .field input#id_volume, body#new_paper form#new_paper_form .field input#id_issue, body#new_paper form#new_paper_form .field input#id_pages, body#new_paper form#import_url_form .field input#id_volume, body#new_paper form#import_url_form .field input#id_issue, body#new_paper form#import_url_form .field input#id_pages {
   width: 100px;
 }
 /* line 393, ../sass/screen.sass */
-body#new_paper form#new_paper_form .actions button, body#new_paper form#get_citation_form .actions button {
+body#new_paper form#new_paper_form .actions button, body#new_paper form#import_url_form .actions button {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   -o-border-radius: 3px;
@@ -1868,14 +1868,14 @@ body#new_paper form#new_paper_form .actions button, body#new_paper form#get_cita
   border-width: 1px;
 }
 /* line 397, ../sass/screen.sass */
-body#new_paper form#get_citation_form {
+body#new_paper form#import_url_form {
   display: block;
   background-color: #f3f5f9;
   padding: 10px 15px;
   width: auto;
 }
 /* line 402, ../sass/screen.sass */
-body#new_paper form#get_citation_form .field {
+body#new_paper form#import_url_form .field {
   padding: 0;
   margin-bottom: 0;
   margin-right: 10px;
@@ -1884,22 +1884,22 @@ body#new_paper form#get_citation_form .field {
   background-color: transparent;
 }
 /* line 409, ../sass/screen.sass */
-body#new_paper form#get_citation_form .field label {
+body#new_paper form#import_url_form .field label {
   font-size: 1.3em;
   font-weight: bold;
   margin-top: 3px;
 }
 /* line 413, ../sass/screen.sass */
-body#new_paper form#get_citation_form .field .right {
+body#new_paper form#import_url_form .field .right {
   margin-left: 50px;
 }
 /* line 415, ../sass/screen.sass */
-body#new_paper form#get_citation_form .field input#id_url {
+body#new_paper form#import_url_form .field input#id_url {
   font-size: 1.25em;
   padding: 5px;
 }
 /* line 418, ../sass/screen.sass */
-body#new_paper form#get_citation_form .actions {
+body#new_paper form#import_url_form .actions {
   margin-top: 0px;
 }
 /* line 422, ../sass/screen.sass */

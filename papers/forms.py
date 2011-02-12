@@ -58,5 +58,5 @@ class NewPaperForm(forms.Form):
         #Otherwise, everything checks out:
         return uploaded_file
 
-class GetCitationForm(forms.Form):
+class ImportURLForm(forms.Form):
     url = forms.URLField(max_length = 9999, label = 'URL')

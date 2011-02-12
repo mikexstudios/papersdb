@@ -12,8 +12,8 @@
 
             $('#select_manual_add a').click(function() {
                 $('#new_paper_form').slideDown();
-                $('#get_citation_form').slideUp();
-                $('#get_citation_description').slideUp();
+                $('#import_url_form').slideUp();
+                $('#import_url_description').slideUp();
                 $('#select_manual_add').slideUp();
                 $('#select_auto_add').slideDown();
                 return false;
@@ -21,8 +21,8 @@
 
             $('#select_auto_add a').click(function() {
                 $('#new_paper_form').slideUp();
-                $('#get_citation_form').slideDown();
-                $('#get_citation_description').slideDown();
+                $('#import_url_form').slideDown();
+                $('#import_url_description').slideDown();
                 $('#select_manual_add').slideDown();
                 $('#select_auto_add').slideUp();
                 return false;
@@ -40,18 +40,18 @@
 
 <div id="select_auto_add" class="select_link"><a href="#">&larr; Try automatically adding the citation</a></div>
 
-<p id="get_citation_description">Tell us the URL of the paper and we will try
+<p id="import_url_description">Tell us the URL of the paper and we will try
 to fill in the citation information automatically:</p>
 
 <form action="" method="POST" enctype="multipart/form-data"
-    name="get_citation_form" id="get_citation_form" class="papers">
+    name="import_url_form" id="import_url_form" class="papers">
     {% csrf_token %}
 
     <div class="field">
         <label for="id_url" class="optional">URL</label> 
         <div class="right">
-            {{ get_citation_form.url.errors }}
-            {{ get_citation_form.url }}
+            {{ import_url_form.url.errors }}
+            {{ import_url_form.url }}
         </div>
     </div>
 
