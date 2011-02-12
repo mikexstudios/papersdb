@@ -94,3 +94,14 @@ def papers_import_url(request):
 
     #Means that user accessed url directly or form failed.
     return {'success': False}
+
+@login_required
+@ajax_request
+def papers_import_url_poll(request, import_id):
+    '''
+    Given an import_id, checks database to see if Task has completed. If so,
+    returns parsed data from the Task.
+    '''
+
+    return {'is_done': False}
+
