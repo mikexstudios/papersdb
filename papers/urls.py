@@ -8,7 +8,8 @@ urlpatterns = patterns('papers.views',
     url(r'^dashboard/$', 'dashboard', name='dashboard'),
     url(r'^papers/new/$', 'new_paper', name='new_paper'),
     url(r'^papers/import/url/$', 'papers_import_url', name='import_url'),
-    url(r'^papers/import/url/(\d+)/$', 'papers_import_url_poll', name='import_url_poll'),
+    #TODO: The [-\w] is a UUID. Should be more specific.
+    url(r'^papers/import/url/([-\w]+)/$', 'papers_import_url_poll', name='import_url_poll'),
 )
 
 urlpatterns += patterns('',

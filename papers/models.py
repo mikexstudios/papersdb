@@ -31,6 +31,7 @@ class Paper(models.Model):
         return '%s' % self.id
 
 
+#TODO: This may not be needed if we setup celery to store results.
 class Import(models.Model):
     '''
     Describes an import url task.

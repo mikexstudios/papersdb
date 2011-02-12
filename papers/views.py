@@ -20,7 +20,7 @@ from annoying.decorators import render_to, ajax_request
 
 from .forms import NewPaperForm, ImportURLForm
 from .models import Paper
-#from .tasks import 
+from .tasks import import_paper_url
 from .helpers import random_md5, save_uploaded_file
 
 #import datetime
@@ -88,20 +88,33 @@ def papers_import_url(request):
             data = form.cleaned_data
             #print data
             
-            #TODO: Execute task to grab paper data. Then return some id so that
-            #      the check status can be polled.
-            return {'id': 435253, 'success': True}
+            #Get paper citation information in the background. Return the
+            #task_id so that it can be polled.
+            result = import_paper_url.delay(data['url'])
+            return {'id': result.task_id, 'success': True}
 
     #Means that user accessed url directly or form failed.
     return {'success': False}
 
 @login_required
 @ajax_request
-def papers_import_url_poll(request, import_id):
+def papers_import_url_poll(request, task_id):
     '''
-    Given an import_id, checks database to see if Task has completed. If so,
+    Given a task_id, checks database to see if Task has completed. If so,
     returns parsed data from the Task.
+
+    TODO: Maybe make this a generalized URL view where any task can be checked
+    up on.
     '''
 
-    return {'is_done': False}
+    #Reconstruct the task from the given id.
+    result = import_paper_url.AsyncResult(task_id)
 
+    response = {'is_done': False, 'success': False, 'data': False}
+    if result.ready():
+        response['is_done'] = True
+        if result.successful():
+            response['data'] = result.result
+        #Otherwise, data is False
+
+    return response
