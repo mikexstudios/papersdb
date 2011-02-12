@@ -104,7 +104,8 @@ INSTALLED_APPS = [
     'annoying', #django-annoying
     'south', #migrations
     #'django_rpx_plus', 
-    #'celery', #messaging queue
+    'djcelery', #messaging queue
+    'djkombu', #for using orm as ghetto queue
     'registration', #for email activation
     #Must come before admin app to override those templates.
     'registration_defaults', #django-registration default templates
@@ -188,12 +189,19 @@ UPLOAD_URL = MEDIA_URL + 'papers'
 #We want to disable migrations during tests. Use syncdb instead.
 SOUTH_TESTS_MIGRATE = False
 
-####################
-# celery settings: #
-####################
+######################
+# djcelery settings: #
+######################
 
-#CELERY_BACKEND = 'database' #default = database
+import djcelery
+djcelery.setup_loader()
 
+#Result store settings.
+CELERY_RESULT_BACKEND = 'database' #default = database
+#CELERY_RESULT_DBURI = 'mysql://%s:%s@%s/%s' % ()
+CELERY_RESULT_DBURI = 'sqlite://celerydb.sqlite'
+
+BROKER_BACKEND = 'djkombu.transport.DatabaseTransport'
 #BROKER_HOST = 'localhost'
 #BROKER_PORT = 5672
 #BROKER_USER = 'dev'
@@ -203,6 +211,11 @@ SOUTH_TESTS_MIGRATE = False
 #If True, tasks are executed locally and never sent to queue.
 #CELERY_ALWAYS_EAGER = True
 #CELERYD_LOG_LEVEL = 'INFO'
+
+#CELERYD_CONCURRENCY = '2' #default = number of CPU
+
+#List of modules to import when celery starts.
+CELERY_IMPORTS('papers.tasks', )
 
 ################################
 #django-registration settings: #

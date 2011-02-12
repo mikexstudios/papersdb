@@ -30,7 +30,10 @@ South
 
 #Messaging/work queue (depends on amqplib, anyjson, billiard, carrot, importlib,
 #and python-dateutil).
-#celery
+django-celery
+celery
+#For using Django's ORM as a ghetto queue.
+django-kombu
 
 #To make email field 254 char.
 #django_auth_longer_email
