@@ -15,7 +15,7 @@ from django.db import models #for aggregator methods
 #django's version can operate on unicode strings.
 #from django.utils.http import urlencode
 
-from annoying.decorators import render_to
+from annoying.decorators import render_to, ajax_request
 #from annoying.functions import get_object_or_None
 
 from .forms import NewPaperForm, ImportURLForm
@@ -79,5 +79,18 @@ def new_paper(request):
 
     return {'form': form, 'import_url_form': import_url_form}
 
-#def papers_import_url(request):
+@login_required
+@ajax_request
+def papers_import_url(request):
+    if request.method == 'POST':
+        form = ImportURLForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            #print data
+            
+            #TODO: Execute task to grab paper data. Then return some id so that
+            #      the check status can be polled.
+            return {'id': 435253, 'success': True}
 
+    #Means that user accessed url directly or form failed.
+    return {'success': False}

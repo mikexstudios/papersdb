@@ -7,6 +7,7 @@ urlpatterns = patterns('papers.views',
     url(r'^$', 'home', name='home'), #default url
     url(r'^dashboard/$', 'dashboard', name='dashboard'),
     url(r'^papers/new/$', 'new_paper', name='new_paper'),
+    url(r'^papers/import/url/$', 'papers_import_url', name='import_url'),
 )
 
 urlpatterns += patterns('',
