@@ -1870,7 +1870,47 @@ body#new_paper form#import_url_form {
   padding: 10px 15px;
   width: auto;
 }
-/* line 400, ../sass/screen.sass */
+/* line 401, ../sass/screen.sass */
+body#new_paper form#import_url_form .errorlist {
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 4px;
+  background-color: #cc4444;
+  font-weight: bold;
+  color: white;
+  list-style: none;
+  margin-left: 0;
+  margin-bottom: 0;
+  width: 100%;
+  background-color: #ffdddd;
+  color: #cc4444;
+  -moz-border-radius-topleft: 10px;
+  -webkit-border-top-left-radius: 10px;
+  -o-border-top-left-radius: 10px;
+  -ms-border-top-left-radius: 10px;
+  -khtml-border-top-left-radius: 10px;
+  border-top-left-radius: 10px;
+  -moz-border-radius-topright: 10px;
+  -webkit-border-top-right-radius: 10px;
+  -o-border-top-right-radius: 10px;
+  -ms-border-top-right-radius: 10px;
+  -khtml-border-top-right-radius: 10px;
+  border-top-right-radius: 10px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  padding: 0;
+  margin-bottom: 3px;
+  margin-top: -5px;
+  margin-left: 50px;
+}
+/* line 11, ../../../../../.gem/ruby/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/lists/_bullets.scss */
+body#new_paper form#import_url_form .errorlist li {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0px;
+}
+/* line 410, ../sass/screen.sass */
 body#new_paper form#import_url_form .field {
   padding: 0;
   margin-bottom: 0;
@@ -1879,37 +1919,37 @@ body#new_paper form#import_url_form .field {
   float: left;
   background-color: transparent;
 }
-/* line 407, ../sass/screen.sass */
+/* line 417, ../sass/screen.sass */
 body#new_paper form#import_url_form .field label {
   font-size: 1.3em;
   font-weight: bold;
   margin-top: 3px;
 }
-/* line 411, ../sass/screen.sass */
+/* line 421, ../sass/screen.sass */
 body#new_paper form#import_url_form .field .right {
   margin-left: 50px;
 }
-/* line 413, ../sass/screen.sass */
+/* line 423, ../sass/screen.sass */
 body#new_paper form#import_url_form .field input#id_url {
   font-size: 1.25em;
   padding: 5px;
 }
-/* line 416, ../sass/screen.sass */
+/* line 426, ../sass/screen.sass */
 body#new_paper form#import_url_form .actions {
   margin-top: 0px;
 }
-/* line 420, ../sass/screen.sass */
+/* line 430, ../sass/screen.sass */
 body#new_paper .select_link {
   text-align: right;
   margin-top: 1em;
   color: #555555;
   margin-bottom: 25px;
 }
-/* line 425, ../sass/screen.sass */
+/* line 435, ../sass/screen.sass */
 body#new_paper .select_link a {
   color: #717da3;
 }
-/* line 428, ../sass/screen.sass */
+/* line 438, ../sass/screen.sass */
 body#new_paper #select_auto_add {
   margin-top: -30px;
 }
