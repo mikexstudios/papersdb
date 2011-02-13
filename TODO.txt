@@ -1,0 +1,23 @@
+TODOs
+=====
+
+- Haystack searching
+    - Extract PDF text -> search
+- Drag and drop PDF upload
+- Change quick link and download link if paper not uploaded.
+    - Instead put a link there where, on click, user taken to "edit" page where
+      can upload PDF.
+- Make paper view page.
+- Ability to delete paper.
+
+Ideas
+=====
+
+- Paper view page
+    - I'm thinking like showing paper information at the top of the page. Towards
+      the bottom of the page, show embedded google quick view.
+    - Two possible ways to edit paper:
+        1. Click an edit link -> takes user to edit page.
+        2. In-place editing. When user clicks field, turns into text box for editing.
+      We should do #1 first since it's less complicated. Also good for the dashboard
+      link.
