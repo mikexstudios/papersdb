@@ -3,7 +3,7 @@ import django.contrib.messages as messages
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 #from django.template import RequestContext
 #from django.core.urlresolvers import reverse
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
@@ -82,6 +82,8 @@ def new_paper(request):
 @login_required
 @ajax_request
 def papers_import_url(request):
+    response = {'success': False}
+
     if request.method == 'POST':
         form = ImportURLForm(request.POST)
         if form.is_valid():
@@ -91,10 +93,17 @@ def papers_import_url(request):
             #Get paper citation information in the background. Return the
             #task_id so that it can be polled.
             result = import_paper_url.delay(data['url'])
-            return {'id': result.task_id, 'success': True}
+            response['success'] = True
+            response['id'] = result.task_id
+
+            return response
+
+        #Otherwise, include errors to report
+        response['errors'] = form.errors
 
     #Means that user accessed url directly or form failed.
-    return {'success': False}
+    #return HttpResponseBadRequest()
+    return response
 
 @login_required
 @ajax_request

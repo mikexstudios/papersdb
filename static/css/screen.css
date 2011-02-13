@@ -1918,6 +1918,26 @@ body#new_paper #select_auto_add {
   display: none;
   margin-top: -30px;
 }
+/* line 434, ../sass/screen.sass */
+body#new_paper #import_status, body#new_paper #import_error {
+  display: none;
+  text-align: center;
+  border: 5px solid #f3f5f9;
+  padding: 5px 15px;
+}
+/* line 440, ../sass/screen.sass */
+body#new_paper #import_status img, body#new_paper #import_error img {
+  margin-top: 2px;
+}
+/* line 442, ../sass/screen.sass */
+body#new_paper #import_status p, body#new_paper #import_error p {
+  margin: 0;
+}
+/* line 444, ../sass/screen.sass */
+body#new_paper #import_error {
+  color: #cc4444;
+  font-weight: bold;
+}
 
 /* line 1, ../sass/helpers/_registration.sass */
 body#login, body#logout {

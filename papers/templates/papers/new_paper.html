@@ -5,15 +5,33 @@
 
 {% block javascript %}
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.pack.js"></script> -->
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.form.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.periodicalupdater.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.url.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             //10 sec delay.
             $('#messages').delay(10000).fadeOut('slow');
 
+            //If the user has manual add set and submitted a form with errors,
+            //retain the manual view.
+            if ($.url.param('manual') == 'true') {
+                $('#import_url_form').hide();
+                $('#import_url_description').hide();
+                $('#select_manual_add').hide();
+                $('#new_paper_form').show();
+                $('#select_auto_add').show();
+            }
+
             $('#select_manual_add a').click(function() {
+                //Can simplify this by adding a common class to the elements
+                //to be hidden.
                 $('#new_paper_form').slideDown();
                 $('#import_url_form').slideUp();
                 $('#import_url_description').slideUp();
+                $('#import_status').slideUp();
+                $('#import_error').slideUp();
                 $('#select_manual_add').slideUp();
                 $('#select_auto_add').slideDown();
                 return false;
@@ -26,6 +44,37 @@
                 $('#select_manual_add').slideDown();
                 $('#select_auto_add').slideUp();
                 return false;
+            });
+
+            $('#import_url_form').ajaxForm({
+                dataType: 'json',
+                beforeSubmit: function(arr) {
+                    //Remove any statuses
+                    $('#import_status').hide();
+                    $('#import_error').hide();
+
+                    //TODO: Validate URL with JS.
+                    
+                    //Disable textbook and submit button.
+                    
+
+                },
+                success: function(responseText, statusText) {
+                    //statusText is fairly useless here since it'll always say
+                    //success if we get here...
+                    //alert('status: ' + statusText + '\n\nresponseText: \n' + responseText);
+
+                    data = responseText;
+                    //Check if the request was successful
+                    if (data['success'] == true) {
+                        //Show status/progress bar
+                        $('#import_status').slideDown();
+                    } else {
+                        //Request was unsuccessful
+                        //TODO: parse errors. 
+                        $('#import_error').slideDown();
+                    }
+                }
             });
         });
     </script>
@@ -43,14 +92,13 @@
 <p id="import_url_description">Tell us the URL of the paper and we will try
 to fill in the citation information automatically:</p>
 
-<form action="{% url import_url %}" method="POST" enctype="multipart/form-data"
-    name="import_url_form" id="import_url_form" class="papers">
+<form action="{% url import_url %}" method="POST" name="import_url_form"
+    id="import_url_form" class="papers">
     {% csrf_token %}
 
     <div class="field">
         <label for="id_url" class="optional">URL</label> 
         <div class="right">
-            {{ import_url_form.url.errors }}
             {{ import_url_form.url }}
         </div>
     </div>
@@ -61,9 +109,18 @@ to fill in the citation information automatically:</p>
     </div>
 </form>
 
+<div id="import_status">
+    <img src="{{ MEDIA_URL }}images/loading.gif" />
+    <p>Attempting to retrieve citation information...</p>
+</div>
+
+<div id="import_error">
+    <p>Enter a valid URL</p>
+</div>
+
 <div id="select_manual_add" class="select_link">Or, <a href="#">I would like to add the paper manually...</a></div>
 
-<form action="" method="POST" enctype="multipart/form-data"
+<form action="?manual=true" method="POST" enctype="multipart/form-data"
     name="new_paper_form" id="new_paper_form" class="papers">
     {% csrf_token %}
     <div class="field">
