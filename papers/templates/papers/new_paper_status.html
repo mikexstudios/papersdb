@@ -19,11 +19,10 @@
                 multiplier: 1.2,          // if set to 2, timerInterval will double each time the response hasn't changed (up to maxTimeout)
                 type: 'json',           // response type - text, xml, json, etc. See $.ajax config options
                 maxCalls: 50,           // maximum number of calls. 0 = no limit.
-                autoStop: 5             // automatically stop requests after this many returns of the same data. 0 = disabled.
+                autoStop: 15            // automatically stop requests after this many returns of the same data. 0 = disabled.
             }, function(data) {
                 // Handle the new data (only called when there was a change)
                 if (data['is_done'] == true) {
-                    //console.log(data['data']);
                     window.location.replace('{% url new_paper_manual task_id %}');
 
                     //.stop() prevents anything else from executing so we put
