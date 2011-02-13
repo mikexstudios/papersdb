@@ -182,6 +182,9 @@ UPLOAD_ROOT = os.path.join(SITE_ROOT, 'uploads')
 #Url to where the uploads can be accessed. No trailing slash.
 UPLOAD_URL = MEDIA_URL + 'papers'
 
+#CiteULike parser driver.tcl path (no trailing /):
+PARSER_PATH = ''
+
 ###################
 # south settings: #
 ###################
