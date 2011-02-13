@@ -42,10 +42,21 @@ def dashboard(request):
 @login_required
 @render_to('papers/new_paper_manual.html')
 def new_paper_manual(request, task_id = None):
+    post = request.POST.copy() #because it is immutable
+
     #If task_id is specified, get the result and merge it into request.POST.
+    if task_id:
+        result = import_paper_url.AsyncResult(task_id)
+        if result.ready() and result.successful():
+            data = result.result
+            #In-place merge of data into post array. Will overwrite any existing
+            #conflicting POST data.
+            post.update(data)
+
+    #import pdb; pdb.set_trace()
 
     if request.method == 'POST':
-        form = NewPaperForm(request.POST, request.FILES)
+        form = NewPaperForm(post, request.FILES)
         if form.is_valid():
             data = form.cleaned_data
             #print data
@@ -73,7 +84,10 @@ def new_paper_manual(request, task_id = None):
             messages.success(request, 'Paper was successfully added.')
             return redirect('dashboard')
     else: 
-        form = NewPaperForm()
+        if task_id:
+            form = NewPaperForm(post)
+        else:
+            form = NewPaperForm()
 
     #Also create the get citation form
     import_url_form = ImportURLForm()
@@ -130,6 +144,7 @@ def papers_import_url_poll(request, task_id):
         response['is_done'] = True
         if result.successful():
             response['success'] = True
+            #NOTE: We don't make use of the returned data at the moment.
             response['data'] = result.result
         #Otherwise, data is False
 
