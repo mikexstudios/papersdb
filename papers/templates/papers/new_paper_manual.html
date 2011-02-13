@@ -26,7 +26,7 @@
 
 <div id="select_auto_add" class="select_link"><a href="{% url new_paper %}">&larr; Try automatically adding the citation</a></div>
 
-<form action="?manual=true" method="POST" enctype="multipart/form-data"
+<form action="" method="POST" enctype="multipart/form-data"
     name="new_paper_form" id="new_paper_form" class="papers">
     {% csrf_token %}
     <div class="field">
