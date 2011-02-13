@@ -1838,7 +1838,7 @@ body#new_paper form#new_paper_form .field textarea#id_title, body#new_paper form
 }
 /* line 384, ../sass/screen.sass */
 body#new_paper form#new_paper_form .field textarea#id_authors, body#new_paper form#import_url_form .field textarea#id_authors {
-  height: 60px;
+  height: 70px;
 }
 /* line 386, ../sass/screen.sass */
 body#new_paper form#new_paper_form .field input#id_year, body#new_paper form#import_url_form .field input#id_year {

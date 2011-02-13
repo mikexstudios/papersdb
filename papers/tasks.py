@@ -58,7 +58,8 @@ def import_paper_url(url):
             if m:
                 simplified_authors.append(m.group(1))
         #Flatten into a string with new lines separating the authors.
-        authors = '\n'.join(simplified_authors)
+        citation['authors'] = '\n'.join(simplified_authors)
+        
 
     #Simplify start and end pages to a single field: pages
     #We assume that we'll always have a start page.
