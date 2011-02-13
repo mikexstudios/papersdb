@@ -123,6 +123,7 @@ def papers_import_url_poll(request, task_id):
     if result.ready():
         response['is_done'] = True
         if result.successful():
+            response['success'] = True
             response['data'] = result.result
         #Otherwise, data is False
 
