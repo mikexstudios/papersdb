@@ -41,7 +41,9 @@ def dashboard(request):
 
 @login_required
 @render_to('papers/new_paper_manual.html')
-def new_paper_manual(request):
+def new_paper_manual(request, task_id = None):
+    #If task_id is specified, get the result and merge it into request.POST.
+
     if request.method == 'POST':
         form = NewPaperForm(request.POST, request.FILES)
         if form.is_valid():
@@ -91,16 +93,22 @@ def new_paper_auto(request):
             #Get paper citation information in the background. Return the
             #task_id so that it can be polled.
             result = import_paper_url.delay(data['url'])
-            response['success'] = True
-            response['id'] = result.task_id
+            task_id = result.task_id
             
-            #Redirect to dashboard.
-            #messages.success(request, 'Paper was successfully added.')
-            #return redirect('dashboard')
+            #Redirect to status.
+            return redirect('new_paper_status', task_id)
     else: 
         form = ImportURLForm()
 
     return {'form': form}
+
+@login_required
+@render_to('papers/new_paper_status.html')
+def new_paper_status(request, task_id):
+    #There's no way of verifying that a task_id exists or not, unless we save it
+    #manually.
+
+    return {'task_id': task_id}
 
 
 @login_required

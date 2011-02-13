@@ -1953,6 +1953,20 @@ body#new_paper .select_link a {
 body#new_paper #select_auto_add {
   margin-top: -30px;
 }
+/* line 441, ../sass/screen.sass */
+body#new_paper #import_status {
+  text-align: center;
+  border: 5px solid #f3f5f9;
+  padding: 5px 15px;
+}
+/* line 446, ../sass/screen.sass */
+body#new_paper #import_status img {
+  margin-top: 2px;
+}
+/* line 448, ../sass/screen.sass */
+body#new_paper #import_status p {
+  margin: 0;
+}
 
 /* line 1, ../sass/helpers/_registration.sass */
 body#login, body#logout {

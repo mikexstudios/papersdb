@@ -12,6 +12,6 @@ def add(x, y):
 
 @task
 def import_paper_url(url):
-    time.sleep(10)
+    time.sleep(2)
     
     return {'title': 'My Sample title', 'authors': 'One Two Three'}
