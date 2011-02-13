@@ -30,18 +30,5 @@ class Paper(models.Model):
     def __unicode__(self):
         return '%s' % self.id
 
-
-#TODO: This may not be needed if we setup celery to store results.
-class Import(models.Model):
-    '''
-    Describes an import url task.
-    '''
-    #id is auto-defined and is auto-incrementing
-    is_done = models.BooleanField(default = False)
-    #data contains the output from the import task.
-    data = models.TextField(blank = True)
-
-
-
 # We handle signals in handlers.py. Make sure they are registered by importing:
 import handlers
