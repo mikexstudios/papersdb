@@ -6,8 +6,9 @@ from django.conf.urls.defaults import *
 urlpatterns = patterns('papers.views',
     url(r'^$', 'home', name='home'), #default url
     url(r'^dashboard/$', 'dashboard', name='dashboard'),
-    url(r'^papers/new/$', 'new_paper', name='new_paper'),
-    url(r'^papers/import/url/$', 'papers_import_url', name='import_url'),
+    url(r'^papers/new/$', 'new_paper_auto', name='new_paper'),
+    url(r'^papers/new/manual/$', 'new_paper_manual', name='new_paper_manual'),
+    #url(r'^papers/import/url/$', 'papers_import_url', name='import_url'),
     #TODO: The [-\w] is a UUID. Should be more specific.
     url(r'^papers/import/url/([-\w]+)/$', 'papers_import_url_poll', name='import_url_poll'),
 )

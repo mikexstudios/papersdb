@@ -375,8 +375,6 @@ body#dashboard
           
 body#new_paper
   form#new_paper_form, form#import_url_form
-    //We initially hide this form until needed.
-    display: none
     .field
       textarea#id_title
         //Want this height to be two line's height.
@@ -428,23 +426,7 @@ body#new_paper
       color: #717DA3
   //#select_manual_add
   #select_auto_add
-    display: none
     margin-top: -30px
-
-  #import_status, #import_error
-    display: none
-    text-align: center
-    //background-color: #f3f5f9
-    border: 5px solid #f3f5f9
-    padding: 5px 15px
-    img
-      margin-top: 2px
-    p
-      margin: 0
-  #import_error
-    color: #c44
-    font-weight: bold
-
 
 
 

@@ -40,8 +40,8 @@ def dashboard(request):
     return {'papers': p}
 
 @login_required
-@render_to('papers/new_paper.html')
-def new_paper(request):
+@render_to('papers/new_paper_manual.html')
+def new_paper_manual(request):
     if request.method == 'POST':
         form = NewPaperForm(request.POST, request.FILES)
         if form.is_valid():
@@ -80,30 +80,28 @@ def new_paper(request):
     return {'form': form, 'import_url_form': import_url_form}
 
 @login_required
-@ajax_request
-def papers_import_url(request):
-    response = {'success': False}
-
+@render_to('papers/new_paper_auto.html')
+def new_paper_auto(request):
     if request.method == 'POST':
         form = ImportURLForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
             #print data
-            
+
             #Get paper citation information in the background. Return the
             #task_id so that it can be polled.
             result = import_paper_url.delay(data['url'])
             response['success'] = True
             response['id'] = result.task_id
+            
+            #Redirect to dashboard.
+            #messages.success(request, 'Paper was successfully added.')
+            #return redirect('dashboard')
+    else: 
+        form = ImportURLForm()
 
-            return response
+    return {'form': form}
 
-        #Otherwise, include errors to report
-        response['errors'] = form.errors
-
-    #Means that user accessed url directly or form failed.
-    #return HttpResponseBadRequest()
-    return response
 
 @login_required
 @ajax_request
