@@ -42,8 +42,9 @@ def dashboard(request):
 @login_required
 @render_to('papers/papers_view.html')
 def papers_view(request, paper_id):
+    p = get_object_or_404(Paper, user = request.user, local_id = paper_id)
 
-    return {}
+    return {'paper': p}
 
 @login_required
 @render_to('papers/new_paper_manual.html')

@@ -1970,6 +1970,52 @@ body#new_paper #import_status p {
   margin: 0;
 }
 
+/* line 455, ../sass/screen.sass */
+body#papers_view #title {
+  margin-bottom: 10px;
+}
+/* line 458, ../sass/screen.sass */
+body#papers_view #information dt {
+  float: left;
+  text-align: right;
+  width: 50px;
+}
+/* line 462, ../sass/screen.sass */
+body#papers_view #information dd {
+  margin-left: 60px;
+}
+/* line 464, ../sass/screen.sass */
+body#papers_view #information dt.title {
+  display: none;
+}
+/* line 466, ../sass/screen.sass */
+body#papers_view #information dd.title {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+/* line 469, ../sass/screen.sass */
+body#papers_view #actions {
+  float: right;
+  background-color: #f3f5f9;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -o-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -khtml-border-radius: 6px;
+  border-radius: 6px;
+  font-size: 1.1em;
+}
+/* line 474, ../sass/screen.sass */
+body#papers_view #actions ul {
+  margin: 0;
+  padding: 15px;
+  padding-left: 30px;
+}
+/* line 479, ../sass/screen.sass */
+body#papers_view #quickview {
+  clear: both;
+}
+
 /* line 1, ../sass/helpers/_registration.sass */
 body#login, body#logout {
   font-size: 1.1em;

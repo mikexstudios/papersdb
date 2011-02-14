@@ -1,4 +1,6 @@
 {% extends "papers/app_base.html" %}
+{% load split %}
+{% load papers %}
 {% block bodyid %}papers_view{% endblock %}
 
 {% block title %}View Paper{% endblock %}
@@ -16,9 +18,45 @@
 {% block sitenav %}{% endblock %}
 
 {% block subcontent %}
-<h2 id="title">View Paper</h2>
 
-<div id="description"></div>
+{# TODO: Need an actions bar #}
+
+<div id="title">{{ paper.title }}</div>
+
+<div id="actions">
+    <ul>
+        <li><a href="">Edit Citation</a></li>
+        <li><a href="{% quickview paper %}" target="_blank">Quick View</a></li>
+        <li><a href="{% paperurl paper %}">Download</a></li>
+    </ul>
+</div>
+
+<dl id="information">
+    <!-- <dt class="title">Title</dt>
+    <dd class="title">{{ paper.title }}</dd> -->
+    <dt class="authors">Authors</dt>
+    <dd class="authors">
+        {% for a in paper.authors|splitlines %}
+        {{ a }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </dd>
+    <dt class="journal">Journal</dt>
+    <dd class="journal">{{ paper.journal }}</dd>
+    <dt class="volume">Volume</dt>
+    <dd class="volume">{{ paper.volume }}</dd>
+    <dt class="issue">Issue</dt>
+    <dd class="issue">{{ paper.issue }}</dd>
+    <dt class="pages">Pages</dt>
+    <dd class="pages">{{ paper.pages }}</dd>
+    <dt class="year">Year</dt>
+    <dd class="year">{{ paper.year }}</dd>
+    <dt class="url">URL</dt>
+    <dd class="url"><a href="{{ paper.url }}">{{ paper.url }}</a></dd>
+</dl>
+
+<h3 id="quickview">Quick View</h3>
+
+{# TODO: Insert quickview embed #}
 
 </form>
 {% endblock %}
