@@ -136,7 +136,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 #Additional user data (ie. User Profile)
-#AUTH_PROFILE_MODULE = 'yourapp.UserProfile'
+AUTH_PROFILE_MODULE = 'papers.UserProfile'
 
 # Here are some settings related to auth urls. django has default values for them
 # as specified on page: http://docs.djangoproject.com/en/dev/ref/settings/. You
