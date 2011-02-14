@@ -40,6 +40,12 @@ def dashboard(request):
     return {'papers': p}
 
 @login_required
+@render_to('papers/papers_view.html')
+def papers_view(request, paper_id):
+
+    return {}
+
+@login_required
 @render_to('papers/new_paper_manual.html')
 def new_paper_manual(request, task_id = None):
     post = request.POST.copy() #because it is immutable
