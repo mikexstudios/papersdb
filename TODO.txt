@@ -9,6 +9,8 @@ TODOs
       can upload PDF.
 - Make paper view page.
 - Ability to delete paper.
+- Create dummy task for local testing.
+- Ability to add supporting information PDF too.
 
 Ideas
 =====
