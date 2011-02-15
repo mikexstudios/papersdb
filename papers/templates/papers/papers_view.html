@@ -26,8 +26,7 @@
 <div id="actions">
     <ul>
         <li><a href="">Edit Citation</a></li>
-        <li><a href="{% quickview paper %}" target="_blank">Quick View</a></li>
-        <li><a href="{% paperurl paper %}">Download</a></li>
+        <li class="download"><a href="{% paperurl paper %}">Download</a></li>
     </ul>
 </div>
 
@@ -55,6 +54,7 @@
 </dl>
 
 <h3 id="quickview">Quick View</h3>
+<a href="{% quickview paper %}" id="quickview_helper" target="_blank">(open in new window)</a>
 
 {# TODO: Insert quickview embed #}
 <iframe src="{% quickview paper %}" style="width:100%; height:800px;" frameborder="0"></iframe>

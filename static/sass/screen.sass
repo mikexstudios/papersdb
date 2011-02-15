@@ -454,11 +454,14 @@ body#new_paper
 body#papers_view
   #title
     margin-bottom: 10px
+    line-height: 1.2
   #information
     dt
       float: left
       text-align: right
       width: 50px
+    dt:after
+      content: ':'
     dd
       margin-left: 60px
     dt.title
@@ -469,15 +472,25 @@ body#papers_view
   #actions
     float: right
     background-color: #f3f5f9
-    +border-radius(6px)
+    +border-radius(4px)
     font-size: 1.1em
     ul
       //+no-bullets
       margin: 0
-      padding: 15px
+      padding: 10px 15px
       padding-left: 30px
+      li.download
+        font-weight: bold
   #quickview
     clear: both
+    margin-bottom: 10px
+    margin-right: 5px
+    float: left
+  a#quickview_helper
+    display: block
+    font-size: 0.8em
+    padding-top: 6px
+
 
       
 
