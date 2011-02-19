@@ -12,6 +12,8 @@ class Paper(models.Model):
     #id is auto-defined and is auto-incrementing
     #local_id is not autoincrementing, but we fake that in save().
     local_id = models.IntegerField(db_index = True, blank = True, editable = False)
+    updated = models.DateTimeField(auto_now = True)
+    created = models.DateTimeField(auto_now_add = True)
     user = models.ForeignKey(User)
     hash = models.CharField(db_index = True, max_length = 32) #Random MD5 hash
 
