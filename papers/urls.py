@@ -6,6 +6,7 @@ from django.conf.urls.defaults import *
 urlpatterns = patterns('papers.views',
     url(r'^$', 'home', name='home'), #default url
     url(r'^dashboard/$', 'dashboard', name='dashboard'),
+
     url(r'^papers/(\d+)/$', 'papers_view', name='papers_view'),
     url(r'^papers/new/$', 'new_paper_auto', name='new_paper'),
     #TODO: The [-\w] is a UUID. Should be more specific.
