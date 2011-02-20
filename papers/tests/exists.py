@@ -4,7 +4,8 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 
 from django.contrib.auth.models import User
-#from .models import 
+from django.contrib.auth.models import User
+from papers.models import Paper
 
 #from .helpers import 
 
@@ -20,10 +21,32 @@ class LoginRequiredTest(TestCase):
     '''
 
     def setUp(self):
+        #Create test user but don't login.
+        self.user = User.objects.create_user('test', 'test@example.com', 'test')
+
+        self.data = {'user': self.user, 'title': 'Test Title', 'url':
+                'http://example.com', 'journal': 'Journal of Test', 'year':
+                '2011', 'volume': '1', 'authors': 
+                "Author One\nAuthor Two\nAuthor Three", 'issue': '2', 'pages':
+                '3-4', }
+
+        p = Paper(**self.data) #unpack dictionary to arguments
+        p.save()
+
         self.pages = (
                 '/dashboard/',
+
                 '/papers/new/',
+                '/papers/new/manual/',
+                #The following UUIDs are dummy ones. The view for that accepts the
+                #UUIDs cannot validate if the UUID is actually a valid task or not.
+                '/papers/new/status/9f2b02d1-5d07-4a4c-ae51-48d026a68c6e/',
+                '/papers/new/manual/9f2b02d1-5d07-4a4c-ae51-48d026a68c6e/',
+                '/papers/import/url/9f2b02d1-5d07-4a4c-ae51-48d026a68c6e/',
+
+                '/papers/%s/' % p.local_id, #individual view for paper
         )
+
 
     def tearDown(self):
         pass
@@ -62,8 +85,8 @@ class PageExistsTest(TestCase):
         r = self.client.get('/dashboard/', {})
         self.assertEqual(r.status_code, 200)
 
-    def test_papers_new_exists(self):
-        r = self.client.get('/papers/new/', {})
+    def test_papers_new_manual_exists(self):
+        r = self.client.get('/papers/new/manual/', {})
         self.assertEqual(r.status_code, 200)
 
         #Also make sure that a form is being shown. Just check for a Title field

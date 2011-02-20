@@ -26,10 +26,11 @@ class AddPaperViewTest(TestCase):
         #TODO: Remove the sample uploaded file.
         pass
 
-    def test_valid_form(self):
+    def test_valid_form_manual(self):
         '''
         When valid form is submitted, database entry should be created, then
         redirect to dashboard.
+        NOTE: For manual adding.
         '''
         data = {'title': 'Test Title', 'url': 'http://example.com', 'journal':
         'Journal of Test', 'year': '2011', 'submit': 'Submit', 'volume': '1',
@@ -43,7 +44,7 @@ class AddPaperViewTest(TestCase):
         upload_file = open(os.path.join(self.TEST_FILES_PATH, upload_filename), 'rb')
         data['file'] = upload_file
 
-        r = self.client.post('/papers/new/', data)
+        r = self.client.post('/papers/new/manual/', data)
         upload_file.close()
         self.assertRedirects(r, reverse('dashboard'))
 
