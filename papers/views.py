@@ -73,9 +73,8 @@ def new_paper_manual(request, task_id = None):
                     year = data['year'], volume = data['volume'], 
                     issue = data['issue'], pages = data['pages'], 
                     url = data['url'])
-            #Generate a random hash that will be used as a non-guessable ID
-            #for this paper.
-            p.hash = random_md5()
+            #We save first in order to have a hash automatically generated
+            p.save()
 
             if data['file']:
                 #Save file. data.file is an UploadedFile object.
@@ -84,8 +83,7 @@ def new_paper_manual(request, task_id = None):
                 save_uploaded_file(data['file'], path)
 
                 p.file = data['file'].name
-
-            p.save()
+                p.save()
 
             #Redirect to dashboard.
             messages.success(request, 'Paper was successfully added.')

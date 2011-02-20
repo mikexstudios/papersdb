@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 
 #from django_extend_model.utils import decorator as extend_model
 
+from .helpers import random_md5
+
 #import datetime
 
 class Paper(models.Model):
@@ -38,6 +40,14 @@ class Paper(models.Model):
         '''
         We want to have the local_id automatically set before save.
         '''
+        #Check to see if this object is new. Note that this isn't a foolproof
+        #way of checking for a new object since pk can be manually set. See:
+        #http://goo.gl/33PwD
+        if self.pk is None:
+            #Generate a random hash that will be used as a non-guessable ID
+            #for this paper.
+            self.hash = random_md5()
+
         #Only set local_id for new objects.
         if self.local_id == None:
             self.local_id = self.user.profile.get_next_paper_id()
