@@ -109,3 +109,29 @@ class AddPaperFormTest(TestCase):
 
         #Undo setting
         settings.MAXIMUM_UPLOAD_SIZE_BYTES = temp
+
+
+from papers.forms import ImportURLForm
+class ImportURLFormTest(TestCase):
+
+    def setUp(self):
+        #This is dummy valid data.
+        self.post = {'url': 'http://example.com',}
+
+    def tearDown(self):
+        pass
+
+    def test_empty_form_errors(self):
+        #Make all the values in the data empty
+        post = dict((k, '') for (k, v) in self.post.iteritems())
+        f = ImportURLForm(post)
+
+        self.assertFalse(f.is_valid())
+        self.assertEqual(f.errors, {
+            'url': [u'This field is required.'], 
+        })
+
+    def test_valid_form(self):
+        f = ImportURLForm(self.post)
+
+        self.assertTrue(f.is_valid())
