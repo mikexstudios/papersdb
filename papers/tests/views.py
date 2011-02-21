@@ -15,7 +15,7 @@ from papers.models import Paper
 import re
 import os
 
-class AddPaperViewTest(TestCase):
+class AddPaperManualViewTest(TestCase):
 
     def setUp(self):
         #Create and login test user.
@@ -68,6 +68,28 @@ class AddPaperViewTest(TestCase):
         path = os.path.join(settings.UPLOAD_ROOT, p.user.username, p.hash, p.file)
         self.assertTrue(os.path.exists(path))
 
+
+class AddPaperAutoViewTest(TestCase):
+
+    def setUp(self):
+        #Create and login test user.
+        self.user = User.objects.create_user('test', 'test@example.com', 'test')
+        self.client.login(username = 'test', password = 'test')
+
+    def tearDown(self):
+        #TODO: Remove the sample uploaded file.
+        pass
+
+    def test_valid_import_url_form(self):
+        '''
+        When valid url is submitted, user should be redirected to status page. New
+        task should be created and executed.
+        '''
+        data = {'url': 'http://example.com', }
+
+        r = self.client.post('/papers/new/', data)
+        self.assertTrue(re.search(r'/papers/new/status/([-\w]+)/$', r['Location']))
+        #self.assertRedirects(r, reverse('new_paper_status'))
 
 class DashboardViewTest(TestCase):
 
