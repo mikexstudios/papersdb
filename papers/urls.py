@@ -6,6 +6,8 @@ from django.conf.urls.defaults import *
 urlpatterns = patterns('papers.views',
     url(r'^$', 'home', name='home'), #default url
     url(r'^dashboard/$', 'dashboard', name='dashboard'),
+    #We want to match urls that end like: /+authors/ or /-date/
+    url(r'^dashboard/sortby/((?:\+|-)\w+)/$', 'dashboard', name='dashboard'),
 
     url(r'^papers/(\d+)/$', 'papers_view', name='papers_view'),
     url(r'^papers/new/$', 'new_paper_auto', name='new_paper'),

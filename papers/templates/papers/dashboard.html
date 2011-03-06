@@ -22,8 +22,10 @@
 {% block subcontent %}
 <div id="actionsbar">
     Select: <a href="">All</a>, <a href="">None</a> | 
-    <strong>Sort by:</strong> <a href="">Year</a>, <a href="">Author</a>, 
-                              <a href="">Journal</a> 
+    <strong>Sort by:</strong> 
+    <a href="{% url dashboard sort_state.added|add:'added' %}">Date Added{% if sort_current == 'added' %}{{ sort_state.added|pm_to_arrow }}{% endif %}</a>,
+    <a href="{% url dashboard sort_state.year|add:'year' %}">Year{% if sort_current == 'year' %}{{ sort_state.year|pm_to_arrow }}{% endif %}</a>, 
+    <a href="{% url dashboard sort_state.journal|add:'journal' %}">Journal{% if sort_current == 'journal' %}{{ sort_state.journal|pm_to_arrow }}{% endif %}</a> 
 </div>
 
 <table id="library-tbl">

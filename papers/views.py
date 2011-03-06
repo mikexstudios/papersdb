@@ -33,11 +33,32 @@ def home(request):
 
 @login_required
 @render_to('papers/dashboard.html')
-def dashboard(request):
-    #Get papers (latest first)
-    p = Paper.objects.filter(user = request.user).order_by('-pk')
+def dashboard(request, sort_by = '-added'):
+    SORT_KEYS = ('added', 'year', 'journal')
+    #We want to set the state before modifying the sort_by variable.
+    sort_current = sort_by[1:] if sort_by[1:] in SORT_KEYS else 'added'
+    sort_state = {
+            #By default, we sort by '-added'.
+            'added': '+' if sort_by == '-added' else '-', # earliest to latest
+            'year': '+' if sort_by == '-year' else '-', #latest to earliest
+            'journal': '-' if sort_by == '+journal' else '+', #a to z
+            }
 
-    return {'papers': p}
+    if sort_by[1:] in SORT_KEYS: #get rid of initial +/-
+        #We don't actually have a field called 'added' in our model. The
+        #corresponding field is 'created'. So we map it here.
+        if sort_by[1:] == 'added':
+            sort_by = '%s%s' % (sort_by[0], 'created')
+        #order_by cannot accept '+field', it must be 'field'
+        if sort_by[0] == '+':
+            sort_by = sort_by[1:]
+        p = Paper.objects.filter(user = request.user).order_by(sort_by)
+    else:
+        #Get papers (latest first)
+        p = Paper.objects.filter(user = request.user).order_by('-pk')
+
+
+    return {'papers': p, 'sort_state': sort_state, 'sort_current': sort_current}
 
 @login_required
 @render_to('papers/papers_view.html')
