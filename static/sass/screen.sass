@@ -460,10 +460,14 @@ body#papers_view
     float: left
     //Push the image down to preserve the layout's whitespace below the searchbar.
     //margin-top: 15px
-    border: 1px solid #333
-    padding: 1px
     img
+      //border: 1px solid #333
+      padding: 1px
       width: 180px
+    img.paper
+      +box-shadow
+    img.placeholder
+      border: none
   #paper_info
     margin-left: 200px
   #title
