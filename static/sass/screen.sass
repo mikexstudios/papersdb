@@ -452,10 +452,19 @@ body#new_paper
   
 
 body#papers_view
+  #thumbnail
+    float: left
+    //Push the image down to preserve the layout's whitespace below the searchbar.
+    margin-top: 15px
+    border: 1px solid #333
+    padding: 1px
+  #paper_info
+    margin-left: 220px
   #title
-    margin-bottom: 10px
-    line-height: 1.2
+    line-height: 1.3
+    margin-bottom: 0.5em
   #information
+    line-height: 1.2
     dt
       float: left
       text-align: right
@@ -464,6 +473,7 @@ body#papers_view
       content: ':'
     dd
       margin-left: 60px
+      margin-bottom: 0.5em
     dt.title
       display: none
     dd.title

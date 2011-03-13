@@ -21,43 +21,53 @@
 
 {# TODO: Need an actions bar #}
 
-<div id="title">{{ paper.title }}</div>
-
-<div id="actions">
-    <ul>
-        <li><a href="">Edit Citation</a></li>
-        <li class="download"><a href="{% paperurl paper %}">Download</a></li>
-    </ul>
+<div id="thumbnail">
+    <img src="{{ MEDIA_URL }}images/output.png" width=200 />
 </div>
 
-<dl id="information">
-    <!-- <dt class="title">Title</dt>
-    <dd class="title">{{ paper.title }}</dd> -->
-    <dt class="authors">Authors</dt>
-    <dd class="authors">
-        {% for a in paper.authors|splitlines %}
-        {{ a }}{% if not forloop.last %}, {% endif %}
-        {% endfor %}
-    </dd>
-    <dt class="journal">Journal</dt>
-    <dd class="journal">{{ paper.journal }}</dd>
-    <dt class="volume">Volume</dt>
-    <dd class="volume">{{ paper.volume }}</dd>
-    <dt class="issue">Issue</dt>
-    <dd class="issue">{{ paper.issue }}</dd>
-    <dt class="pages">Pages</dt>
-    <dd class="pages">{{ paper.pages }}</dd>
-    <dt class="year">Year</dt>
-    <dd class="year">{{ paper.year }}</dd>
-    <dt class="url">URL</dt>
-    <dd class="url"><a href="{{ paper.url }}">{{ paper.url }}</a></dd>
-</dl>
+<div id="paper_info">
+    <div id="title">{{ paper.title }}</div>
+    
+    <!--
+    <div id="actions">
+        <ul>
+            <li><a href="">Edit Citation</a></li>
+            <li class="download"><a href="{% paperurl paper %}">Download</a></li>
+        </ul>
+    </div>
+    -->
+    
+    <dl id="information">
+        <!-- <dt class="title">Title</dt>
+        <dd class="title">{{ paper.title }}</dd> -->
+        <dt class="authors">Authors</dt>
+        <dd class="authors">
+            {% for a in paper.authors|splitlines %}
+            {{ a }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </dd>
+        <dt class="journal">Journal</dt>
+        <dd class="journal">{{ paper.journal }}</dd>
+        <dt class="volume">Volume</dt>
+        <dd class="volume">{{ paper.volume }}</dd>
+        <dt class="issue">Issue</dt>
+        <dd class="issue">{{ paper.issue }}</dd>
+        <dt class="pages">Pages</dt>
+        <dd class="pages">{{ paper.pages }}</dd>
+        <dt class="year">Year</dt>
+        <dd class="year">{{ paper.year }}</dd>
+        <dt class="url">URL</dt>
+        <dd class="url"><a href="{{ paper.url }}">{{ paper.url }}</a></dd>
+    </dl>
+</div>
 
+<!--
 <h3 id="quickview">Quick View</h3>
 <a href="{% quickview paper %}" id="quickview_helper" target="_blank">(open in new window)</a>
 
 {# TODO: Insert quickview embed #}
 <iframe src="{% quickview paper %}" style="width:100%; height:800px;" frameborder="0"></iframe>
+-->
 
 </form>
 {% endblock %}

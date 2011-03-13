@@ -1971,34 +1971,50 @@ body#new_paper #import_status p {
 }
 
 /* line 455, ../sass/screen.sass */
+body#papers_view #thumbnail {
+  float: left;
+  margin-top: 15px;
+  border: 1px solid #333333;
+  padding: 1px;
+}
+/* line 461, ../sass/screen.sass */
+body#papers_view #paper_info {
+  margin-left: 220px;
+}
+/* line 463, ../sass/screen.sass */
 body#papers_view #title {
-  margin-bottom: 10px;
+  line-height: 1.3;
+  margin-bottom: 0.5em;
+}
+/* line 466, ../sass/screen.sass */
+body#papers_view #information {
   line-height: 1.2;
 }
-/* line 459, ../sass/screen.sass */
+/* line 468, ../sass/screen.sass */
 body#papers_view #information dt {
   float: left;
   text-align: right;
   width: 50px;
 }
-/* line 463, ../sass/screen.sass */
+/* line 472, ../sass/screen.sass */
 body#papers_view #information dt:after {
   content: ":";
 }
-/* line 465, ../sass/screen.sass */
+/* line 474, ../sass/screen.sass */
 body#papers_view #information dd {
   margin-left: 60px;
+  margin-bottom: 0.5em;
 }
-/* line 467, ../sass/screen.sass */
+/* line 477, ../sass/screen.sass */
 body#papers_view #information dt.title {
   display: none;
 }
-/* line 469, ../sass/screen.sass */
+/* line 479, ../sass/screen.sass */
 body#papers_view #information dd.title {
   font-size: 1.5em;
   font-weight: bold;
 }
-/* line 472, ../sass/screen.sass */
+/* line 482, ../sass/screen.sass */
 body#papers_view #actions {
   float: right;
   background-color: #f3f5f9;
@@ -2010,24 +2026,24 @@ body#papers_view #actions {
   border-radius: 4px;
   font-size: 1.1em;
 }
-/* line 477, ../sass/screen.sass */
+/* line 487, ../sass/screen.sass */
 body#papers_view #actions ul {
   margin: 0;
   padding: 10px 15px;
   padding-left: 30px;
 }
-/* line 482, ../sass/screen.sass */
+/* line 492, ../sass/screen.sass */
 body#papers_view #actions ul li.download {
   font-weight: bold;
 }
-/* line 484, ../sass/screen.sass */
+/* line 494, ../sass/screen.sass */
 body#papers_view #quickview {
   clear: both;
   margin-bottom: 10px;
   margin-right: 5px;
   float: left;
 }
-/* line 489, ../sass/screen.sass */
+/* line 499, ../sass/screen.sass */
 body#papers_view a#quickview_helper {
   display: block;
   font-size: 0.8em;
