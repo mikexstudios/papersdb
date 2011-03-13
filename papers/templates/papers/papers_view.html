@@ -11,6 +11,11 @@
         $(document).ready(function() {
             //10 sec delay.
             $('#messages').delay(10000).fadeOut('slow');
+
+            $('#back a').click(function() {
+                history.back(-1);
+                return false;
+            });
         });
     </script>
 {% endblock %}
@@ -19,12 +24,14 @@
 
 {% block subcontent %}
 
-{# TODO: Need an actions bar #}
+<div id="back"><a href="{% url dashboard %}">&larr; Back to all papers</a></div>
 
 <div id="title">{{ paper.title }}</div>
 
 <div id="thumbnail">
-    <img src="{{ MEDIA_URL }}images/output.png" width=180 />
+    <a href="{% quickview paper %}" target="_blank">
+        <img src="{{ MEDIA_URL }}images/output.png" width=180 />
+    </a>
 </div>
 
 <div id="paper_info">
@@ -60,14 +67,6 @@
 
     <!-- TODO: Show cite information -->
 </div>
-
-<!--
-<h3 id="quickview">Quick View</h3>
-<a href="{% quickview paper %}" id="quickview_helper" target="_blank">(open in new window)</a>
-
-{# TODO: Insert quickview embed #}
-<iframe src="{% quickview paper %}" style="width:100%; height:800px;" frameborder="0"></iframe>
--->
 
 </form>
 {% endblock %}

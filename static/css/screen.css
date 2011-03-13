@@ -1971,49 +1971,59 @@ body#new_paper #import_status p {
 }
 
 /* line 455, ../sass/screen.sass */
+body#papers_view #back {
+  margin-top: 15px;
+  font-weight: bold;
+  margin-bottom: -10px;
+}
+/* line 459, ../sass/screen.sass */
 body#papers_view #thumbnail {
   float: left;
   border: 1px solid #333333;
   padding: 1px;
 }
-/* line 461, ../sass/screen.sass */
+/* line 465, ../sass/screen.sass */
+body#papers_view #thumbnail img {
+  width: 180px;
+}
+/* line 467, ../sass/screen.sass */
 body#papers_view #paper_info {
   margin-left: 200px;
 }
-/* line 463, ../sass/screen.sass */
+/* line 469, ../sass/screen.sass */
 body#papers_view #title {
   line-height: 1.3;
   margin-bottom: 0.5em;
 }
-/* line 466, ../sass/screen.sass */
+/* line 472, ../sass/screen.sass */
 body#papers_view #information {
   line-height: 1.5;
 }
-/* line 468, ../sass/screen.sass */
+/* line 474, ../sass/screen.sass */
 body#papers_view #information dt {
   float: left;
   text-align: right;
   width: 60px;
 }
-/* line 472, ../sass/screen.sass */
+/* line 478, ../sass/screen.sass */
 body#papers_view #information dt:after {
   content: ":";
 }
-/* line 474, ../sass/screen.sass */
+/* line 480, ../sass/screen.sass */
 body#papers_view #information dd {
   margin-left: 70px;
   margin-bottom: 0.5em;
 }
-/* line 477, ../sass/screen.sass */
+/* line 483, ../sass/screen.sass */
 body#papers_view #information dt.title {
   display: none;
 }
-/* line 479, ../sass/screen.sass */
+/* line 485, ../sass/screen.sass */
 body#papers_view #information dd.title {
   font-size: 1.5em;
   font-weight: bold;
 }
-/* line 482, ../sass/screen.sass */
+/* line 488, ../sass/screen.sass */
 body#papers_view #actions {
   background-color: #f3f5f9;
   -moz-border-radius: 4px;
@@ -2026,18 +2036,18 @@ body#papers_view #actions {
   padding: 2px 10px;
   margin-bottom: 1em;
 }
-/* line 489, ../sass/screen.sass */
+/* line 495, ../sass/screen.sass */
 body#papers_view #actions .download, body#papers_view #actions .quickview {
   font-weight: bold;
 }
-/* line 491, ../sass/screen.sass */
+/* line 497, ../sass/screen.sass */
 body#papers_view #quickview {
   clear: both;
   margin-bottom: 10px;
   margin-right: 5px;
   float: left;
 }
-/* line 496, ../sass/screen.sass */
+/* line 502, ../sass/screen.sass */
 body#papers_view a#quickview_helper {
   display: block;
   font-size: 0.8em;
