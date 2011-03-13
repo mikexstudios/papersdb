@@ -21,21 +21,19 @@
 
 {# TODO: Need an actions bar #}
 
+<div id="title">{{ paper.title }}</div>
+
 <div id="thumbnail">
-    <img src="{{ MEDIA_URL }}images/output.png" width=200 />
+    <img src="{{ MEDIA_URL }}images/output.png" width=180 />
 </div>
 
 <div id="paper_info">
-    <div id="title">{{ paper.title }}</div>
     
-    <!--
     <div id="actions">
-        <ul>
-            <li><a href="">Edit Citation</a></li>
-            <li class="download"><a href="{% paperurl paper %}">Download</a></li>
-        </ul>
+            <a href="{% quickview paper %}" target="_blank" class="quickview">Quickview</a> |
+            <a href="{% paperurl paper %}" class="download">Download</a> |
+            <a href="">Edit Citation</a>
     </div>
-    -->
     
     <dl id="information">
         <!-- <dt class="title">Title</dt>
@@ -59,6 +57,8 @@
         <dt class="url">URL</dt>
         <dd class="url"><a href="{{ paper.url }}">{{ paper.url }}</a></dd>
     </dl>
+
+    <!-- TODO: Show cite information -->
 </div>
 
 <!--
