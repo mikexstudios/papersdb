@@ -14,7 +14,7 @@ from django.test import TestCase
 import re
 import os
 
-from papers.forms import NewPaperForm
+from papers.forms import PaperForm
 from django.core.files.uploadedfile import SimpleUploadedFile
 class AddPaperFormTest(TestCase):
 
@@ -39,7 +39,7 @@ class AddPaperFormTest(TestCase):
     def test_empty_form_errors(self):
         #Make all the values in the data empty
         post = dict((k, '') for (k, v) in self.post.iteritems())
-        f = NewPaperForm(post)
+        f = PaperForm(post)
 
         self.assertFalse(f.is_valid())
         self.assertEqual(f.errors, {
@@ -48,7 +48,7 @@ class AddPaperFormTest(TestCase):
         })
 
     def test_valid_form(self):
-        f = NewPaperForm(self.post, self.files)
+        f = PaperForm(self.post, self.files)
 
         self.assertTrue(f.is_valid())
 
@@ -77,7 +77,7 @@ class AddPaperFormTest(TestCase):
         for c in cases:
             post['authors'] = c
 
-            f = NewPaperForm(post)
+            f = PaperForm(post)
             self.assertTrue(f.is_valid())
             self.assertEqual(f.cleaned_data['authors'], expected_authors)
 
@@ -92,7 +92,7 @@ class AddPaperFormTest(TestCase):
         invalid_files['file'] = SimpleUploadedFile(f.name, f.read())
         f.close()
         
-        f = NewPaperForm(self.post, invalid_files)
+        f = PaperForm(self.post, invalid_files)
         self.assertFalse(f.is_valid())
 
     def test_oversized_upload_file(self):
@@ -104,7 +104,7 @@ class AddPaperFormTest(TestCase):
         temp = settings.MAXIMUM_UPLOAD_SIZE_BYTES
         settings.MAXIMUM_UPLOAD_SIZE_BYTES = 0
 
-        f = NewPaperForm(self.post, self.files)
+        f = PaperForm(self.post, self.files)
         self.assertFalse(f.is_valid())
 
         #Undo setting

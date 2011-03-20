@@ -18,7 +18,7 @@ from django.db import models #for aggregator methods
 from annoying.decorators import render_to, ajax_request
 #from annoying.functions import get_object_or_None
 
-from .forms import NewPaperForm, ImportURLForm
+from .forms import ImportURLForm, PaperForm
 from .models import Paper
 from .tasks import import_paper_url
 from .helpers import random_md5, save_uploaded_file
@@ -84,7 +84,7 @@ def new_paper_manual(request, task_id = None):
     #import pdb; pdb.set_trace()
 
     if request.method == 'POST':
-        form = NewPaperForm(post, request.FILES)
+        form = PaperForm(post, request.FILES)
         if form.is_valid():
             data = form.cleaned_data
             #print data
@@ -111,9 +111,9 @@ def new_paper_manual(request, task_id = None):
             return redirect('dashboard')
     else: 
         if task_id:
-            form = NewPaperForm(post)
+            form = PaperForm(post)
         else:
-            form = NewPaperForm()
+            form = PaperForm()
 
     #Also create the get citation form
     import_url_form = ImportURLForm()
@@ -183,7 +183,7 @@ def papers_edit(request, paper_id):
     p = get_object_or_404(Paper, user = request.user, local_id = paper_id)
 
     if request.method == 'POST':
-        form = NewPaperForm(request.POST, request.FILES)
+        form = PaperForm(request.POST, request.FILES)
         if form.is_valid():
             data = form.cleaned_data
             #print data
@@ -209,6 +209,6 @@ def papers_edit(request, paper_id):
             messages.success(request, 'Paper was successfully added.')
             return redirect('dashboard')
     else: 
-        form = NewPaperForm()
+        form = PaperForm()
 
     return {'form': form}
