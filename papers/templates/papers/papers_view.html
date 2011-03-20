@@ -37,9 +37,13 @@
 <div id="paper_info">
     
     <div id="actions">
-            <a href="{% quickview paper %}" target="_blank" class="quickview">Quickview</a> |
-            <a href="{% paperurl paper %}" class="download">Download</a> |
-            <a href="">Edit Citation</a>
+        {% if paper.file %}
+        <a href="{% quickview paper %}" target="_blank" class="quickview">Quickview</a> |
+        <a href="{% paperurl paper %}" class="download">Download</a> |
+        {% else %}
+        <a href="" class="upload">Upload Paper</a> | 
+        {% endif %}
+        <a href="">Edit Citation</a>
     </div>
     
     <dl id="information">

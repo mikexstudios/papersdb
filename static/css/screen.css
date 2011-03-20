@@ -2047,7 +2047,7 @@ body#papers_view #actions {
   margin-bottom: 1em;
 }
 /* line 499, ../sass/screen.sass */
-body#papers_view #actions .download, body#papers_view #actions .quickview {
+body#papers_view #actions .download, body#papers_view #actions .quickview, body#papers_view #actions .upload {
   font-weight: bold;
 }
 /* line 501, ../sass/screen.sass */
