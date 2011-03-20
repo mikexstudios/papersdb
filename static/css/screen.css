@@ -1816,41 +1816,45 @@ body#dashboard #right #library-tbl tr .right ul.actions li {
 body#dashboard #right #library-tbl tr .right ul.actions a {
   color: #333333;
 }
-/* line 366, ../sass/screen.sass */
+/* line 365, ../sass/screen.sass */
+body#dashboard #right #library-tbl tr .right ul.actions .upload {
+  color: #999999;
+}
+/* line 368, ../sass/screen.sass */
 body#dashboard #right #pagesbar {
   margin-top: 20px;
   border-top: 1px solid #eeeeee;
 }
-/* line 370, ../sass/screen.sass */
+/* line 372, ../sass/screen.sass */
 body#dashboard #right #pagesbar .entries {
   float: left;
 }
-/* line 372, ../sass/screen.sass */
+/* line 374, ../sass/screen.sass */
 body#dashboard #right #pagesbar .nav {
   float: right;
 }
-/* line 374, ../sass/screen.sass */
+/* line 376, ../sass/screen.sass */
 body#dashboard #right #pagesbar .pages {
   text-align: center;
 }
 
-/* line 381, ../sass/screen.sass */
+/* line 383, ../sass/screen.sass */
 body#new_paper form#new_paper_form .field textarea#id_title, body#new_paper form#import_url_form .field textarea#id_title {
   height: 40px;
 }
-/* line 386, ../sass/screen.sass */
+/* line 388, ../sass/screen.sass */
 body#new_paper form#new_paper_form .field textarea#id_authors, body#new_paper form#import_url_form .field textarea#id_authors {
   height: 70px;
 }
-/* line 388, ../sass/screen.sass */
+/* line 390, ../sass/screen.sass */
 body#new_paper form#new_paper_form .field input#id_year, body#new_paper form#import_url_form .field input#id_year {
   width: 50px;
 }
-/* line 390, ../sass/screen.sass */
+/* line 392, ../sass/screen.sass */
 body#new_paper form#new_paper_form .field input#id_volume, body#new_paper form#new_paper_form .field input#id_issue, body#new_paper form#new_paper_form .field input#id_pages, body#new_paper form#import_url_form .field input#id_volume, body#new_paper form#import_url_form .field input#id_issue, body#new_paper form#import_url_form .field input#id_pages {
   width: 100px;
 }
-/* line 393, ../sass/screen.sass */
+/* line 395, ../sass/screen.sass */
 body#new_paper form#new_paper_form .actions button, body#new_paper form#import_url_form .actions button {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -1865,14 +1869,14 @@ body#new_paper form#new_paper_form .actions button, body#new_paper form#import_u
   padding: 6px 20px;
   border-width: 1px;
 }
-/* line 397, ../sass/screen.sass */
+/* line 399, ../sass/screen.sass */
 body#new_paper form#import_url_form {
   display: block;
   background-color: #f3f5f9;
   padding: 10px 15px;
   width: auto;
 }
-/* line 403, ../sass/screen.sass */
+/* line 405, ../sass/screen.sass */
 body#new_paper form#import_url_form .errorlist {
   text-align: center;
   padding-top: 5px;
@@ -1912,7 +1916,7 @@ body#new_paper form#import_url_form .errorlist li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 412, ../sass/screen.sass */
+/* line 414, ../sass/screen.sass */
 body#new_paper form#import_url_form .field {
   padding: 0;
   margin-bottom: 0;
@@ -1921,119 +1925,119 @@ body#new_paper form#import_url_form .field {
   float: left;
   background-color: transparent;
 }
-/* line 419, ../sass/screen.sass */
+/* line 421, ../sass/screen.sass */
 body#new_paper form#import_url_form .field label {
   font-size: 1.3em;
   font-weight: bold;
   margin-top: 3px;
 }
-/* line 423, ../sass/screen.sass */
+/* line 425, ../sass/screen.sass */
 body#new_paper form#import_url_form .field .right {
   margin-left: 50px;
 }
-/* line 425, ../sass/screen.sass */
+/* line 427, ../sass/screen.sass */
 body#new_paper form#import_url_form .field input#id_url {
   font-size: 1.25em;
   padding: 5px;
 }
-/* line 428, ../sass/screen.sass */
+/* line 430, ../sass/screen.sass */
 body#new_paper form#import_url_form .actions {
   margin-top: 0px;
 }
-/* line 432, ../sass/screen.sass */
+/* line 434, ../sass/screen.sass */
 body#new_paper .select_link {
   text-align: right;
   margin-top: 1em;
   color: #555555;
   margin-bottom: 25px;
 }
-/* line 437, ../sass/screen.sass */
+/* line 439, ../sass/screen.sass */
 body#new_paper .select_link a {
   color: #717da3;
 }
-/* line 440, ../sass/screen.sass */
+/* line 442, ../sass/screen.sass */
 body#new_paper #select_auto_add {
   margin-top: -30px;
 }
-/* line 443, ../sass/screen.sass */
+/* line 445, ../sass/screen.sass */
 body#new_paper #import_status {
   text-align: center;
   border: 5px solid #f3f5f9;
   padding: 5px 15px;
 }
-/* line 448, ../sass/screen.sass */
+/* line 450, ../sass/screen.sass */
 body#new_paper #import_status img {
   margin-top: 2px;
 }
-/* line 450, ../sass/screen.sass */
+/* line 452, ../sass/screen.sass */
 body#new_paper #import_status p {
   margin: 0;
 }
 
-/* line 455, ../sass/screen.sass */
+/* line 457, ../sass/screen.sass */
 body#papers_view #back {
   margin-top: 15px;
   font-weight: bold;
   margin-bottom: -10px;
 }
-/* line 459, ../sass/screen.sass */
+/* line 461, ../sass/screen.sass */
 body#papers_view #thumbnail {
   float: left;
 }
-/* line 463, ../sass/screen.sass */
+/* line 465, ../sass/screen.sass */
 body#papers_view #thumbnail img {
   padding: 1px;
   width: 180px;
 }
-/* line 467, ../sass/screen.sass */
+/* line 469, ../sass/screen.sass */
 body#papers_view #thumbnail img.paper {
   -moz-box-shadow: #333333 1px 1px 5px 0;
   -webkit-box-shadow: #333333 1px 1px 5px 0;
   -o-box-shadow: #333333 1px 1px 5px 0;
   box-shadow: #333333 1px 1px 5px 0;
 }
-/* line 469, ../sass/screen.sass */
+/* line 471, ../sass/screen.sass */
 body#papers_view #thumbnail img.placeholder {
   border: none;
 }
-/* line 471, ../sass/screen.sass */
+/* line 473, ../sass/screen.sass */
 body#papers_view #paper_info {
   margin-left: 200px;
 }
-/* line 473, ../sass/screen.sass */
+/* line 475, ../sass/screen.sass */
 body#papers_view #title {
   line-height: 1.3;
   margin-bottom: 0.5em;
 }
-/* line 476, ../sass/screen.sass */
+/* line 478, ../sass/screen.sass */
 body#papers_view #information {
   line-height: 1.5;
 }
-/* line 478, ../sass/screen.sass */
+/* line 480, ../sass/screen.sass */
 body#papers_view #information dt {
   float: left;
   text-align: right;
   width: 60px;
 }
-/* line 482, ../sass/screen.sass */
+/* line 484, ../sass/screen.sass */
 body#papers_view #information dt:after {
   content: ":";
 }
-/* line 484, ../sass/screen.sass */
+/* line 486, ../sass/screen.sass */
 body#papers_view #information dd {
   margin-left: 70px;
   margin-bottom: 0.5em;
 }
-/* line 487, ../sass/screen.sass */
+/* line 489, ../sass/screen.sass */
 body#papers_view #information dt.title {
   display: none;
 }
-/* line 489, ../sass/screen.sass */
+/* line 491, ../sass/screen.sass */
 body#papers_view #information dd.title {
   font-size: 1.5em;
   font-weight: bold;
 }
-/* line 492, ../sass/screen.sass */
+/* line 494, ../sass/screen.sass */
 body#papers_view #actions {
   background-color: #f3f5f9;
   -moz-border-radius: 4px;
@@ -2046,18 +2050,18 @@ body#papers_view #actions {
   padding: 2px 10px;
   margin-bottom: 1em;
 }
-/* line 499, ../sass/screen.sass */
+/* line 501, ../sass/screen.sass */
 body#papers_view #actions .download, body#papers_view #actions .quickview, body#papers_view #actions .upload {
   font-weight: bold;
 }
-/* line 501, ../sass/screen.sass */
+/* line 503, ../sass/screen.sass */
 body#papers_view #quickview {
   clear: both;
   margin-bottom: 10px;
   margin-right: 5px;
   float: left;
 }
-/* line 506, ../sass/screen.sass */
+/* line 508, ../sass/screen.sass */
 body#papers_view a#quickview_helper {
   display: block;
   font-size: 0.8em;
