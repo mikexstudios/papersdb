@@ -175,3 +175,40 @@ def papers_import_url_poll(request, task_id):
         #Otherwise, data is False
 
     return response
+
+
+@login_required
+@render_to('papers/papers_edit.html')
+def papers_edit(request, paper_id):
+    p = get_object_or_404(Paper, user = request.user, local_id = paper_id)
+
+    if request.method == 'POST':
+        form = NewPaperForm(request.POST, request.FILES)
+        if form.is_valid():
+            data = form.cleaned_data
+            #print data
+            
+            p = Paper(user = request.user, title = data['title'], 
+                    authors = data['authors'], journal = data['journal'], 
+                    year = data['year'], volume = data['volume'], 
+                    issue = data['issue'], pages = data['pages'], 
+                    url = data['url'])
+            #We save first in order to have a hash automatically generated
+            p.save()
+
+            if data['file']:
+                #Save file. data.file is an UploadedFile object.
+                path = os.path.join(settings.UPLOAD_ROOT, request.user.username,
+                        p.hash)
+                save_uploaded_file(data['file'], path)
+
+                p.file = data['file'].name
+                p.save()
+
+            #Redirect to dashboard.
+            messages.success(request, 'Paper was successfully added.')
+            return redirect('dashboard')
+    else: 
+        form = NewPaperForm()
+
+    return {'form': form}
