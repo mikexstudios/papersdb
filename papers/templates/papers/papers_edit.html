@@ -1,14 +1,24 @@
 {% extends "papers/app_base.html" %}
+{% load papers %}
 {% block bodyid %}papers_edit{% endblock %}
 
 {% block title %}Edit Paper{% endblock %}
 
 {% block javascript %}
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.inline-confirmation.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             //10 sec delay.
             $('#messages').delay(10000).fadeOut('slow');
+
+            $('a.delete').inlineConfirmation({
+                confirm: "<a href='#' class='confirm-yes'>Yes</a>",
+                cancel: "Are you sure? <a href='#' class='confirm-no'>No</a>",
+                separator: " | ",
+                reverse: true,
+            });
+            
         });
     </script>
 {% endblock %}
@@ -93,9 +103,14 @@
     <div class="field">
         <label for="id_file" class="optional">File</label> 
         <div class="right">
+            <div class="uploaded">
+                <a href="{% paperurl paper %}">{{ paper.file }}</a> 
+                <small>(<a href="{% quickview paper %}" target="_blank">quickview</a>) 
+                    (<a href="#" class="delete">delete</a>)</small>
+            </div>
             {{ form.file.errors }}
             {{ form.file }}
-            <small class="helper">Select and upload the file that is associated with this paper.</small>
+            <small class="helper">Replace the existing file by selecting and uploading a new document.</small>
         </div>
     </div>
 

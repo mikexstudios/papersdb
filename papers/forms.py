@@ -8,10 +8,12 @@ from .models import Paper
 import os
 
 class PaperForm(forms.ModelForm):
+    #Override fields here.
     file = forms.FileField(required = False, label='Upload Paper')
 
     class Meta:
         model = Paper
+        #Files that will appear in form.
         fields = ('title', 'authors', 'journal', 'year', 'volume', 'issue', 
                   'pages', 'url', 'file', )
 

@@ -43,7 +43,7 @@
         {% else %}
         <a href="" class="upload">Upload Paper</a> | 
         {% endif %}
-        <a href="">Edit Citation</a>
+        <a href="{% url papers_edit paper.local_id %}">Edit Citation</a>
     </div>
     
     <dl id="information">

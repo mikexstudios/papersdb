@@ -25,6 +25,7 @@ $serif_font: Georgia, Times, Times New Roman, serif
 $monospace_font: Monaco, Courier New, DejaVu Sans Mono, Bitstream Vera Sans Mono, monospace
 $blueprint-font-family: $sans_serif_font
 
+
 // Generate the blueprint framework according to your configuration:
 // (We put this after typography so that duplicate css code isn't generated.)
 +blueprint
@@ -214,6 +215,12 @@ body
     .actions
       margin-top: 15px
       text-align: right
+
+    //For inline confirmations
+    .inline-confirmation-block
+      color: #c44
+      a
+        color: #c44 !important
   
   #footer
     clear: both
@@ -377,8 +384,8 @@ body#dashboard
         text-align: center
 
           
-body#new_paper
-  form#new_paper_form, form#import_url_form
+body#new_paper, body#papers_edit
+  form#new_paper_form, form#import_url_form, form#papers_edit_form
     .field
       textarea#id_title
         //Want this height to be two line's height.
@@ -391,6 +398,20 @@ body#new_paper
         width: 50px
       input#id_volume, input#id_issue, input#id_pages
         width: 100px
+      .right
+        .uploaded
+          font-weight: bold
+          line-height: 1.5
+          margin-bottom: 0.3em
+          a
+            color: $link-color
+          small
+            display: inline
+            color: #717DA3
+            font-size: 0.8em
+
+            a
+              color: #717DA3
     .actions
       button
         +fancy-button-size(1.05em, 3px)
