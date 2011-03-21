@@ -191,12 +191,13 @@ def papers_edit(request, paper_id):
 
             #TODO: Delete old file when new one is uploaded. Better yet, allow
             #      multiple files per paper.
-            if data['file']:
+            #NOTE: Checking for unicode type is an ugly hack.
+            if data['file'] and type(data['file']) != unicode:
                 path = os.path.join(settings.UPLOAD_ROOT, request.user.username,
                         p.hash)
 
                 #If there is an existing file, delete that first.
-                if p.file:
+                if p_file:
                     try:
                         os.unlink(os.path.join(path, p_file))
                     except OSError:

@@ -34,22 +34,27 @@ class PaperForm(forms.ModelForm):
         if not uploaded_file:
             return None
         
-        #Check for allowed extensions:
-        ext = os.path.splitext(uploaded_file.name)[1]
-        ext = ext[1:] #get rid of .
-        ext = ext.lower() #make lowercase
-        if ext not in settings.ALLOWED_UPLOAD_EXTENSIONS:
-            valid_files = ['.%s' % i for i in settings.ALLOWED_UPLOAD_EXTENSIONS]
-            valid_files = get_text_list(valid_files, ', and')
-            raise forms.ValidationError(
-                'Not a valid file! Only %s files are allowed!' % valid_files
-            )
+        try:
+            #Check for allowed extensions:
+            ext = os.path.splitext(uploaded_file.name)[1]
+            ext = ext[1:] #get rid of .
+            ext = ext.lower() #make lowercase
+            if ext not in settings.ALLOWED_UPLOAD_EXTENSIONS:
+                valid_files = ['.%s' % i for i in settings.ALLOWED_UPLOAD_EXTENSIONS]
+                valid_files = get_text_list(valid_files, ', and')
+                raise forms.ValidationError(
+                    'Not a valid file! Only %s files are allowed!' % valid_files
+                )
 
-        #Check for allowed file size:
-        if uploaded_file.size > settings.MAXIMUM_UPLOAD_SIZE_BYTES:
-            raise forms.ValidationError(
-                'File is too large! Only files with size <= %s MB are allowed!' % settings.MAXIMUM_UPLOAD_SIZE_MB
-            )
+            #Check for allowed file size:
+            if uploaded_file.size > settings.MAXIMUM_UPLOAD_SIZE_BYTES:
+                raise forms.ValidationError(
+                    'File is too large! Only files with size <= %s MB are allowed!' % settings.MAXIMUM_UPLOAD_SIZE_MB
+                )
+        except AttributeError:
+            #Means that the uploaded_file is not a File object but rather a string
+            #denoting an existing file that we do not want changed.
+            pass
         
         #Otherwise, everything checks out:
         return uploaded_file
