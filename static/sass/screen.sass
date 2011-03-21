@@ -215,12 +215,6 @@ body
     .actions
       margin-top: 15px
       text-align: right
-
-    //For inline confirmations
-    .inline-confirmation-block
-      color: #c44
-      a
-        color: #c44 !important
   
   #footer
     clear: both
@@ -399,6 +393,7 @@ body#new_paper, body#papers_edit
       input#id_volume, input#id_issue, input#id_pages
         width: 100px
       .right
+        //TODO: Clean this code up.
         .uploaded
           font-weight: bold
           line-height: 1.5
@@ -409,7 +404,6 @@ body#new_paper, body#papers_edit
             display: inline
             color: #717DA3
             font-size: 0.8em
-
             a
               color: #717DA3
     .actions
