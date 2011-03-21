@@ -181,6 +181,7 @@ def papers_import_url_poll(request, task_id):
 @render_to('papers/papers_edit.html')
 def papers_edit(request, paper_id):
     p = get_object_or_404(Paper, user = request.user, local_id = paper_id)
+    p_file = p.file #Need to make a copy of this since the ModelForm overwrites it.
 
     if request.method == 'POST':
         form = PaperForm(request.POST, request.FILES, instance = p)
@@ -188,19 +189,27 @@ def papers_edit(request, paper_id):
             data = form.cleaned_data
             #print data
 
-            form.save()
-
             #TODO: Delete old file when new one is uploaded. Better yet, allow
             #      multiple files per paper.
-            
             if data['file']:
-                #Save file. data.file is an UploadedFile object.
                 path = os.path.join(settings.UPLOAD_ROOT, request.user.username,
                         p.hash)
+
+                #If there is an existing file, delete that first.
+                if p.file:
+                    try:
+                        os.unlink(os.path.join(path, p_file))
+                    except OSError:
+                        #The file is already missing.
+                        pass
+
+                #Save file. data.file is an UploadedFile object.
                 save_uploaded_file(data['file'], path)
 
-                p.file = data['file'].name
-                p.save()
+                form.file = data['file'].name
+                #p.save()
+
+            form.save()
 
             #Redirect to individual paper.
             messages.success(request, 'Paper was successfully updated.')

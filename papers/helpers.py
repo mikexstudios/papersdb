@@ -34,8 +34,13 @@ def save_uploaded_file(f, path, filename = ''):
     '''
     if filename == '':
         filename = f.name
-    #Need to make the hash directory before saving file.
-    os.makedirs(path, mode = 0755)
+    #Need to make the hash directory (if it doesn't already exist) before
+    #saving file.
+    try:
+        os.makedirs(path, mode = 0755)
+    except OSError:
+        #Directory already exists. That's fine.
+        pass
     save_path = os.path.join(path, filename)
     destination = open(save_path, 'wb+')
     for chunk in f.chunks():
