@@ -18,6 +18,8 @@
 {% block sitenav %}{% endblock %}
 
 {% block subcontent %}
+<div id="back"><a href="{% url papers_view paper.local_id %}">&larr; Back to paper</a></div>
+
 <h2 id="title">Edit Paper</h2>
 
 <div id="description"></div>
