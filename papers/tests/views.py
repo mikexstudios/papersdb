@@ -174,10 +174,13 @@ class PapersEditTest(TestCase):
         self.assertEqual(self.p.file, upload_filename)
 
         #Verify that the new uploaded file exists
-        self.assertTrue(os.path.exists(new_uploaded_file))
+        #/<upload files location>/username/<hash>/filename.ext
+        path = os.path.join(settings.UPLOAD_ROOT, self.p.user.username, self.p.hash,
+                self.p.file)
+        self.assertTrue(os.path.exists(path))
 
         #Cleanup: Delete the newly uploaded file
-        os.unlink(new_uploaded_file)
+        os.unlink(path)
 
 
 
