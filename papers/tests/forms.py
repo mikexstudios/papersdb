@@ -16,7 +16,11 @@ import os
 
 from papers.forms import PaperForm
 from django.core.files.uploadedfile import SimpleUploadedFile
-class AddPaperFormTest(TestCase):
+class PaperFormTest(TestCase):
+    '''
+    This tests manual add paper form (which doubles as the edit paper form). Testing
+    the edit form on an existing entry is done in the tests/view.py.
+    '''
 
     def setUp(self):
         #This is dummy valid data.

@@ -14,6 +14,7 @@ from papers.models import Paper
 
 import re
 import os
+import shutil #for copy2
 
 class AddPaperManualViewTest(TestCase):
 
@@ -68,6 +69,8 @@ class AddPaperManualViewTest(TestCase):
         path = os.path.join(settings.UPLOAD_ROOT, p.user.username, p.hash, p.file)
         self.assertTrue(os.path.exists(path))
 
+        #TODO: Remove uploaded file.
+
 
 class AddPaperAutoViewTest(TestCase):
 
@@ -90,6 +93,53 @@ class AddPaperAutoViewTest(TestCase):
         r = self.client.post('/papers/new/', data)
         self.assertTrue(re.search(r'/papers/new/status/([-\w]+)/$', r['Location']))
         #self.assertRedirects(r, reverse('new_paper_status'))
+
+class PapersEditTest(TestCase):
+
+    def setUp(self):
+        #Create and login test user.
+        self.user = User.objects.create_user('test', 'test@example.com', 'test')
+        self.client.login(username = 'test', password = 'test')
+
+        #Create a new paper entry with associated file.
+        upload_filename = 'blank.pdf'
+        self.data = {'user': self.user, 'title': 'Test Title', 'url':
+                'http://example.com', 'journal': 'Journal of Test', 'year':
+                '2011', 'volume': '1', 'authors': 
+                "Author One\nAuthor Two\nAuthor Three", 'issue': '2', 'pages':
+                '3-4', 'file': upload_filename }
+
+        self.p = Paper(**self.data) #unpack dictionary to arguments
+        self.p.save()
+
+        #Now let's copy the dummy upload file from the test files location path
+        #to the uploaded file location
+        to_path = os.path.join(settings.UPLOAD_ROOT, self.p.user.username, self.p.hash)
+        from_path = os.path.join(settings.SITE_ROOT, 'papers', 'tests',
+                                 'files')
+        os.makedirs(to_path, mode = 0755)
+        shutil.copy2(os.path.join(from_path, upload_filename), to_path)
+        self.uploaded_file = os.path.join(to_path, upload_filename)
+
+    def tearDown(self):
+        #Remove dummy uploaded file
+        os.unlink(self.uploaded_file)
+
+    def test_resave_form_no_upload(self):
+        '''
+        Resave the form without re-uploading a file.
+        '''
+        #Change the data slightly so that we can verify that the update occurred.
+        data = self.data.copy()
+        data['title'] = 'Test Title 2'
+        r = self.client.post(reverse('papers_edit', args=[self.p.local_id]), data)
+        self.assertRedirects(r, reverse('papers_view', args=[self.p.local_id]))
+
+        #Verify that the update did in-fact occur. Need to first refresh our 
+        #object though.
+        self.p = Paper.objects.get(pk = self.p.pk)
+        self.assertEqual(self.p.title, data['title'])
+
 
 class DashboardViewTest(TestCase):
 
