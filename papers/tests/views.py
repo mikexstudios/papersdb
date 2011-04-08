@@ -122,13 +122,10 @@ class PapersEditTest(TestCase):
         self.uploaded_file = os.path.join(to_path, upload_filename)
 
     def tearDown(self):
-        #Remove dummy uploaded file (if exists). Some tests replace the originally
-        #uploaded file, so we don't expect the originally uploaded file to
-        #necessarily exist.
-        try:
-            os.unlink(self.uploaded_file)
-        except OSError:
-            pass
+        #Remove the hash directory created by the new paper including any files
+        #in there (such as uploaded files).
+        path = os.path.join(settings.UPLOAD_ROOT, self.p.user.username, self.p.hash)
+        shutil.rmtree(path)
 
     def test_resave_form_no_upload(self):
         '''
@@ -178,9 +175,6 @@ class PapersEditTest(TestCase):
         path = os.path.join(settings.UPLOAD_ROOT, self.p.user.username, self.p.hash,
                 self.p.file)
         self.assertTrue(os.path.exists(path))
-
-        #Cleanup: Delete the newly uploaded file
-        os.unlink(path)
 
 
 
