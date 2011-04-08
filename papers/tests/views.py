@@ -24,7 +24,10 @@ class AddPaperManualViewTest(TestCase):
         self.client.login(username = 'test', password = 'test')
 
     def tearDown(self):
-        pass
+        #Remove the user's upload directory recursively. This also gets rid of 
+        #any test uploads.
+        path = os.path.join(settings.UPLOAD_ROOT, self.user.username)
+        shutil.rmtree(path)
 
     def test_valid_form_manual(self):
         '''
@@ -68,8 +71,6 @@ class AddPaperManualViewTest(TestCase):
         path = os.path.join(settings.UPLOAD_ROOT, p.user.username, p.hash, p.file)
         self.assertTrue(os.path.exists(path))
 
-        #TODO: Remove uploaded file.
-
 
 
 class AddPaperAutoViewTest(TestCase):
@@ -80,8 +81,10 @@ class AddPaperAutoViewTest(TestCase):
         self.client.login(username = 'test', password = 'test')
 
     def tearDown(self):
-        #TODO: Remove the sample uploaded file.
-        pass
+        #Remove the user's upload directory recursively. This also gets rid of 
+        #any test uploads.
+        path = os.path.join(settings.UPLOAD_ROOT, self.user.username)
+        shutil.rmtree(path)
 
     def test_valid_import_url_form(self):
         '''
@@ -122,9 +125,9 @@ class PapersEditTest(TestCase):
         self.uploaded_file = os.path.join(to_path, upload_filename)
 
     def tearDown(self):
-        #Remove the hash directory created by the new paper including any files
-        #in there (such as uploaded files).
-        path = os.path.join(settings.UPLOAD_ROOT, self.p.user.username, self.p.hash)
+        #Remove the user's upload directory recursively. This also gets rid of 
+        #any test uploads.
+        path = os.path.join(settings.UPLOAD_ROOT, self.user.username)
         shutil.rmtree(path)
 
     def test_resave_form_no_upload(self):
@@ -195,7 +198,10 @@ class DashboardViewTest(TestCase):
         p.save()
 
     def tearDown(self):
-        pass
+        #Remove the user's upload directory recursively. This also gets rid of 
+        #any test uploads.
+        path = os.path.join(settings.UPLOAD_ROOT, self.user.username)
+        shutil.rmtree(path)
 
     def test_that_paper_is_listed(self):
         '''
@@ -225,6 +231,11 @@ class DashboardViewTest(TestCase):
         r = self.client.get('/dashboard/', {})
         self.assertNotContains(r, data['title'])
 
+        #Remove the second user's upload directory recursively. This also gets
+        #rid of any test uploads.
+        path = os.path.join(settings.UPLOAD_ROOT, second_user.username)
+        shutil.rmtree(path)
+
 
 class AccountsRegisterTest(TestCase):
 
@@ -245,3 +256,8 @@ class AccountsRegisterTest(TestCase):
 
         path = os.path.join(settings.UPLOAD_ROOT, new_user.username)
         self.assertTrue(os.path.exists(path))
+
+        #Remove the user's upload directory recursively. This also gets rid of 
+        #any test uploads.
+        path = os.path.join(settings.UPLOAD_ROOT, new_user.username)
+        shutil.rmtree(path)
