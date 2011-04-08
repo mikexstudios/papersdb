@@ -24,7 +24,6 @@ class AddPaperManualViewTest(TestCase):
         self.client.login(username = 'test', password = 'test')
 
     def tearDown(self):
-        #TODO: Remove the sample uploaded file.
         pass
 
     def test_valid_form_manual(self):
@@ -70,6 +69,7 @@ class AddPaperManualViewTest(TestCase):
         self.assertTrue(os.path.exists(path))
 
         #TODO: Remove uploaded file.
+
 
 
 class AddPaperAutoViewTest(TestCase):
@@ -122,8 +122,13 @@ class PapersEditTest(TestCase):
         self.uploaded_file = os.path.join(to_path, upload_filename)
 
     def tearDown(self):
-        #Remove dummy uploaded file
-        os.unlink(self.uploaded_file)
+        #Remove dummy uploaded file (if exists). Some tests replace the originally
+        #uploaded file, so we don't expect the originally uploaded file to
+        #necessarily exist.
+        try:
+            os.unlink(self.uploaded_file)
+        except OSError:
+            pass
 
     def test_resave_form_no_upload(self):
         '''
@@ -139,6 +144,41 @@ class PapersEditTest(TestCase):
         #object though.
         self.p = Paper.objects.get(pk = self.p.pk)
         self.assertEqual(self.p.title, data['title'])
+
+    def test_resave_form_with_upload(self):
+        '''
+        Test resaving when the only thing that changes is uploading a new file.
+        The expected behavior is that the existing file is deleted and the new
+        file is copied to the paper directory.
+        '''
+        #This is a dummy blank pdf that's different from the dummy PDF file
+        #tha we already used.
+        upload_filename = 'blank2.pdf'
+        from_path = os.path.join(settings.SITE_ROOT, 'papers', 'tests',
+                                 'files')
+        new_uploaded_file = os.path.join(from_path, upload_filename)
+        f = open(os.path.join(from_path, upload_filename), 'rb')
+        data = self.data.copy()
+        data['file'] = f
+
+        r = self.client.post(reverse('papers_edit', args=[self.p.local_id]), data)
+        self.assertRedirects(r, reverse('papers_view', args=[self.p.local_id]))
+        f.close()
+
+        #Verify that the old uploaded file was deleted from the upload path.
+        self.assertFalse(os.path.exists(self.uploaded_file))
+
+        #Verify that the update did in-fact occur. Need to first refresh our 
+        #object though.
+        self.p = Paper.objects.get(pk = self.p.pk)
+        self.assertEqual(self.p.file, upload_filename)
+
+        #Verify that the new uploaded file exists
+        self.assertTrue(os.path.exists(new_uploaded_file))
+
+        #Cleanup: Delete the newly uploaded file
+        os.unlink(new_uploaded_file)
+
 
 
 class DashboardViewTest(TestCase):
