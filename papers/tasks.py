@@ -101,5 +101,6 @@ def generate_paper_thumbnail(paper):
 
     #Everything is good! Set flag to indicate that thumbnail has been generated!
     paper.has_thumbnail = True
+    paper.save()
     return True
 
