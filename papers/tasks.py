@@ -93,7 +93,7 @@ def generate_paper_thumbnail(paper):
                                            'thumbnail': thumbnail_file})
     output = Popen(command, stdout=PIPE, shell=True,
              close_fds=True).stdout.read()
-    print output
+    #print output
 
     #Verify that the thumbnail exists
     if not os.path.exists(thumbnail_file):

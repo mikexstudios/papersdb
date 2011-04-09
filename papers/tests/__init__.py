@@ -6,3 +6,6 @@ from papers.tests.forms import *
 
 #Test views.
 from papers.tests.views import *
+
+#Test tasks.
+from papers.tests.tasks import *
