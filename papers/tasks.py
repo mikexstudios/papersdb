@@ -18,7 +18,7 @@ def add(x, y):
 def import_paper_url(url):
     '''
     Given a url, calls external program to obtain citation information. If
-    successful, will parse citation information and returned a structured
+    successful, will parse citation information and return a structured
     format.
     '''
     parser = os.path.join(settings.PARSER_PATH, 'driver.tcl')
@@ -70,3 +70,36 @@ def import_paper_url(url):
     citation['pages'] = citation['pages'].strip('- ')
     
     return citation
+
+@task
+def generate_paper_thumbnail(paper):
+    '''
+    Given a Paper with an associated uploaded file, will call imagemagick on the
+    file to generate a thumbnail of it.
+    '''
+    #Make sure that the paper has an associated uploaded file
+    if not paper.file:
+        return False
+
+    #Make sure that the file exists
+    paper_dir = os.path.join(settings.UPLOAD_ROOT, paper.user.username, paper.hash)
+    paper_file = os.path.join(paper_dir, paper.file)
+    if not os.path.exists(paper_file):
+        return False
+
+    #Generate the thumbnail
+    thumbnail_file = os.path.join(paper_dir, settings.THUMBNAIL_FILENAME % paper.hash)
+    command = settings.IMAGEMAGICK_CMD % ({'document': paper_file, 
+                                           'thumbnail': thumbnail_file})
+    output = Popen(command, stdout=PIPE, shell=True,
+             close_fds=True).stdout.read()
+    print output
+
+    #Verify that the thumbnail exists
+    if not os.path.exists(thumbnail_file):
+        return False
+
+    #Everything is good! Set flag to indicate that thumbnail has been generated!
+    paper.has_thumbnail = True
+    return True
+
