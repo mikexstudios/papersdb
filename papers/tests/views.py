@@ -19,6 +19,9 @@ import shutil #for copy2
 class AddPaperManualViewTest(TestCase):
 
     def setUp(self):
+        #Bypass the celery daemon and directly test synchronously.
+        settings.CELERY_ALWAYS_EAGER = True
+
         #Create and login test user.
         self.user = User.objects.create_user('test', 'test@example.com', 'test')
         self.client.login(username = 'test', password = 'test')
@@ -68,14 +71,23 @@ class AddPaperManualViewTest(TestCase):
 
         #Check that the file was saved to disk with format:
         #/<upload files location>/username/<hash>/filename.ext
-        path = os.path.join(settings.UPLOAD_ROOT, p.user.username, p.hash, p.file)
-        self.assertTrue(os.path.exists(path))
+        paper_dir = os.path.join(settings.UPLOAD_ROOT, p.user.username, p.hash)
+        paper_file = os.path.join(paper_dir, p.file)
+        self.assertTrue(os.path.exists(paper_file))
 
+        #Check that thumbnail was generated
+        #NOTE: We don't need to delay this since during tests, async tasks execute
+        #      as sync.
+        thumbnail_file = os.path.join(paper_dir, settings.THUMBNAIL_FILENAME % p.hash)
+        self.assertTrue(os.path.exists(thumbnail_file))
 
 
 class AddPaperAutoViewTest(TestCase):
 
     def setUp(self):
+        #Bypass the celery daemon and directly test synchronously.
+        settings.CELERY_ALWAYS_EAGER = True
+
         #Create and login test user.
         self.user = User.objects.create_user('test', 'test@example.com', 'test')
         self.client.login(username = 'test', password = 'test')
@@ -100,6 +112,9 @@ class AddPaperAutoViewTest(TestCase):
 class PapersEditTest(TestCase):
 
     def setUp(self):
+        #Bypass the celery daemon and directly test synchronously.
+        settings.CELERY_ALWAYS_EAGER = True
+
         #Create and login test user.
         self.user = User.objects.create_user('test', 'test@example.com', 'test')
         self.client.login(username = 'test', password = 'test')
@@ -123,6 +138,9 @@ class PapersEditTest(TestCase):
         os.makedirs(to_path, mode = 0755)
         shutil.copy2(os.path.join(from_path, upload_filename), to_path)
         self.uploaded_file = os.path.join(to_path, upload_filename)
+
+        #Generate thumbnail for the uploaded file
+        self.p.generate_thumbnail()
 
     def tearDown(self):
         #Remove the user's upload directory recursively. This also gets rid of 
@@ -175,9 +193,15 @@ class PapersEditTest(TestCase):
 
         #Verify that the new uploaded file exists
         #/<upload files location>/username/<hash>/filename.ext
-        path = os.path.join(settings.UPLOAD_ROOT, self.p.user.username, self.p.hash,
-                self.p.file)
-        self.assertTrue(os.path.exists(path))
+        paper_dir = os.path.join(settings.UPLOAD_ROOT, self.p.user.username, self.p.hash)
+        paper_file = os.path.join(paper_dir, self.p.file)
+        self.assertTrue(os.path.exists(paper_file))
+
+        #Check that thumbnail was generated
+        #NOTE: We don't need to delay this since during tests, async tasks execute
+        #      as sync.
+        thumbnail_file = os.path.join(paper_dir, settings.THUMBNAIL_FILENAME % self.p.hash)
+        self.assertTrue(os.path.exists(thumbnail_file))
 
 
 

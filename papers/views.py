@@ -106,6 +106,10 @@ def new_paper_manual(request, task_id = None):
                 p.file = data['file'].name
                 p.save()
 
+                #Call paper thumbnail generation task. Returns the AsyncResult
+                #object, which was don't use here.
+                #p.generate_thumbnail()
+
             #Redirect to dashboard.
             messages.success(request, 'Paper was successfully added.')
             return redirect('dashboard')
@@ -189,17 +193,17 @@ def papers_edit(request, paper_id):
             data = form.cleaned_data
             #print data
 
-            #TODO: Delete old file when new one is uploaded. Better yet, allow
-            #      multiple files per paper.
             #NOTE: Checking for unicode type is an ugly hack.
             if data['file'] and type(data['file']) != unicode:
                 path = os.path.join(settings.UPLOAD_ROOT, request.user.username,
                         p.hash)
 
-                #If there is an existing file, delete that first.
+                #If there is an existing file, delete that first. Also delete
+                #the associated thumbnail.
                 if p_file:
                     try:
                         os.unlink(os.path.join(path, p_file))
+                        os.unlink(os.path.join(path, settings.THUMBNAIL_FILENAME % p.hash))
                     except OSError:
                         #The file is already missing.
                         pass
@@ -208,7 +212,12 @@ def papers_edit(request, paper_id):
                 save_uploaded_file(data['file'], path)
 
                 form.file = data['file'].name
-                #p.save()
+                p = form.save() #save first so that we can generate thumbnail
+
+                #Call paper thumbnail generation task. Returns the AsyncResult
+                #object, which was don't use here.
+                #p.generate_thumbnail()
+
 
             form.save()
 
