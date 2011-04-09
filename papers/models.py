@@ -32,6 +32,7 @@ class Paper(models.Model):
     
     #Longest valid filename roughly around 300 characters.
     file = models.CharField(blank = True, max_length = 305) 
+    has_thumbnail = models.BooleanField(default = False)
 
     def __unicode__(self):
         return '%s' % self.id
