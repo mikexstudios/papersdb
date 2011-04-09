@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 #from django_extend_model.utils import decorator as extend_model
 
 from .helpers import random_md5
+import papers.tasks as tasks
+
 
 #import datetime
 
@@ -36,6 +38,19 @@ class Paper(models.Model):
 
     def __unicode__(self):
         return '%s' % self.id
+
+    def generate_thumbnail(self):
+        '''
+        Calls thumbnail generation task on uploaded file, if exists.
+
+        @return AsyncResult object from celery.
+        '''
+        if not file:
+            return False
+
+        #This task will automatically set has_thumbnail to True if successful.
+        r = tasks.generate_paper_thumbnail(self)
+        return r
 
     def save(self, *args, **kwargs):
         '''
