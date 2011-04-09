@@ -186,7 +186,7 @@ UPLOAD_URL = MEDIA_URL + 'papers'
 PARSER_PATH = ''
 
 #ImageMagick command (put in %(document)s and $(thumbnail)s):
-IMAGEMAGICK_CMD = "convert -colorspace rgb %(document)s[0] -resize '100' " +\
+IMAGEMAGICK_CMD = "convert -colorspace rgb %(document)s[0] -resize '180' " +\
                   "%(thumbnail)s"
 #The format describing the thumbnail filename. Use '%s' to insert the hash.
 THUMBNAIL_FILENAME = 'thumb_%s.png'
