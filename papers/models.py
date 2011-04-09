@@ -45,7 +45,7 @@ class Paper(models.Model):
 
         @return AsyncResult object from celery.
         '''
-        if not file:
+        if not self.file:
             return False
 
         #This task will automatically set has_thumbnail to True if successful.
