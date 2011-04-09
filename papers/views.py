@@ -108,7 +108,7 @@ def new_paper_manual(request, task_id = None):
 
                 #Call paper thumbnail generation task. Returns the AsyncResult
                 #object, which was don't use here.
-                #p.generate_thumbnail()
+                p.generate_thumbnail()
 
             #Redirect to dashboard.
             messages.success(request, 'Paper was successfully added.')
@@ -216,7 +216,7 @@ def papers_edit(request, paper_id):
 
                 #Call paper thumbnail generation task. Returns the AsyncResult
                 #object, which was don't use here.
-                #p.generate_thumbnail()
+                p.generate_thumbnail()
 
 
             form.save()
