@@ -61,6 +61,10 @@ class GenerateThumbnailTest(TestCase):
         r = generate_paper_thumbnail.delay(self.p)
         self.assertTrue(r.get()) #wait until task is done and get result
 
+        #Refresh paper object
+        self.p = Paper.objects.get(pk = self.p.pk)
+        self.assertTrue(self.p.has_thumbnail)
+
         paper_dir = os.path.join(settings.UPLOAD_ROOT, self.p.user.username, self.p.hash)
         thumbnail_file = os.path.join(paper_dir, settings.THUMBNAIL_FILENAME % self.p.hash)
         self.assertTrue(os.path.exists(thumbnail_file))
