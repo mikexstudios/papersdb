@@ -26,7 +26,11 @@
 
 <div id="thumbnail">
     <a href="{% quickview paper %}" target="_blank">
-        <img src="{{ MEDIA_URL }}images/placeholder.png" width=180 class="placeholder" />
+        {% if paper.has_thumbnail %}
+        <img src="{% thumbnailurl paper %}" width="180" class="paper" />
+        {% else %}
+        <img src="{{ MEDIA_URL }}images/placeholder.png" width="180" class="placeholder" />
+        {% endif %}
     </a>
 </div>
 
