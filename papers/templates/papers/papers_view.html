@@ -25,13 +25,21 @@
 <div id="title">{{ paper.title }}</div>
 
 <div id="thumbnail">
+    {% if paper.has_thumbnail %}
     <a href="{% quickview paper %}" target="_blank">
-        {% if paper.has_thumbnail %}
         <img src="{% thumbnailurl paper %}" width="180" class="paper" />
+    </a>
+    {% else %}
+    {# If the paper does not have thumbnail but has the file, then the #}
+    {# thumbnail is in the process of generating and we show a placeholder. #}
+        {% if paper.file %}
+        <a href="{% quickview paper %}" target="_blank">
+            <img src="{{ MEDIA_URL }}images/paper-generate.gif" width="180" class="generating" />
+        </a>
         {% else %}
         <img src="{{ MEDIA_URL }}images/placeholder.png" width="180" class="placeholder" />
         {% endif %}
-    </a>
+    {% endif %}
 </div>
 
 <div id="paper_info">
