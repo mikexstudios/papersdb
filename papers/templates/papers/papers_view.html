@@ -37,7 +37,7 @@
             <img src="{{ MEDIA_URL }}images/paper-generate.gif" width="180" class="generating" />
         </a>
         {% else %}
-        <img src="{{ MEDIA_URL }}images/placeholder.png" width="180" class="placeholder" />
+        <a href="{% url papers_edit paper.local_id %}#upload"><img src="{{ MEDIA_URL }}images/placeholder.png" width="180" class="placeholder" /></a>
         {% endif %}
     {% endif %}
 </div>
