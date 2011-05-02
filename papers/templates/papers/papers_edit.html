@@ -97,13 +97,19 @@
     <div id="upload" class="field">
         <label for="id_file" class="optional">File</label> 
         <div class="right">
+            {% if paper.file %}
             <div class="uploaded">
                 <a href="{% paperurl paper %}">{{ paper.file }}</a> 
                 <small>(<a href="{% quickview paper %}" target="_blank">quickview</a>)</small>
             </div>
+            {% endif %}
             {{ form.file.errors }}
             {{ form.file }}
+            {% if paper.file %}
             <small class="helper">Replace the existing file by selecting and uploading a new document.</small>
+            {% else %}
+            <small class="helper">Select and upload the file that is associated with this paper.</small>
+            {% endif %}
         </div>
     </div>
 
