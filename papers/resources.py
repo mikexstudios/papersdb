@@ -7,25 +7,31 @@ from papers import models
 class Paper(Resource):
 
     @action
-    def index(self, sort_by = '-added'):
+    def index(self):
+        #NOTE: This sorting code is all hackish. Let's nuke it sometime and start
+        #      all over.
+        sort_by = self.request.GET.get('sort_by', '-added')
+
         SORT_KEYS = ('added', 'year', 'journal')
         #We want to set the state before modifying the sort_by variable.
-        self.sort_current = sort_by[1:] if sort_by[1:] in SORT_KEYS else 'added'
+        self.sort_current = sort_by[1:] if sort_by[0] == '-' else sort_by #remove the '-' in front
+        self.sort_current = self.sort_current if self.sort_current in SORT_KEYS else 'added'
         self.sort_state = {
                 #By default, we sort by '-added'.
-                'added': '+' if sort_by == '-added' else '-', # earliest to latest
-                'year': '+' if sort_by == '-year' else '-', #latest to earliest
-                'journal': '-' if sort_by == '+journal' else '+', #a to z
+                #NOTE: Because the '+' character in urls is not interpreted, we
+                #      assume '' to be '+' behavior.
+                'added': '' if sort_by == '-added' else '-', # earliest to latest
+                'year': '' if sort_by == '-year' else '-', #latest to earliest
+                'journal': '-' if sort_by == 'journal' else '', #a to z
                 }
 
-        if sort_by[1:] in SORT_KEYS: #get rid of initial +/-
+        if self.sort_current in SORT_KEYS: #get rid of initial +/-
             #We don't actually have a field called 'added' in our model. The
             #corresponding field is 'created'. So we map it here.
+            if sort_by == 'added':
+                sort_by = 'created'
             if sort_by[1:] == 'added':
                 sort_by = '%s%s' % (sort_by[0], 'created')
-            #order_by cannot accept '+field', it must be 'field'
-            if sort_by[0] == '+':
-                sort_by = sort_by[1:]
             p = models.Paper.objects.filter(user = self.request.user).order_by(sort_by)
         else:
             #Get papers (latest first)

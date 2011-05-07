@@ -44,7 +44,7 @@ def pm_to_arrow(val):
     Given a '+' or '-' string, returns an unicode up arrow for + and down arrow
     for '-'.
     '''
-    if val == '+':
+    if val == '+' or val == '':
         return mark_safe('&uarr;')
     elif val == '-':
         return mark_safe('&darr;')
