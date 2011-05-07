@@ -11,9 +11,15 @@ urlpatterns = patterns('',
     (r'^', include('papers.urls')),
 
     (r'^papers/', resources('papers.resources.Paper', name='Paper')),
-    url(r'^papers/create/status/([-\w]+)/', 'papers.resources.Paper', 
+    url(r'^papers/create/status/([-\w]+)/$', 'papers.resources.Paper', 
         kwargs = {'action': 'create_status'},
         name='Paper#create_status'),
+    url(r'^papers/new/manual/$', 'papers.resources.Paper', 
+        kwargs = {'action': 'new_manual'},
+        name='Paper#new_manual'),
+    url(r'^papers/new/manual/([-\w]+)/$', 'papers.resources.Paper', 
+        kwargs = {'action': 'new_manual'},
+        name='Paper#new_manual'),
 
 
     #Override for simple backend to redirect user to overview page on successful

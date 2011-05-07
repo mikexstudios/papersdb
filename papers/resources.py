@@ -50,6 +50,24 @@ class Paper(Resource):
         self.form = forms.ImportURLForm()
 
     @action
+    def new_manual(self, task_id = None):
+        POST = self.request.POST.copy() #because it is immutable
+
+        #If task_id is specified, get the result and merge it into request.POST.
+        if task_id:
+            result = tasks.import_paper_url.AsyncResult(task_id)
+            if result.ready() and result.successful():
+                data = result.result
+                #In-place merge of data into post array. Will overwrite any existing
+                #conflicting POST data.
+                POST.update(data)
+
+        if task_id:
+            self.form = forms.PaperForm(POST)
+        else:
+            self.form = forms.PaperForm()
+
+    @action
     def create(self):
         self.form = forms.ImportURLForm(self.request.POST)
         if self.form.is_valid():
