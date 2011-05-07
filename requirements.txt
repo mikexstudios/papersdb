@@ -43,3 +43,6 @@ django-kombu
 
 #For django admin docs
 #docutils
+
+#Rails-style resources for django
+-e git://github.com/zacharyvoase/dagny.git#egg=dagny

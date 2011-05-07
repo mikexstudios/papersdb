@@ -1,0 +1,81 @@
+{% extends "papers/app_base.html" %}
+{% load split %}
+{% load papers %}
+{% block bodyid %}dashboard{% endblock %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //10 sec delay.
+            $('#messages').delay(10000).fadeOut('slow');
+        });
+    </script>
+{% endblock %}
+
+{% block sitenav %}{% endblock %}
+
+{% block left-menu-all %}selected{% endblock %}
+
+{% block subcontent %}
+<div id="actionsbar">
+    Select: <a href="">All</a>, <a href="">None</a> | 
+    <strong>Sort by:</strong> 
+    <a href="{% url Paper#index %}?sort_by={{ self.sort_state.added|add:'added' }}">Date Added{% if self.sort_current == 'added' %}{{ self.sort_state.added|pm_to_arrow }}{% endif %}</a>,
+    <a href="{% url Paper#index %}?sort_by={{ self.sort_state.year|add:'year' }}">Year{% if self.sort_current == 'year' %}{{ self.sort_state.year|pm_to_arrow }}{% endif %}</a>, 
+    <a href="{% url Paper#index %}?sort_by={{ self.sort_state.journal|add:'journal' }}">Journal{% if self.sort_current == 'journal' %}{{ self.sort_state.journal|pm_to_arrow }}{% endif %}</a> 
+</div>
+
+<table id="library-tbl">
+<tbody>
+    {% for p in self.papers %}
+    <tr class="{% cycle 'odd' 'even' %}">
+        <td class="left">
+            <input type="checkbox" name="ch[]" value="{{ p.id }}" />
+        </td>
+        <td class="middle">
+            <div class="title"><a href="{% url papers_view  p.local_id %}">{{ p.title }}</a></div>
+            <div class="authors">
+                {% for a in p.authors|splitlines %}
+                {{ a }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </div>
+            <div class="journal">{{ p.journal }}</div>
+            <div class="year">{% if p.year %}({{ p.year }}){% endif %}</div>
+        </td>
+        <td class="right">
+            <div class="year">{{ p.year|default:'' }}</div>
+            <ul class="actions">
+                {% if p.file %}
+                <li><a href="{% quickview p %}" target="_blank">Quick View</a></li>
+                <li><a href="{% paperurl p %}">Download</a></li>
+                {% else %}
+                <li><a href="" class="upload">Upload</a></li>
+                {% endif %}
+            </ul>
+        </td>
+    </tr>
+    {% empty %}
+    <tr class="empty">
+        <td>No papers in your library yet! Get started by <strong>
+        <a href="{% url new_paper %}">adding a new paper &rarr;</a></strong></td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+
+<div id="pagesbar">
+    <div class="entries">
+        <strong>1 - 10</strong> of <strong>500</strong>
+    </div>
+    <div class="nav">
+        next &rarr;
+    </div>
+    <div class="pages">
+        Page 1 2 3 4 5 ... 9 10 Last
+    </div>
+</div>
+{% endblock %}
+

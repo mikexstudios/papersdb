@@ -21,7 +21,7 @@ urlpatterns = patterns('papers.views',
     url(r'^papers/(\d+)/edit/$', 'papers_edit', name='papers_edit'),
 )
 
-urlpatterns += patterns('',
-    url(r'^papers/$', 'django.views.generic.simple.redirect_to', 
-                        {'url': '/dashboard/', 'permanent': False}),
-)
+#urlpatterns += patterns('',
+#    url(r'^papers/$', 'django.views.generic.simple.redirect_to', 
+#                        {'url': '/dashboard/', 'permanent': False}),
+#)

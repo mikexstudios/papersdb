@@ -1,3 +1,5 @@
+from dagny.urls import resources
+
 from django.conf.urls.defaults import *
 from django.conf import settings #for MEDIA_ROOT
 
@@ -7,6 +9,9 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^', include('papers.urls')),
+
+    (r'^papers/', resources('papers.resources.Paper', name='Paper')),
+
 
     #Override for simple backend to redirect user to overview page on successful
     #registration.
