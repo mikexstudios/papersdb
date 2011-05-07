@@ -53,7 +53,7 @@ class Paper(Resource):
     def create(self):
         self.form = forms.ImportURLForm(self.request.POST)
         if self.form.is_valid():
-            data = form.cleaned_data
+            data = self.form.cleaned_data
             #print data
 
             #Get paper citation information in the background. Return the
@@ -62,9 +62,13 @@ class Paper(Resource):
             task_id = result.task_id
             
             #Redirect to status.
-            return redirect('new_paper_status', task_id)
+            return redirect('Paper#create_status', task_id)
         
         #The following will render the page that create was called from. This will
         #display the original form with errors.
         return self.new.render()
 
+
+    @action
+    def create_status(self, task_id):
+        self.task_id = task_id
