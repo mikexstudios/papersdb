@@ -2,6 +2,7 @@ from dagny import Resource, action
 
 from django.conf import settings
 from papers import models
+from django.shortcuts import redirect, get_object_or_404
 
 
 class Paper(Resource):
@@ -39,3 +40,7 @@ class Paper(Resource):
         
         #Set output variables
         self.papers = p
+
+    @action
+    def show(self, paper_id):
+        self.paper = get_object_or_404(models.Paper, user = self.request.user, local_id = paper_id)

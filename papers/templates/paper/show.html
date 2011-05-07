@@ -1,0 +1,85 @@
+{% extends "paper/app_base.html" %}
+{% load split %}
+{% load papers %}
+{% block bodyid %}papers_view{% endblock %}
+
+{% block title %}View Paper{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //10 sec delay.
+            $('#messages').delay(10000).fadeOut('slow');
+
+        });
+    </script>
+{% endblock %}
+
+{% block sitenav %}{% endblock %}
+
+{% block subcontent %}
+
+<div id="back"><a href="{% url Paper#index %}">&larr; Back to all papers</a></div>
+
+<div id="title">{{ self.paper.title }}</div>
+
+<div id="thumbnail">
+    {% if self.paper.has_thumbnail %}
+    <a href="{% quickview self.paper %}" target="_blank">
+        <img src="{% thumbnailurl self.paper %}" width="180" class="paper" />
+    </a>
+    {% else %}
+    {# If the paper does not have thumbnail but has the file, then the #}
+    {# thumbnail is in the process of generating and we show a placeholder. #}
+        {% if self.paper.file %}
+        <a href="{% quickview self.paper %}" target="_blank">
+            <img src="{{ MEDIA_URL }}images/paper-generate.gif" width="180" class="generating" />
+        </a>
+        {% else %}
+        <a href="{% url papers_edit self.paper.local_id %}#upload"><img src="{{ MEDIA_URL }}images/placeholder.png" width="180" class="placeholder" /></a>
+        {% endif %}
+    {% endif %}
+</div>
+
+<div id="paper_info">
+    
+    <div id="actions">
+        {% if self.paper.file %}
+        <a href="{% quickview self.paper %}" target="_blank" class="quickview">Quickview</a> |
+        <a href="{% paperurl self.paper %}" class="download">Download</a> |
+        {% else %}
+        <a href="" class="upload">Upload Paper</a> | 
+        {% endif %}
+        <a href="{% url papers_edit self.paper.local_id %}">Edit Citation</a>
+    </div>
+    
+    <dl id="information">
+        <!-- <dt class="title">Title</dt>
+        <dd class="title">{{ self.paper.title }}</dd> -->
+        <dt class="authors">Authors</dt>
+        <dd class="authors">
+            {% for a in self.paper.authors|splitlines %}
+            {{ a }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </dd>
+        <dt class="journal">Journal</dt>
+        <dd class="journal">{{ self.paper.journal }}</dd>
+        <dt class="volume">Volume</dt>
+        <dd class="volume">{{ self.paper.volume }}</dd>
+        <dt class="issue">Issue</dt>
+        <dd class="issue">{{ self.paper.issue }}</dd>
+        <dt class="pages">Pages</dt>
+        <dd class="pages">{{ self.paper.pages }}</dd>
+        <dt class="year">Year</dt>
+        <dd class="year">{{ self.paper.year }}</dd>
+        <dt class="url">URL</dt>
+        <dd class="url"><a href="{{ self.paper.url }}">{{ self.paper.url }}</a></dd>
+    </dl>
+
+    <!-- TODO: Show cite information -->
+</div>
+
+</form>
+{% endblock %}
+

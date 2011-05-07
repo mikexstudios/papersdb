@@ -36,7 +36,7 @@
             <input type="checkbox" name="ch[]" value="{{ p.id }}" />
         </td>
         <td class="middle">
-            <div class="title"><a href="{% url papers_view  p.local_id %}">{{ p.title }}</a></div>
+            <div class="title"><a href="{% url Paper#show  p.local_id %}">{{ p.title }}</a></div>
             <div class="authors">
                 {% for a in p.authors|splitlines %}
                 {{ a }}{% if not forloop.last %}, {% endif %}
