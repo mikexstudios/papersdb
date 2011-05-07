@@ -10,7 +10,7 @@ urlpatterns = patterns('papers.views',
     url(r'^dashboard/sortby/((?:\+|-)\w+)/$', 'dashboard', name='dashboard'),
 
     #url(r'^papers/(\d+)/$', 'papers_view', name='papers_view'),
-    url(r'^papers/new/$', 'new_paper_auto', name='new_paper'),
+    #url(r'^papers/new/$', 'new_paper_auto', name='new_paper'),
     #TODO: The [-\w] is a UUID. Should be more specific.
     url(r'^papers/new/status/([-\w]+)/$', 'new_paper_status', name='new_paper_status'),
     url(r'^papers/new/manual/$', 'new_paper_manual', name='new_paper_manual'),

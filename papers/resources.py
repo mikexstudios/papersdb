@@ -1,9 +1,10 @@
 from dagny import Resource, action
 
 from django.conf import settings
-from papers import models
 from django.shortcuts import redirect, get_object_or_404
 
+from papers import models
+from papers import forms
 
 class Paper(Resource):
 
@@ -44,3 +45,8 @@ class Paper(Resource):
     @action
     def show(self, paper_id):
         self.paper = get_object_or_404(models.Paper, user = self.request.user, local_id = paper_id)
+
+    @action
+    def new(self):
+        self.form = forms.ImportURLForm()
+
