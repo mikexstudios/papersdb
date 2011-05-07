@@ -119,11 +119,7 @@ def new_paper_manual(request, task_id = None):
         else:
             form = PaperForm()
 
-    #Also create the get citation form
-    import_url_form = ImportURLForm()
-
-
-    return {'form': form, 'import_url_form': import_url_form}
+    return {'form': form, }
 
 @login_required
 @render_to('papers/new_paper_auto.html')
