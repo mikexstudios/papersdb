@@ -130,7 +130,7 @@ class Paper(Resource):
         return self.new_manual.render()
 
     @action
-    @ajax_request
+    @action.deco(ajax_request)
     def import_url_poll(self, task_id):
         '''
         Given a task_id, checks database to see if Task has completed. If so,
