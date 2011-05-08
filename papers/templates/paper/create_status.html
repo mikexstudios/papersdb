@@ -23,7 +23,7 @@
             }, function(data) {
                 // Handle the new data (only called when there was a change)
                 if (data['is_done'] == true) {
-                    window.location.replace('{% url new_paper_manual self.task_id %}');
+                    window.location.replace('{% url Paper#new_manual self.task_id %}');
 
                     //.stop() prevents anything else from executing so we put
                     //this last.
@@ -33,7 +33,7 @@
             }, function() {
                 //Auto stopped. Must be something wrong with the server. Redirect
                 //to manual add.
-                window.location.replace('{% url new_paper_manual %}');
+                window.location.replace('{% url Paper#new_manual %}');
             });
             
         });
@@ -52,7 +52,7 @@
     <p>Attempting to retrieve citation information...</p>
 </div>
 
-<div id="select_manual_add" class="select_link">Or, <a href="{% url new_paper_manual %}">I would like to add the paper manually...</a></div>
+<div id="select_manual_add" class="select_link">Or, <a href="{% url Paper#new_manual %}">I would like to add the paper manually...</a></div>
 
 {% endblock %}
 

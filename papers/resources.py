@@ -2,8 +2,11 @@ from dagny import Resource, action
 
 from django.conf import settings
 from django.shortcuts import redirect, get_object_or_404
+import django.contrib.messages as messages
 
-from papers import models, forms, tasks
+from papers import models, forms, tasks, helpers
+
+import os
 
 class Paper(Resource):
 
@@ -90,3 +93,39 @@ class Paper(Resource):
     @action
     def create_status(self, task_id):
         self.task_id = task_id
+
+    @action
+    def create_manual(self):
+        self.form = forms.PaperForm(self.request.POST, self.request.FILES)
+        if self.form.is_valid():
+            data = self.form.cleaned_data
+            #print data
+            
+            p = models.Paper(user = self.request.user, title = data['title'], 
+                    authors = data['authors'], journal = data['journal'], 
+                    year = data['year'], volume = data['volume'], 
+                    issue = data['issue'], pages = data['pages'], 
+                    url = data['url'])
+            #We save first in order to have a hash automatically generated
+            p.save()
+
+            if data['file']:
+                #Save file. data.file is an UploadedFile object.
+                path = os.path.join(settings.UPLOAD_ROOT, request.user.username,
+                        p.hash)
+                helpers.save_uploaded_file(data['file'], path)
+
+                p.file = data['file'].name
+                p.save()
+
+                #Call paper thumbnail generation task. Returns the AsyncResult
+                #object, which was don't use here.
+                p.generate_thumbnail()
+
+            #Redirect to dashboard.
+            messages.success(self.request, 'Paper was successfully added.')
+            return redirect('Paper#index')
+
+        #The following will render the page that create was called from. This will
+        #display the original form with errors.
+        return self.new.render()

@@ -20,6 +20,9 @@ urlpatterns = patterns('',
     url(r'^papers/new/manual/([-\w]+)/$', 'papers.resources.Paper', 
         kwargs = {'action': 'new_manual'},
         name='Paper#new_manual'),
+    url(r'^papers/create/manual/$', 'papers.resources.Paper', 
+        kwargs = {'action': 'create_manual'},
+        name='Paper#create_manual'),
 
 
     #Override for simple backend to redirect user to overview page on successful
