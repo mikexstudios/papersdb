@@ -2,6 +2,7 @@ from dagny import Resource, action
 
 from django.conf import settings
 from django.shortcuts import redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 import django.contrib.messages as messages
 from annoying.decorators import ajax_request
 
@@ -201,3 +202,6 @@ class Paper(Resource):
 
         #Otherwise, invalid form. Re-render the edit page with form errors.
         return self.edit.render()
+
+#All pages in paper must require prior login.
+Paper = Paper._decorate(login_required)
