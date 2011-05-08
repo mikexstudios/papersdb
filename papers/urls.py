@@ -18,7 +18,7 @@ urlpatterns = patterns('papers.views',
     #url(r'^papers/import/url/$', 'papers_import_url', name='import_url'),
     #url(r'^papers/import/url/([-\w]+)/$', 'papers_import_url_poll', name='import_url_poll'),
 
-    url(r'^papers/(\d+)/edit/$', 'papers_edit', name='papers_edit'),
+    #url(r'^papers/(\d+)/edit/$', 'papers_edit', name='papers_edit'),
 )
 
 #urlpatterns += patterns('',

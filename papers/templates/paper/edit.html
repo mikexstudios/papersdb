@@ -1,0 +1,122 @@
+{% extends "paper/app_base.html" %}
+{% load papers %}
+{% block bodyid %}papers_edit{% endblock %}
+
+{% block title %}Edit Paper{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //10 sec delay.
+            $('#messages').delay(10000).fadeOut('slow');
+
+        });
+    </script>
+{% endblock %}
+
+{% block sitenav %}{% endblock %}
+
+{% block subcontent %}
+<div id="back"><a href="{% url Paper#show self.paper.local_id %}">&larr; Back to paper</a></div>
+
+<h2 id="title">Edit Paper</h2>
+
+<div id="description"></div>
+
+<form action="" method="POST" enctype="multipart/form-data"
+    name="papers_edit_form" id="papers_edit_form" class="papers">
+    {% csrf_token %}
+    <div class="field">
+        <label for="id_title">Title</label> 
+        <div class="right">
+            {{ self.form.title.errors }}
+            {{ self.form.title }}
+        </div>
+    </div>
+
+    <div class="field">
+        <label for="id_authors">Author(s)</label> 
+        <div class="right">
+            {{ self.form.authors.errors }}
+            {{ self.form.authors }}
+            <small class="helper">Enter each author on a new line. You may
+            format each name like: <strong>First Middle Last</strong> or <strong>Last,
+            First Middle</strong>.</small>
+        </div>
+    </div>
+
+    <div class="field">
+        <label for="id_journal" class="optional">Journal</label> 
+        <div class="right">
+            {{ self.form.journal.errors }}
+            {{ self.form.journal }}
+        </div>
+    </div>
+
+    <div class="field">
+        <label for="id_year" class="optional">Year</label> 
+        <div class="right">
+            {{ self.form.year.errors }}
+            {{ self.form.year }}
+        </div>
+    </div>
+
+    <div class="field">
+        <label for="id_volume" class="optional">Volume</label> 
+        <div class="right">
+            {{ self.form.volume.errors }}
+            {{ self.form.volume }}
+        </div>
+    </div>
+
+    <div class="field">
+        <label for="id_issue" class="optional">Issue</label> 
+        <div class="right">
+            {{ self.form.issue.errors }}
+            {{ self.form.issue }}
+        </div>
+    </div>
+
+    <div class="field">
+        <label for="id_pages" class="optional">Pages</label> 
+        <div class="right">
+            {{ self.form.pages.errors }}
+            {{ self.form.pages }}
+        </div>
+    </div>
+
+    <div class="field">
+        <label for="id_url" class="optional">URL</label> 
+        <div class="right">
+            {{ self.form.url.errors }}
+            {{ self.form.url }}
+        </div>
+    </div>
+
+    <div id="upload" class="field">
+        <label for="id_file" class="optional">File</label> 
+        <div class="right">
+            {% if self.paper.file %}
+            <div class="uploaded">
+                <a href="{% paperurl self.paper %}">{{ self.paper.file }}</a> 
+                <small>(<a href="{% quickview self.paper %}" target="_blank">quickview</a>)</small>
+            </div>
+            {% endif %}
+            {{ self.form.file.errors }}
+            {{ self.form.file }}
+            {% if self.paper.file %}
+            <small class="helper">Replace the existing file by selecting and uploading a new document.</small>
+            {% else %}
+            <small class="helper">Select and upload the file that is associated with this paper.</small>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="actions">
+        <button type="submit" id="papers_edit_submit" class="light" name="submit"
+            value="Submit">Save changes &raquo;</button>
+    </div>
+</form>
+{% endblock %}
+

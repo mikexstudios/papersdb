@@ -154,3 +154,8 @@ class Paper(Resource):
             #Otherwise, data is False
 
         return response
+
+    @action
+    def edit(self, paper_id):
+        self.paper = get_object_or_404(models.Paper, user = self.request.user, local_id = paper_id)
+        self.form = forms.PaperForm(instance = self.paper)
