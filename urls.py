@@ -8,24 +8,9 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    (r'^', include('papers.urls')),
 
     (r'^papers/', resources('papers.resources.Paper', name='Paper')),
-    url(r'^papers/create/status/([-\w]+)/$', 'papers.resources.Paper', 
-        kwargs = {'action': 'create_status'},
-        name='Paper#create_status'),
-    url(r'^papers/new/manual/$', 'papers.resources.Paper', 
-        kwargs = {'action': 'new_manual'},
-        name='Paper#new_manual'),
-    url(r'^papers/new/manual/([-\w]+)/$', 'papers.resources.Paper', 
-        kwargs = {'action': 'new_manual'},
-        name='Paper#new_manual'),
-    url(r'^papers/create/manual/$', 'papers.resources.Paper', 
-        kwargs = {'action': 'create_manual'},
-        name='Paper#create_manual'),
-    url(r'^papers/import/url/([-\w]+)/$', 'papers.resources.Paper', 
-        kwargs = {'action': 'import_url_poll'},
-        name='Paper#import_url_poll'),
+    (r'^papers/', include('papers.urls')), #includes additional dagny urls
 
 
     #Override for simple backend to redirect user to overview page on successful
