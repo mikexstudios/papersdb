@@ -129,7 +129,7 @@ class Paper(Resource):
 
         #The following will render the page that create was called from. This will
         #display the original form with errors.
-        return self.new.render()
+        return self.new_manual.render()
 
     @action
     @ajax_request
