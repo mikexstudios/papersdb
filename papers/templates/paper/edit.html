@@ -24,7 +24,7 @@
 
 <div id="description"></div>
 
-<form action="" method="POST" enctype="multipart/form-data"
+<form action="{% url Paper#update self.paper.local_id %}" method="POST" enctype="multipart/form-data"
     name="papers_edit_form" id="papers_edit_form" class="papers">
     {% csrf_token %}
     <div class="field">

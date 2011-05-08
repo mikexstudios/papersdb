@@ -159,3 +159,48 @@ class Paper(Resource):
     def edit(self, paper_id):
         self.paper = get_object_or_404(models.Paper, user = self.request.user, local_id = paper_id)
         self.form = forms.PaperForm(instance = self.paper)
+
+    @action
+    def update(self, paper_id):
+        self.paper = get_object_or_404(models.Paper, user = self.request.user, local_id = paper_id)
+        p_file = self.paper.file #Need to make a copy of this since the ModelForm overwrites it.
+        self.form = forms.PaperForm(self.request.POST, self.request.FILES, instance = self.paper)
+
+        if self.form.is_valid():
+            data = self.form.cleaned_data
+            #print data
+
+            #NOTE: Checking for unicode type is an ugly hack.
+            if data['file'] and type(data['file']) != unicode:
+                path = os.path.join(settings.UPLOAD_ROOT, self.request.user.username,
+                        self.paper.hash)
+
+                #If there is an existing file, delete that first. Also delete
+                #the associated thumbnail.
+                if p_file:
+                    try:
+                        os.unlink(os.path.join(path, p_file))
+                        os.unlink(os.path.join(path, settings.THUMBNAIL_FILENAME % self.paper.hash))
+                    except OSError:
+                        #The file is already missing.
+                        pass
+
+                #Save file. data.file is an UploadedFile object.
+                helpers.save_uploaded_file(data['file'], path)
+
+                self.form.file = data['file'].name
+                self.paper = self.form.save() #save first so that we can generate thumbnail
+
+                #Call paper thumbnail generation task. Returns the AsyncResult
+                #object, which was don't use here.
+                self.paper.generate_thumbnail()
+
+            self.form.save()
+
+            #Redirect to individual paper.
+            messages.success(self.request, 'Paper was successfully updated.')
+            return redirect('Paper#show', paper_id)
+
+        #The following will render the page that create was called from. This will
+        #display the original form with errors.
+        return self.edit.render()
