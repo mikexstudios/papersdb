@@ -11,7 +11,7 @@
             //10 sec delay.
             $('#messages').delay(10000).fadeOut('slow');
 
-            poll_url = '{% url import_url_poll self.task_id %}';
+            poll_url = '{% url Paper#import_url_poll self.task_id %}';
             pu = $.PeriodicalUpdater(poll_url, {
                 method: 'get',          // method; get or post
                 minTimeout: 1000,       // starting value for the timeout in milliseconds

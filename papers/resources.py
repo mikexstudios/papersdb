@@ -3,6 +3,7 @@ from dagny import Resource, action
 from django.conf import settings
 from django.shortcuts import redirect, get_object_or_404
 import django.contrib.messages as messages
+from annoying.decorators import ajax_request
 
 from papers import models, forms, tasks, helpers
 
@@ -129,3 +130,27 @@ class Paper(Resource):
         #The following will render the page that create was called from. This will
         #display the original form with errors.
         return self.new.render()
+
+    @action
+    @ajax_request
+    def import_url_poll(self, task_id):
+        '''
+        Given a task_id, checks database to see if Task has completed. If so,
+        returns parsed data from the Task.
+
+        TODO: Maybe make this a generalized URL view where any task can be checked
+        up on.
+        '''
+        #Reconstruct the task from the given id.
+        result = tasks.import_paper_url.AsyncResult(task_id)
+
+        response = {'is_done': False, 'success': False, 'data': False}
+        if result.ready():
+            response['is_done'] = True
+            if result.successful():
+                response['success'] = True
+                #NOTE: We don't make use of the returned data at the moment.
+                response['data'] = result.result
+            #Otherwise, data is False
+
+        return response
