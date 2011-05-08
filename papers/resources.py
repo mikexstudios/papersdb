@@ -86,8 +86,7 @@ class Paper(Resource):
             #Redirect to status.
             return redirect('Paper#create_status', task_id)
         
-        #The following will render the page that create was called from. This will
-        #display the original form with errors.
+        #Otherwise, invalid form. Re-render the new page with form errors.
         return self.new.render()
 
 
@@ -127,8 +126,7 @@ class Paper(Resource):
             messages.success(self.request, 'Paper was successfully added.')
             return redirect('Paper#index')
 
-        #The following will render the page that create was called from. This will
-        #display the original form with errors.
+        #Otherwise, invalid form. Re-render the new_manual page with form errors.
         return self.new_manual.render()
 
     @action
@@ -201,6 +199,5 @@ class Paper(Resource):
             messages.success(self.request, 'Paper was successfully updated.')
             return redirect('Paper#show', paper_id)
 
-        #The following will render the page that create was called from. This will
-        #display the original form with errors.
+        #Otherwise, invalid form. Re-render the edit page with form errors.
         return self.edit.render()
