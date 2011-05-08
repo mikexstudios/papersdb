@@ -3,12 +3,12 @@ from django.conf.urls.defaults import *
 
 #from .models import 
 
-urlpatterns = patterns('papers.views',
-    url(r'^$', 'home', name='home'), #default url
-)
+#urlpatterns = patterns('papers.views',
+#    url(r'^$', 'home', name='home'), #default url
+#)
 
 #Additional dagny urls:
-urlpatterns += patterns('papers.resources',
+urlpatterns = patterns('papers.resources',
     url(r'^create/status/([-\w]+)/$', 'Paper', 
         kwargs = {'action': 'create_status'},
         name='Paper#create_status'),

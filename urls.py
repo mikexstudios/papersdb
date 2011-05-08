@@ -8,6 +8,8 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^$', 'papers.views.home', name = 'home'), #default url
+
 
     (r'^papers/', resources('papers.resources.Paper', name='Paper')),
     (r'^papers/', include('papers.urls')), #includes additional dagny urls
