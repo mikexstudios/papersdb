@@ -26,7 +26,7 @@ from annoying.decorators import render_to, ajax_request
 #import datetime
 #import os
 
-@render_to('papers/home.html')
+@render_to('paper/home.html')
 def home(request):
 
     return {}
