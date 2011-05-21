@@ -17,7 +17,9 @@ import re
 
 class LoginRequiredTest(TestCase):
     '''
-    Tests that specified pages require login.
+    Tests that specified pages require login. Since we have a universal decorator
+    that automatically sets login_required on all paper/* pages, we don't need
+    to test all pages, just one of them.
     '''
 
     def setUp(self):
@@ -33,29 +35,12 @@ class LoginRequiredTest(TestCase):
         p = Paper(**self.data) #unpack dictionary to arguments
         p.save()
 
-        self.pages = (
-                '/papers/', #this is the dashboard
-
-                '/papers/new/',
-                '/papers/new/manual/',
-                #The following UUIDs are dummy ones. The view for that accepts the
-                #UUIDs cannot validate if the UUID is actually a valid task or not.
-                '/papers/create/status/9f2b02d1-5d07-4a4c-ae51-48d026a68c6e/',
-                '/papers/new/manual/9f2b02d1-5d07-4a4c-ae51-48d026a68c6e/',
-                '/papers/import/url/9f2b02d1-5d07-4a4c-ae51-48d026a68c6e/',
-
-                '/papers/%s/' % p.local_id, #individual view for paper
-                '/papers/%s/edit/' % p.local_id, 
-        )
-
-
     def tearDown(self):
         pass
 
     def test_login_required(self):
-        for p in self.pages:
-            r = self.client.get(p, {})
-            self.assertRedirects(r, '%s?next=%s' % (reverse('auth_login'), p))
+        r = self.client.get('/papers/', {})
+        self.assertRedirects(r, '%s?next=%s' % (reverse('auth_login'), '/papers/'))
 
 
 class PageExistsTest(TestCase):
