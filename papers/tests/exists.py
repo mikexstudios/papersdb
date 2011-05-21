@@ -93,7 +93,7 @@ class PageExistsTest(TestCase):
         self.assertEqual(r.status_code, 404)
 
     def test_dashboard_exists(self):
-        r = self.client.get('/dashboard/', {})
+        r = self.client.get('/papers/', {})
         self.assertEqual(r.status_code, 200)
 
     def test_papers_new_manual_exists(self):
@@ -102,23 +102,23 @@ class PageExistsTest(TestCase):
 
         #Also make sure that a form is being shown. Just check for a Title field
         #in the form. Assume if 'Title' exists, rest of the form does too.
-        self.assertTrue(re.search('Title', str(r.context['form'])))
+        self.assertTrue(re.search('Title', str(r.context['self'].form)))
 
     def test_papers_new_auto_exists(self):
         r = self.client.get('/papers/new/', {})
         self.assertEqual(r.status_code, 200)
 
         #Also make sure that a form is being shown.
-        self.assertTrue(re.search('URL', str(r.context['form'])))
+        self.assertTrue(re.search('URL', str(r.context['self'].form)))
 
     def test_papers_view_exists(self):
         r = self.client.get('/papers/%s/' % self.paper.local_id, {})
         self.assertEqual(r.status_code, 200)
 
-        self.assertEqual(r.context['paper'].title, self.paper.title) 
+        self.assertEqual(r.context['self'].paper.title, self.paper.title) 
 
     def test_papers_edit_exists(self):
         r = self.client.get('/papers/%s/edit/' % self.paper.local_id, {})
         self.assertEqual(r.status_code, 200)
 
-        self.assertTrue(re.search('Title', str(r.context['form'])))
+        self.assertTrue(re.search('Title', str(r.context['self'].form)))
