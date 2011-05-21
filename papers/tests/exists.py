@@ -34,13 +34,13 @@ class LoginRequiredTest(TestCase):
         p.save()
 
         self.pages = (
-                '/dashboard/',
+                '/papers/', #this is the dashboard
 
                 '/papers/new/',
                 '/papers/new/manual/',
                 #The following UUIDs are dummy ones. The view for that accepts the
                 #UUIDs cannot validate if the UUID is actually a valid task or not.
-                '/papers/new/status/9f2b02d1-5d07-4a4c-ae51-48d026a68c6e/',
+                '/papers/create/status/9f2b02d1-5d07-4a4c-ae51-48d026a68c6e/',
                 '/papers/new/manual/9f2b02d1-5d07-4a4c-ae51-48d026a68c6e/',
                 '/papers/import/url/9f2b02d1-5d07-4a4c-ae51-48d026a68c6e/',
 
