@@ -112,7 +112,7 @@ class Paper(Resource):
 
             if data['file']:
                 #Save file. data.file is an UploadedFile object.
-                path = os.path.join(settings.UPLOAD_ROOT, request.user.username,
+                path = os.path.join(settings.UPLOAD_ROOT, self.request.user.username,
                         p.hash)
                 helpers.save_uploaded_file(data['file'], path)
 
