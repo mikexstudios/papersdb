@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 
 #from django_extend_model.utils import decorator as extend_model
 
+from annoying.fields import AutoOneToOneField
+
 from .helpers import random_md5
 import papers.tasks as tasks
 
@@ -68,6 +70,12 @@ class Paper(models.Model):
         if self.local_id == None:
             self.local_id = self.user.profile.get_next_paper_id()
         super(Paper, self).save(*args, **kwargs)
+
+
+class Crocodoc(models.Model):
+    paper = AutoOneToOneField(Paper, primary_key = True)
+    uuid = models.CharField(max_length = 36, blank = True)
+    short_id = models.CharField(max_length = 6, blank = True) #ex. yQZpPm
 
 
 class UserProfile(models.Model):
