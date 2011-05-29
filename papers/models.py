@@ -85,7 +85,7 @@ class Paper(models.Model):
             return False
 
         #This task will automatically set has_thumbnail to True if successful.
-        r = tasks.generate_paper_thumbnail(self)
+        r = tasks.generate_paper_thumbnail.delay(self)
         return r
 
     def save(self, *args, **kwargs):
@@ -123,7 +123,7 @@ class Crocodoc(models.Model):
 
         @return AsyncResult object from task/celery.
         '''
-        r = tasks.crocodoc_upload_paper(self)
+        r = tasks.crocodoc_upload_paper.delay(self)
         return r
 
     def refresh_session_id(self):
@@ -132,7 +132,7 @@ class Crocodoc(models.Model):
 
         @return AsyncResult from task.
         '''
-        r = tasks.crocodoc_get_session_id(self)
+        r = tasks.crocodoc_get_session_id.delay(self)
         return r
 
     def url(self):
