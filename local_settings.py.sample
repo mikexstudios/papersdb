@@ -18,6 +18,12 @@ INSTALLED_APPS.append('django_autotest')
 #CiteULike parser driver.tcl path (no trailing /):
 PARSER_PATH = '/my/path/'
 
+######################
+# crocodoc settings: #
+######################
+
+CROCODOC_API_KEY = ''
+
 ##For django-debug-toolbar
 #MIDDLEWARE_CLASSES.append('debug_toolbar.middleware.DebugToolbarMiddleware')
 #INSTALLED_APPS.append('debug_toolbar')

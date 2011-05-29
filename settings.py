@@ -19,8 +19,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'development.db',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -235,6 +235,12 @@ CELERY_IMPORTS = ('papers.tasks', )
 
 #If False, new registration of accounts are closed. (default = True)
 #REGISTRATION_OPEN = False
+
+######################
+# crocodoc settings: #
+######################
+
+CROCODOC_API_KEY = ''
 
 
 #Import any local settings (ie. production environment) that will override
