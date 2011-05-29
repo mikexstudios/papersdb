@@ -162,3 +162,18 @@ def crocodoc_get_session_id(paper):
 
     return True
     
+@task
+def crocodoc_delete_uuid(uuid):
+    '''
+    Given a uuid, deletes the upload. We accept uuid instead of Paper object
+    since the Paper object may have already been deleted by the time this
+    task is called.
+    '''
+    c = crocodoc.Crocodoc(settings.CROCODOC_API_KEY)
+    r = c.delete(uuid)
+    if not r:
+        #Means that there was something wrong when deleting the file. For now,
+        #let's do nothing.
+        pass
+
+    return True
