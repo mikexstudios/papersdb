@@ -5,8 +5,9 @@ from django.contrib.auth.models import User
 #from django_extend_model.utils import decorator as extend_model
 
 from annoying.fields import AutoOneToOneField
-
 import crocodoc
+
+import os #for path
 
 from .helpers import random_md5
 import papers.tasks as tasks
@@ -73,7 +74,7 @@ class Paper(models.Model):
         '''
         if not self.file:
             return False
-        return os.path.join(self.get_file_dir, self.file)
+        return os.path.join(self.get_file_dir(), self.file)
 
     def generate_thumbnail(self):
         '''
@@ -109,7 +110,7 @@ class Paper(models.Model):
 class Crocodoc(models.Model):
     paper = AutoOneToOneField(Paper, primary_key = True)
     uuid = models.CharField(max_length = 36, blank = True)
-    short_id = models.CharField(max_length = 6, blank = True) #ex. yQZpPm
+    short_id = models.CharField(max_length = 7, blank = True) #ex. yQZpPm
     #The session_id allows viewing of privately uploaded Crocodoc documents.
     #They do not expire, but may only be accessed once. Thus, to not block
     #the request, we pre-populate the session_id for each document and then

@@ -123,10 +123,10 @@ def crocodoc_upload_paper(paper, method = 'url'):
     #      to set the document as viewable. This may slow down queue processing
     #      a bit though.
     if method == 'post': #good for local testing
-        with open(paper.get_file_path, 'r') as f:
+        with open(paper.get_file_path(), 'r') as f:
             r = c.upload(f, private = True)
     else:
-        r = c.upload(paper.get_file_url, private = True)
+        r = c.upload(paper.get_file_url(), private = True)
 
     try:
         paper.crocodoc.short_id = r['shortId']

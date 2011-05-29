@@ -107,7 +107,13 @@ class CrocodocTests(TestCase):
 
     def tearDown(self):
         #Delete the crocodoc uploaded paper
-        self.p.crocodoc.delete()
+        try:
+            self.p.crocodoc.delete()
+        except AssertionError:
+            #If we try to delete an already deleted object (like when we test
+            #delete), we need to catch this error so that the test doesn't 
+            #fail.
+            pass
 
         #Remove the user's upload directory recursively. This also gets rid of 
         #any test uploads.
@@ -125,7 +131,7 @@ class CrocodocTests(TestCase):
         r = self.p.crocodoc.upload(method = 'post')
         self.assertTrue(r.get()) #wait until task is done and get result
 
-        self.assertTrue(len(self.p.crocodoc.short_id) == 6)
+        self.assertTrue(len(self.p.crocodoc.short_id) == 7)
         self.assertTrue(len(self.p.crocodoc.uuid) == 36)
         #And that we also have a session_id
         self.assertTrue(len(self.p.crocodoc.session_id) == 15)
@@ -141,6 +147,9 @@ class CrocodocTests(TestCase):
         r = self.p.crocodoc.refresh_session_id()
         self.assertTrue(r.get())
 
+        #We have to refresh the paper object to get the new session_id
+        self.p = Paper.objects.get(pk = self.p.pk)
+
         self.assertTrue(len(self.p.crocodoc.session_id) == 15)
         self.assertTrue(old_session_id != self.p.crocodoc.session_id)
 
@@ -151,6 +160,10 @@ class CrocodocTests(TestCase):
         '''
         self.test_crocodoc_upload_paper_post()
         self.p.crocodoc.delete()
+
+        #When we delete the crocodoc object, the attributes still remain attached
+        #to the paper.crocodoc object unless we refresh it.
+        self.p = Paper.objects.get(pk = self.p.pk)
 
         self.assertTrue(len(self.p.crocodoc.short_id) == 0)
         self.assertTrue(len(self.p.crocodoc.uuid) == 0)
