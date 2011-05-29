@@ -123,17 +123,18 @@ class Crocodoc(models.Model):
 
         NOTE: Will not be called when deleting objects in bulk.
         '''
-        tasks.crocodoc_delete_uuid.delay(self.uuid)
+        if self.uuid:
+            tasks.crocodoc_delete_uuid.delay(self.uuid)
 
         super(Crocodoc, self).delete(*args, **kwargs)
 
-    def upload(self):
+    def upload(self, method = 'url'):
         '''
         Uploads the paper (via URL method) to Crocodoc by calling task.
 
         @return AsyncResult object from task/celery.
         '''
-        r = tasks.crocodoc_upload_paper.delay(self.paper)
+        r = tasks.crocodoc_upload_paper.delay(self.paper, method)
         return r
 
     def refresh_session_id(self):
