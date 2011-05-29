@@ -2,6 +2,8 @@ from django.conf import settings
 
 from celery.task import task
 
+import crocodoc
+
 #from .models import 
 
 import time
@@ -104,3 +106,51 @@ def generate_paper_thumbnail(paper):
     paper.save()
     return True
 
+
+@task
+def crocodoc_upload_paper(paper):
+    '''
+    Given a Paper with an associated uploaded file, will upload the Paper to
+    Crocodoc via the URL method.
+    '''
+    #Make sure that the paper has an associated uploaded file
+    if not paper.file:
+        return False
+
+    c = crocodoc.Crocodoc(settings.CROCODOC_API_KEY)
+    #NOTE: We do not upload in async mode since we want to immediately be able
+    #      to set the document as viewable. This may slow down queue processing
+    #      a bit though.
+    r = c.upload(paper.get_file_url, private = True)
+    try:
+        paper.crocodoc.short_id = r['shortId']
+        paper.crocodoc.uuid = r['uuid']
+        paper.crocodoc.save()
+    except KeyError, exc:
+        #Means that the document was not sucessfully uploaded or perhaps we
+        #ran into a rate limiting issue. So let's try again.
+        return upload_paper_to_crocodoc.retry(exc = exc)
+
+    #Also obtain a session_id for the document.
+    crocodoc_get_session_id(paper)
+
+    return True
+
+@task
+def crocodoc_get_session_id(paper):
+    '''
+    Given a paper with crocodoc information, obtains a session id.
+    '''
+    if not paper.file or not paper.crocodoc.uuid:
+        return False
+
+    c = crocodoc.Crocodoc(settings.CROCODOC_API_KEY)
+    r = c.get_session(paper.crocodoc.uuid)
+    try:
+        paper.crocodoc.session_id = r['sessionId']
+        paper.crocodoc.save()
+    except KeyError:
+        return False
+
+    return True
+    
