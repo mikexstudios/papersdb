@@ -47,7 +47,7 @@
     <div id="actions">
         {% if self.paper.file %}
         <a href="{% quickview self.paper %}" target="_blank" class="quickview">Quickview</a> |
-        <a href="{% paperurl self.paper %}" class="download">Download</a> |
+        <a href="{{ self.paper.get_file_url }}" class="download">Download</a> |
         {% else %}
         <a href="{% url Paper#edit self.paper.local_id %}#upload" class="upload">Upload Paper</a> | 
         {% endif %}

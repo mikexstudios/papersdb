@@ -9,6 +9,8 @@ register = template.Library()
 def paperurl(paper):
     '''
     Given a Paper object, returns the url (starting with '/') of the paper.
+
+    NOTE: This is deprecated, use Paper.get_file_url instead!
     '''
     paper_url = '%s/%s/%s/%s' % (settings.UPLOAD_URL, paper.user.username,
             paper.hash, paper.file)

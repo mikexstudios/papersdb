@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -40,6 +41,21 @@ class Paper(models.Model):
 
     def __unicode__(self):
         return '%s' % self.id
+
+    def get_file_url(self, is_absolute = False):
+        '''
+        Returns the static url (starting with /) to the associated file, if
+        exists. Otherwise, returns False. If is_absolute = True, the returns
+        the full absolute path to the file (starting with http://).
+        '''
+        if not self.file:
+            return False
+
+        url = '%s/%s/%s/%s' % (settings.UPLOAD_URL, self.user.username,
+                               self.hash, self.file)
+        if is_absolute:
+            url = 'http://%s%s' % (request.get_host(), url)
+        return url
 
     def generate_thumbnail(self):
         '''
