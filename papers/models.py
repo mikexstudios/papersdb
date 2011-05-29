@@ -76,6 +76,37 @@ class Crocodoc(models.Model):
     paper = AutoOneToOneField(Paper, primary_key = True)
     uuid = models.CharField(max_length = 36, blank = True)
     short_id = models.CharField(max_length = 6, blank = True) #ex. yQZpPm
+    #The session_id allows viewing of privately uploaded Crocodoc documents.
+    #They do not expire, but may only be accessed once. Thus, to not block
+    #the request, we pre-populate the session_id for each document and then
+    #grab and new one once the current one has been used.
+    session_id = models.CharField(max_length = 15, blank = True)
+    #is_viewable = models.BooleanField(default = False)
+
+    def upload(self):
+        '''
+        Uploads the paper (via URL method) to Crocodoc by calling task.
+
+        @return AsyncResult object from task/celery.
+        '''
+        pass
+
+    def refresh_session_id(self):
+        '''
+        Gets a new session_id by calling task.
+
+        @return AsyncResult from task.
+        '''
+        pass
+
+    def url(self):
+        '''
+        Returns a session-based url to the private document.
+        '''
+        pass
+
+    def embeddable_url(self):
+        pass
 
 
 class UserProfile(models.Model):
