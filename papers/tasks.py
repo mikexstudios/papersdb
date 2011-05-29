@@ -111,6 +111,8 @@ def crocodoc_upload_paper(paper, method = 'url'):
     '''
     Given a Paper with an associated uploaded file, will upload the Paper to
     Crocodoc via the URL method.
+
+    @param method string 'url' or 'post' depending on the upload method.
     '''
     #Make sure that the paper has an associated uploaded file
     if not paper.file:
@@ -121,7 +123,8 @@ def crocodoc_upload_paper(paper, method = 'url'):
     #      to set the document as viewable. This may slow down queue processing
     #      a bit though.
     if method == 'post': #good for local testing
-        r = c.upload(
+        with open(paper.get_file_path, 'r') as f:
+            r = c.upload(f, private = True)
     else:
         r = c.upload(paper.get_file_url, private = True)
 
