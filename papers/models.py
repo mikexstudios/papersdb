@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 
 from annoying.fields import AutoOneToOneField
 
+import crocodoc
+
 from .helpers import random_md5
 import papers.tasks as tasks
 
@@ -105,7 +107,8 @@ class Crocodoc(models.Model):
 
         @return AsyncResult object from task/celery.
         '''
-        pass
+        r = tasks.crocodoc_upload_paper(self)
+        return r
 
     def refresh_session_id(self):
         '''
@@ -113,16 +116,20 @@ class Crocodoc(models.Model):
 
         @return AsyncResult from task.
         '''
-        pass
+        r = tasks.crocodoc_get_session_id(self)
+        return r
 
     def url(self):
         '''
-        Returns a session-based url to the private document.
+        Returns a session-based url to the private document. Generates a new
+        session_id at the same time (for subsequent use).
         '''
-        pass
+        url = crocodoc.Crocodoc.session_based_viewer_url(self.session_id)
+        self.refresh_session_id()
+        return url
 
     def embeddable_url(self):
-        pass
+        return crocodoc.Crocodoc.embeddable_viewer_url(self.short_id)
 
 
 class UserProfile(models.Model):
