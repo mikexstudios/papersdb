@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from papers.models import Paper
 
 #from .helpers import 
-from papers.tasks import generate_paper_thumbnail
+from papers import tasks
 
 #from datetime import datetime, date
 
@@ -40,7 +40,7 @@ class GenerateThumbnailTest(TestCase):
 
         #Now let's copy the dummy upload file from the test files location path
         #to the uploaded file location
-        to_path = os.path.join(settings.UPLOAD_ROOT, self.p.user.username, self.p.hash)
+        to_path = self.p.get_file_dir()
         from_path = os.path.join(settings.SITE_ROOT, 'papers', 'tests',
                                  'files')
         os.makedirs(to_path, mode = 0755)
@@ -58,7 +58,7 @@ class GenerateThumbnailTest(TestCase):
         Call the generate thumbnail task on the new paper. The task should return
         True and the thumbnail should be generated.
         '''
-        r = generate_paper_thumbnail.delay(self.p)
+        r = tasks.generate_paper_thumbnail.delay(self.p)
         self.assertTrue(r.get()) #wait until task is done and get result
 
         #Refresh paper object
@@ -71,6 +71,11 @@ class GenerateThumbnailTest(TestCase):
 
 
 class CrocodocTests(TestCase):
+    '''
+    NOTE: At the same time, we end up testing some of the Crocodoc model methods.
+    It may be a good idea to just test the task here without going through the
+    Crocodoc model, but there is just so much overlap.
+    '''
 
     def setUp(self):
         #Bypass the celery daemon and directly test synchronously.
@@ -93,7 +98,7 @@ class CrocodocTests(TestCase):
 
         #Now let's copy the dummy upload file from the test files location path
         #to the uploaded file location
-        to_path = os.path.join(settings.UPLOAD_ROOT, self.p.user.username, self.p.hash)
+        to_path = self.p.get_file_dir()
         from_path = os.path.join(settings.SITE_ROOT, 'papers', 'tests',
                                  'files')
         os.makedirs(to_path, mode = 0755)
@@ -101,23 +106,51 @@ class CrocodocTests(TestCase):
         self.uploaded_file = os.path.join(to_path, upload_filename)
 
     def tearDown(self):
+        #Delete the crocodoc uploaded paper
+        self.p.crocodoc.delete()
+
         #Remove the user's upload directory recursively. This also gets rid of 
         #any test uploads.
         path = os.path.join(settings.UPLOAD_ROOT, self.user.username)
         shutil.rmtree(path)
 
-    def test_generate_thumbnail(self):
+    def test_crocodoc_upload_paper_post(self):
         '''
-        Call the generate thumbnail task on the new paper. The task should return
-        True and the thumbnail should be generated.
+        Call the upload task on the new paper. The task should return
+        True and short_id and uuid of the paper should be set.
+
+        NOTE: We are using the POST method of uploading papers because there
+        is not an easy way of testing the url method of uploading.
         '''
-        r = generate_paper_thumbnail.delay(self.p)
+        r = self.p.crocodoc.upload(method = 'post')
         self.assertTrue(r.get()) #wait until task is done and get result
 
-        #Refresh paper object
-        self.p = Paper.objects.get(pk = self.p.pk)
-        self.assertTrue(self.p.has_thumbnail)
+        self.assertTrue(len(self.p.crocodoc.short_id) == 6)
+        self.assertTrue(len(self.p.crocodoc.uuid) == 36)
+        #And that we also have a session_id
+        self.assertTrue(len(self.p.crocodoc.session_id) == 15)
 
-        paper_dir = os.path.join(settings.UPLOAD_ROOT, self.p.user.username, self.p.hash)
-        thumbnail_file = os.path.join(paper_dir, settings.THUMBNAIL_FILENAME % self.p.hash)
-        self.assertTrue(os.path.exists(thumbnail_file))
+    def test_crocodoc_get_session_id(self):
+        '''
+        Call the get_session_id task on the new paper. The task should return
+        True and the session_id should be different.
+        '''
+        self.test_crocodoc_upload_paper_post()
+        old_session_id = self.p.crocodoc.session_id
+
+        r = self.p.crocodoc.refresh_session_id()
+        self.assertTrue(r.get())
+
+        self.assertTrue(len(self.p.crocodoc.session_id) == 15)
+        self.assertTrue(old_session_id != self.p.crocodoc.session_id)
+
+    def test_crocodoc_delete(self):
+        '''
+        Call crocodoc_delete_uuid on the uploaded paper. short_id and
+        uuid should be empty.
+        '''
+        self.test_crocodoc_upload_paper_post()
+        self.p.crocodoc.delete()
+
+        self.assertTrue(len(self.p.crocodoc.short_id) == 0)
+        self.assertTrue(len(self.p.crocodoc.uuid) == 0)
