@@ -84,8 +84,7 @@ def generate_paper_thumbnail(paper):
         return False
 
     #Make sure that the file exists
-    paper_dir = os.path.join(settings.UPLOAD_ROOT, paper.user.username, paper.hash)
-    paper_file = os.path.join(paper_dir, paper.file)
+    paper_file = paper.get_file_path
     if not os.path.exists(paper_file):
         return False
 
@@ -108,7 +107,7 @@ def generate_paper_thumbnail(paper):
 
 
 @task
-def crocodoc_upload_paper(paper):
+def crocodoc_upload_paper(paper, method = 'url'):
     '''
     Given a Paper with an associated uploaded file, will upload the Paper to
     Crocodoc via the URL method.
@@ -121,7 +120,11 @@ def crocodoc_upload_paper(paper):
     #NOTE: We do not upload in async mode since we want to immediately be able
     #      to set the document as viewable. This may slow down queue processing
     #      a bit though.
-    r = c.upload(paper.get_file_url, private = True)
+    if method == 'post': #good for local testing
+        r = c.upload(
+    else:
+        r = c.upload(paper.get_file_url, private = True)
+
     try:
         paper.crocodoc.short_id = r['shortId']
         paper.crocodoc.uuid = r['uuid']
@@ -140,6 +143,8 @@ def crocodoc_upload_paper(paper):
 def crocodoc_get_session_id(paper):
     '''
     Given a paper with crocodoc information, obtains a session id.
+
+    TODO: Think about adding retry to failing session_id getting.
     '''
     if not paper.file or not paper.crocodoc.uuid:
         return False

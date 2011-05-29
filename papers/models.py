@@ -59,6 +59,15 @@ class Paper(models.Model):
             url = 'http://%s%s' % (request.get_host(), url)
         return url
 
+    def get_file_path(self):
+        '''
+        Returns the full path of the uploaded file, if exists.
+        '''
+        paper_dir = os.path.join(settings.UPLOAD_ROOT, self.user.username, 
+                                 self.hash)
+        paper_file = os.path.join(paper_dir, self.file)
+        return paper_file
+
     def generate_thumbnail(self):
         '''
         Calls thumbnail generation task on uploaded file, if exists.
