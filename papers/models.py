@@ -117,13 +117,23 @@ class Crocodoc(models.Model):
     session_id = models.CharField(max_length = 15, blank = True)
     #is_viewable = models.BooleanField(default = False)
 
+    def delete(self, *args, **kwargs):
+        '''
+        Deletes the Crocodoc upload before deleting self.
+
+        NOTE: Will not be called when deleting objects in bulk.
+        '''
+        tasks.crocodoc_delete_uuid.delay(self.uuid)
+
+        super(Crocodoc, self).delete(*args, **kwargs)
+
     def upload(self):
         '''
         Uploads the paper (via URL method) to Crocodoc by calling task.
 
         @return AsyncResult object from task/celery.
         '''
-        r = tasks.crocodoc_upload_paper.delay(self)
+        r = tasks.crocodoc_upload_paper.delay(self.paper)
         return r
 
     def refresh_session_id(self):
@@ -132,7 +142,7 @@ class Crocodoc(models.Model):
 
         @return AsyncResult from task.
         '''
-        r = tasks.crocodoc_get_session_id.delay(self)
+        r = tasks.crocodoc_get_session_id.delay(self.paper)
         return r
 
     def url(self):
