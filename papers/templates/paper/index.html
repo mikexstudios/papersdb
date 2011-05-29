@@ -1,4 +1,4 @@
-{% extends "papers/app_base.html" %}
+{% extends "paper/app_base.html" %}
 {% load split %}
 {% load papers %}
 {% block bodyid %}dashboard{% endblock %}
@@ -23,20 +23,20 @@
 <div id="actionsbar">
     Select: <a href="">All</a>, <a href="">None</a> | 
     <strong>Sort by:</strong> 
-    <a href="{% url dashboard sort_state.added|add:'added' %}">Date Added{% if sort_current == 'added' %}{{ sort_state.added|pm_to_arrow }}{% endif %}</a>,
-    <a href="{% url dashboard sort_state.year|add:'year' %}">Year{% if sort_current == 'year' %}{{ sort_state.year|pm_to_arrow }}{% endif %}</a>, 
-    <a href="{% url dashboard sort_state.journal|add:'journal' %}">Journal{% if sort_current == 'journal' %}{{ sort_state.journal|pm_to_arrow }}{% endif %}</a> 
+    <a href="{% url Paper#index %}?sort_by={{ self.sort_state.added|add:'added' }}">Date Added{% if self.sort_current == 'added' %}{{ self.sort_state.added|pm_to_arrow }}{% endif %}</a>,
+    <a href="{% url Paper#index %}?sort_by={{ self.sort_state.year|add:'year' }}">Year{% if self.sort_current == 'year' %}{{ self.sort_state.year|pm_to_arrow }}{% endif %}</a>, 
+    <a href="{% url Paper#index %}?sort_by={{ self.sort_state.journal|add:'journal' }}">Journal{% if self.sort_current == 'journal' %}{{ self.sort_state.journal|pm_to_arrow }}{% endif %}</a> 
 </div>
 
 <table id="library-tbl">
 <tbody>
-    {% for p in papers %}
+    {% for p in self.papers %}
     <tr class="{% cycle 'odd' 'even' %}">
         <td class="left">
             <input type="checkbox" name="ch[]" value="{{ p.id }}" />
         </td>
         <td class="middle">
-            <div class="title"><a href="{% url papers_view  p.local_id %}">{{ p.title }}</a></div>
+            <div class="title"><a href="{% url Paper#show  p.local_id %}">{{ p.title }}</a></div>
             <div class="authors">
                 {% for a in p.authors|splitlines %}
                 {{ a }}{% if not forloop.last %}, {% endif %}

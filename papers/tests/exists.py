@@ -17,7 +17,9 @@ import re
 
 class LoginRequiredTest(TestCase):
     '''
-    Tests that specified pages require login.
+    Tests that specified pages require login. Since we have a universal decorator
+    that automatically sets login_required on all paper/* pages, we don't need
+    to test all pages, just one of them.
     '''
 
     def setUp(self):
@@ -33,29 +35,12 @@ class LoginRequiredTest(TestCase):
         p = Paper(**self.data) #unpack dictionary to arguments
         p.save()
 
-        self.pages = (
-                '/dashboard/',
-
-                '/papers/new/',
-                '/papers/new/manual/',
-                #The following UUIDs are dummy ones. The view for that accepts the
-                #UUIDs cannot validate if the UUID is actually a valid task or not.
-                '/papers/new/status/9f2b02d1-5d07-4a4c-ae51-48d026a68c6e/',
-                '/papers/new/manual/9f2b02d1-5d07-4a4c-ae51-48d026a68c6e/',
-                '/papers/import/url/9f2b02d1-5d07-4a4c-ae51-48d026a68c6e/',
-
-                '/papers/%s/' % p.local_id, #individual view for paper
-                '/papers/%s/edit/' % p.local_id, 
-        )
-
-
     def tearDown(self):
         pass
 
     def test_login_required(self):
-        for p in self.pages:
-            r = self.client.get(p, {})
-            self.assertRedirects(r, '%s?next=%s' % (reverse('auth_login'), p))
+        r = self.client.get('/papers/', {})
+        self.assertRedirects(r, '%s?next=%s' % (reverse('auth_login'), '/papers/'))
 
 
 class PageExistsTest(TestCase):
@@ -93,7 +78,7 @@ class PageExistsTest(TestCase):
         self.assertEqual(r.status_code, 404)
 
     def test_dashboard_exists(self):
-        r = self.client.get('/dashboard/', {})
+        r = self.client.get('/papers/', {})
         self.assertEqual(r.status_code, 200)
 
     def test_papers_new_manual_exists(self):
@@ -102,23 +87,23 @@ class PageExistsTest(TestCase):
 
         #Also make sure that a form is being shown. Just check for a Title field
         #in the form. Assume if 'Title' exists, rest of the form does too.
-        self.assertTrue(re.search('Title', str(r.context['form'])))
+        self.assertTrue(re.search('Title', str(r.context['self'].form)))
 
     def test_papers_new_auto_exists(self):
         r = self.client.get('/papers/new/', {})
         self.assertEqual(r.status_code, 200)
 
         #Also make sure that a form is being shown.
-        self.assertTrue(re.search('URL', str(r.context['form'])))
+        self.assertTrue(re.search('URL', str(r.context['self'].form)))
 
     def test_papers_view_exists(self):
         r = self.client.get('/papers/%s/' % self.paper.local_id, {})
         self.assertEqual(r.status_code, 200)
 
-        self.assertEqual(r.context['paper'].title, self.paper.title) 
+        self.assertEqual(r.context['self'].paper.title, self.paper.title) 
 
     def test_papers_edit_exists(self):
         r = self.client.get('/papers/%s/edit/' % self.paper.local_id, {})
         self.assertEqual(r.status_code, 200)
 
-        self.assertTrue(re.search('Title', str(r.context['form'])))
+        self.assertTrue(re.search('Title', str(r.context['self'].form)))

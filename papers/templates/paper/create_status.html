@@ -1,4 +1,4 @@
-{% extends "papers/app_base.html" %}
+{% extends "paper/app_base.html" %}
 {% block bodyid %}new_paper{% endblock %}
 
 {% block title %}Add Paper Status{% endblock %}
@@ -11,7 +11,7 @@
             //10 sec delay.
             $('#messages').delay(10000).fadeOut('slow');
 
-            poll_url = '{% url import_url_poll task_id %}';
+            poll_url = '{% url Paper#import_url_poll self.task_id %}';
             pu = $.PeriodicalUpdater(poll_url, {
                 method: 'get',          // method; get or post
                 minTimeout: 1000,       // starting value for the timeout in milliseconds
@@ -23,7 +23,7 @@
             }, function(data) {
                 // Handle the new data (only called when there was a change)
                 if (data['is_done'] == true) {
-                    window.location.replace('{% url new_paper_manual task_id %}');
+                    window.location.replace('{% url Paper#new_manual self.task_id %}');
 
                     //.stop() prevents anything else from executing so we put
                     //this last.
@@ -33,7 +33,7 @@
             }, function() {
                 //Auto stopped. Must be something wrong with the server. Redirect
                 //to manual add.
-                window.location.replace('{% url new_paper_manual %}');
+                window.location.replace('{% url Paper#new_manual %}');
             });
             
         });
@@ -52,7 +52,7 @@
     <p>Attempting to retrieve citation information...</p>
 </div>
 
-<div id="select_manual_add" class="select_link">Or, <a href="{% url new_paper_manual %}">I would like to add the paper manually...</a></div>
+<div id="select_manual_add" class="select_link">Or, <a href="{% url Paper#new_manual %}">I would like to add the paper manually...</a></div>
 
 {% endblock %}
 

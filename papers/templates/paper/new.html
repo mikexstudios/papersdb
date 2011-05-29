@@ -1,4 +1,4 @@
-{% extends "papers/app_base.html" %}
+{% extends "paper/app_base.html" %}
 {% block bodyid %}new_paper{% endblock %}
 
 {% block title %}Add Paper{% endblock %}
@@ -23,15 +23,15 @@
 <p id="import_url_description">Tell us the URL of the paper and we will try
 to fill in the citation information automatically:</p>
 
-<form action="" method="POST" name="import_url_form"
+<form action="{% url Paper#create %}" method="POST" name="import_url_form"
     id="import_url_form" class="papers">
     {% csrf_token %}
 
-    {{ form.url.errors }}
+    {{ self.form.url.errors }}
     <div class="field">
         <label for="id_url" class="optional">URL</label> 
         <div class="right">
-            {{ form.url }}
+            {{ self.form.url }}
         </div>
     </div>
 
@@ -41,7 +41,7 @@ to fill in the citation information automatically:</p>
     </div>
 </form>
 
-<div id="select_manual_add" class="select_link">Or, <a href="{% url new_paper_manual %}">I would like to add the paper manually...</a></div>
+<div id="select_manual_add" class="select_link">Or, <a href="{% url Paper#new_manual %}">I would like to add the paper manually...</a></div>
 
 {% endblock %}
 

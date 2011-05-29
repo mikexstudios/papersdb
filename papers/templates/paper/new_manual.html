@@ -1,4 +1,4 @@
-{% extends "papers/app_base.html" %}
+{% extends "paper/app_base.html" %}
 {% block bodyid %}new_paper{% endblock %}
 
 {% block title %}Add Paper{% endblock %}
@@ -20,24 +20,24 @@
 
 <div id="description"></div>
 
-<div id="select_auto_add" class="select_link"><a href="{% url new_paper %}">&larr; Try automatically adding the citation</a></div>
+<div id="select_auto_add" class="select_link"><a href="{% url Paper#new %}">&larr; Try automatically adding the citation</a></div>
 
-<form action="" method="POST" enctype="multipart/form-data"
+<form action="{% url Paper#create_manual %}" method="POST" enctype="multipart/form-data"
     name="new_paper_form" id="new_paper_form" class="papers">
     {% csrf_token %}
     <div class="field">
         <label for="id_title">Title</label> 
         <div class="right">
-            {{ form.title.errors }}
-            {{ form.title }}
+            {{ self.form.title.errors }}
+            {{ self.form.title }}
         </div>
     </div>
 
     <div class="field">
         <label for="id_authors">Author(s)</label> 
         <div class="right">
-            {{ form.authors.errors }}
-            {{ form.authors }}
+            {{ self.form.authors.errors }}
+            {{ self.form.authors }}
             <small class="helper">Enter each author on a new line. You may
             format each name like: <strong>First Middle Last</strong> or <strong>Last,
             First Middle</strong>.</small>
@@ -47,56 +47,56 @@
     <div class="field">
         <label for="id_journal" class="optional">Journal</label> 
         <div class="right">
-            {{ form.journal.errors }}
-            {{ form.journal }}
+            {{ self.form.journal.errors }}
+            {{ self.form.journal }}
         </div>
     </div>
 
     <div class="field">
         <label for="id_year" class="optional">Year</label> 
         <div class="right">
-            {{ form.year.errors }}
-            {{ form.year }}
+            {{ self.form.year.errors }}
+            {{ self.form.year }}
         </div>
     </div>
 
     <div class="field">
         <label for="id_volume" class="optional">Volume</label> 
         <div class="right">
-            {{ form.volume.errors }}
-            {{ form.volume }}
+            {{ self.form.volume.errors }}
+            {{ self.form.volume }}
         </div>
     </div>
 
     <div class="field">
         <label for="id_issue" class="optional">Issue</label> 
         <div class="right">
-            {{ form.issue.errors }}
-            {{ form.issue }}
+            {{ self.form.issue.errors }}
+            {{ self.form.issue }}
         </div>
     </div>
 
     <div class="field">
         <label for="id_pages" class="optional">Pages</label> 
         <div class="right">
-            {{ form.pages.errors }}
-            {{ form.pages }}
+            {{ self.form.pages.errors }}
+            {{ self.form.pages }}
         </div>
     </div>
 
     <div class="field">
         <label for="id_url" class="optional">URL</label> 
         <div class="right">
-            {{ form.url.errors }}
-            {{ form.url }}
+            {{ self.form.url.errors }}
+            {{ self.form.url }}
         </div>
     </div>
 
     <div class="field">
         <label for="id_file" class="optional">File</label> 
         <div class="right">
-            {{ form.file.errors }}
-            {{ form.file }}
+            {{ self.form.file.errors }}
+            {{ self.form.file }}
             <small class="helper">Select and upload the file that is associated with this paper.</small>
         </div>
     </div>

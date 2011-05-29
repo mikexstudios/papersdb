@@ -50,9 +50,9 @@ class AddPaperManualViewTest(TestCase):
         upload_file = open(os.path.join(self.TEST_FILES_PATH, upload_filename), 'rb')
         data['file'] = upload_file
 
-        r = self.client.post('/papers/new/manual/', data)
+        r = self.client.post('/papers/create/manual/', data)
         upload_file.close()
-        self.assertRedirects(r, reverse('dashboard'))
+        self.assertRedirects(r, reverse('Paper#index'))
 
         #Also make sure information is saved to database. If not saved, will
         #raise DoesNotExist.
@@ -105,8 +105,8 @@ class AddPaperAutoViewTest(TestCase):
         '''
         data = {'url': 'http://example.com', }
 
-        r = self.client.post('/papers/new/', data)
-        self.assertTrue(re.search(r'/papers/new/status/([-\w]+)/$', r['Location']))
+        r = self.client.post('/papers/', data) #NOTE the url for creation
+        self.assertTrue(re.search(r'/papers/create/status/([-\w]+)/$', r['Location']))
         #self.assertRedirects(r, reverse('new_paper_status'))
 
 class PapersEditTest(TestCase):
@@ -155,8 +155,8 @@ class PapersEditTest(TestCase):
         #Change the data slightly so that we can verify that the update occurred.
         data = self.data.copy()
         data['title'] = 'Test Title 2'
-        r = self.client.post(reverse('papers_edit', args=[self.p.local_id]), data)
-        self.assertRedirects(r, reverse('papers_view', args=[self.p.local_id]))
+        r = self.client.post(reverse('Paper#update', args=[self.p.local_id]), data)
+        self.assertRedirects(r, reverse('Paper#show', args=[self.p.local_id]))
 
         #Verify that the update did in-fact occur. Need to first refresh our 
         #object though.
@@ -179,8 +179,8 @@ class PapersEditTest(TestCase):
         data = self.data.copy()
         data['file'] = f
 
-        r = self.client.post(reverse('papers_edit', args=[self.p.local_id]), data)
-        self.assertRedirects(r, reverse('papers_view', args=[self.p.local_id]))
+        r = self.client.post(reverse('Paper#update', args=[self.p.local_id]), data)
+        self.assertRedirects(r, reverse('Paper#show', args=[self.p.local_id]))
         f.close()
 
         #Verify that the old uploaded file was deleted from the upload path.
@@ -232,7 +232,7 @@ class DashboardViewTest(TestCase):
         A paper was added in setUp. Now check if it is shown on the dashboard
         page.
         '''
-        r = self.client.get('/dashboard/', {})
+        r = self.client.get('/papers/', {})
         #Assume that if we find the title of the dummy paper that the rest of
         #the information is there too.
         self.assertContains(r, self.data['title'], count = 1)
@@ -252,7 +252,7 @@ class DashboardViewTest(TestCase):
         p.save()
 
         #Make sure that the added paper does not show up in dashboard.
-        r = self.client.get('/dashboard/', {})
+        r = self.client.get('/papers/', {})
         self.assertNotContains(r, data['title'])
 
         #Remove the second user's upload directory recursively. This also gets

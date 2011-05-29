@@ -1,11 +1,11 @@
-{% extends "papers/base.html" %}
+{% extends "paper/base.html" %}
 
 {% block content %}
 <div id="left">
     <div id="menu">
-        <a href="{% url new_paper %}" id="papers-add-link" class="button light small">Add Paper</a>
+        <a href="{% url Paper#new %}" id="papers-add-link" class="button light small">Add Paper</a>
         <ul>
-            <li class="{% block left-menu-all %}{% endblock %}"><a href="{% url dashboard %}">All Papers</a></li>
+            <li class="{% block left-menu-all %}{% endblock %}"><a href="{% url Paper#index %}">All Papers</a></li>
             <!-- <li class="{% block left-menu-recent %}{% endblock %}"><a href="">Recent</a></li> -->
             <li class="{% block left-menu-starred %}{% endblock %}"><a href="">Starred <span class="star">&#9733;</span></a></li>
             <li class="{% block left-menu-trash %}{% endblock %}"><a href="">Trash</a></li>
