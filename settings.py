@@ -193,7 +193,7 @@ THUMBNAIL_FILENAME = 'thumb_%s.png'
 
 #Method for uploading documents to Crocodoc service. 'url' method is preferred
 #for scalibility and simplicity, but 'post' is good for unit-testing.
-CROCODOC_UPLOAD_METHOD = 'url' #url or post
+CROCODOC_UPLOAD_METHOD = 'post' #url or post
 
 ###################
 # south settings: #
