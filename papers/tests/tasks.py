@@ -23,6 +23,9 @@ class GenerateThumbnailTest(TestCase):
         #Bypass the celery daemon and directly test synchronously.
         settings.CELERY_ALWAYS_EAGER = True
 
+        #Set Crocodoc upload method to POST
+        settings.CROCODOC_UPLOAD_METHOD = 'post'
+
         #Create and login test user.
         self.user = User.objects.create_user('test', 'test@example.com', 'test')
         self.client.login(username = 'test', password = 'test')
@@ -81,6 +84,9 @@ class CrocodocTests(TestCase):
         #Bypass the celery daemon and directly test synchronously.
         settings.CELERY_ALWAYS_EAGER = True
 
+        #Set Crocodoc upload method to POST
+        settings.CROCODOC_UPLOAD_METHOD = 'post'
+
         #Create and login test user.
         self.user = User.objects.create_user('test', 'test@example.com', 'test')
         self.client.login(username = 'test', password = 'test')
@@ -95,6 +101,8 @@ class CrocodocTests(TestCase):
 
         self.p = Paper(**self.data) #unpack dictionary to arguments
         self.p.save()
+        #uploading to crocodoc will fail here since the file does not exist (we
+        #add it below).
 
         #Now let's copy the dummy upload file from the test files location path
         #to the uploaded file location
@@ -104,6 +112,10 @@ class CrocodocTests(TestCase):
         os.makedirs(to_path, mode = 0755)
         shutil.copy2(os.path.join(from_path, upload_filename), to_path)
         self.uploaded_file = os.path.join(to_path, upload_filename)
+
+        #We should re-save the Paper here to automatically generate thumbnail
+        #and upload to crocodoc. But we don't since we are testing the
+        #uploading to crocodoc.
 
     def tearDown(self):
         #Delete the crocodoc uploaded paper
@@ -127,11 +139,17 @@ class CrocodocTests(TestCase):
 
         NOTE: We are using the POST method of uploading papers because there
         is not an easy way of testing the url method of uploading.
+
+        NOTE: This test may not be very necessary since the act of saving 
+        the file above automatically uploads the paper to crocodoc.
         '''
-        r = self.p.crocodoc.upload(method = 'post')
+        r = self.p.crocodoc.upload()
         self.assertTrue(r.get()) #wait until task is done and get result
 
-        self.assertTrue(len(self.p.crocodoc.short_id) == 7)
+        #Need to refresh our object because of the upload.
+        self.p = Paper.objects.get(pk = self.p.pk)
+
+        self.assertTrue(len(self.p.crocodoc.short_id) > 4)
         self.assertTrue(len(self.p.crocodoc.uuid) == 36)
         #And that we also have a session_id
         self.assertTrue(len(self.p.crocodoc.session_id) == 15)

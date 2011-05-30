@@ -105,6 +105,11 @@ class Paper(models.Model):
         if self.local_id == None:
             self.local_id = self.user.profile.get_next_paper_id()
 
+        super(Paper, self).save(*args, **kwargs)
+
+        #Refresh object
+        self = Paper.objects.get(pk = self.pk)
+
         #If we don't already have a generated thumbnail, call paper thumbnail
         #generation task. Returns the AsyncResult object, which was don't use
         #here.
@@ -115,7 +120,12 @@ class Paper(models.Model):
         if not self.has_thumbnail and self.file:
             self.generate_thumbnail()
 
-        super(Paper, self).save(*args, **kwargs)
+        #If the paper has not been uploaded to Crocodoc, do it. We need this
+        #part after the real save so that the uploaded file can be saved 
+        #first.
+        if not self.crocodoc.uuid:
+            self.crocodoc.upload()
+
 
 
 class Crocodoc(models.Model):
@@ -140,13 +150,14 @@ class Crocodoc(models.Model):
 
         super(Crocodoc, self).delete(*args, **kwargs)
 
-    def upload(self, method = 'url'):
+    def upload(self, method = None):
         '''
-        Uploads the paper (via URL method) to Crocodoc by calling task.
+        Uploads the paper (via URL or POST method) to Crocodoc by calling task.
 
         @return AsyncResult object from task/celery.
         '''
-        r = tasks.crocodoc_upload_paper.delay(self.paper, method)
+        r = tasks.crocodoc_upload_paper.delay(self.paper, 
+                method = settings.CROCODOC_UPLOAD_METHOD)
         return r
 
     def refresh_session_id(self):

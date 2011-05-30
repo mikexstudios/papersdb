@@ -191,6 +191,10 @@ IMAGEMAGICK_CMD = "convert -colorspace rgb %(document)s[0] -resize '180' " +\
 #The format describing the thumbnail filename. Use '%s' to insert the hash.
 THUMBNAIL_FILENAME = 'thumb_%s.png'
 
+#Method for uploading documents to Crocodoc service. 'url' method is preferred
+#for scalibility and simplicity, but 'post' is good for unit-testing.
+CROCODOC_UPLOAD_METHOD = 'url' #url or post
+
 ###################
 # south settings: #
 ###################

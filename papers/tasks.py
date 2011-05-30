@@ -122,6 +122,11 @@ def crocodoc_upload_paper(paper, method = 'url'):
     if not paper.file:
         return False
 
+    #Double check again that in the time it took to execute this task, that
+    #the paper wasn't already uploaded.
+    if paper.crocodoc.uuid:
+        return True
+
     c = crocodoc.Crocodoc(settings.CROCODOC_API_KEY)
     #NOTE: We do not upload in async mode since we want to immediately be able
     #      to set the document as viewable. This may slow down queue processing

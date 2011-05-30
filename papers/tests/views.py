@@ -22,6 +22,9 @@ class AddPaperManualViewTest(TestCase):
         #Bypass the celery daemon and directly test synchronously.
         settings.CELERY_ALWAYS_EAGER = True
 
+        #Set Crocodoc upload method to POST
+        settings.CROCODOC_UPLOAD_METHOD = 'post'
+
         #Create and login test user.
         self.user = User.objects.create_user('test', 'test@example.com', 'test')
         self.client.login(username = 'test', password = 'test')
@@ -81,12 +84,35 @@ class AddPaperManualViewTest(TestCase):
         thumbnail_file = os.path.join(paper_dir, settings.THUMBNAIL_FILENAME % p.hash)
         self.assertTrue(os.path.exists(thumbnail_file))
 
+        #Need to refresh our object because of the upload.
+        p = Paper.objects.get(pk = p.pk)
+
+        #Check that crocodoc entries were created
+        self.assertTrue(len(p.crocodoc.short_id) > 4)
+        self.assertTrue(len(p.crocodoc.uuid) == 36)
+        #And that we also have a session_id
+        self.assertTrue(len(p.crocodoc.session_id) == 15)
+
+        #TODO: Move this to tearDown, somehow (tried, but errored).
+        #Delete the crocodoc uploaded paper
+        try:
+            p.crocodoc.delete()
+        except AssertionError:
+            #If we try to delete an already deleted object (like when we test
+            #delete), we need to catch this error so that the test doesn't 
+            #fail.
+            pass
+
+
 
 class AddPaperAutoViewTest(TestCase):
 
     def setUp(self):
         #Bypass the celery daemon and directly test synchronously.
         settings.CELERY_ALWAYS_EAGER = True
+
+        #Set Crocodoc upload method to POST
+        settings.CROCODOC_UPLOAD_METHOD = 'post'
 
         #Create and login test user.
         self.user = User.objects.create_user('test', 'test@example.com', 'test')
@@ -115,6 +141,9 @@ class PapersEditTest(TestCase):
         #Bypass the celery daemon and directly test synchronously.
         settings.CELERY_ALWAYS_EAGER = True
 
+        #Set Crocodoc upload method to POST
+        settings.CROCODOC_UPLOAD_METHOD = 'post'
+
         #Create and login test user.
         self.user = User.objects.create_user('test', 'test@example.com', 'test')
         self.client.login(username = 'test', password = 'test')
@@ -139,10 +168,19 @@ class PapersEditTest(TestCase):
         shutil.copy2(os.path.join(from_path, upload_filename), to_path)
         self.uploaded_file = os.path.join(to_path, upload_filename)
 
-        #Generate thumbnail for the uploaded file
-        self.p.generate_thumbnail()
+        #Generate thumbnail and upload to crocodoc
+        self.p.save()
 
     def tearDown(self):
+        #Delete the crocodoc uploaded paper
+        try:
+            self.p.crocodoc.delete()
+        except AssertionError:
+            #If we try to delete an already deleted object (like when we test
+            #delete), we need to catch this error so that the test doesn't 
+            #fail.
+            pass
+
         #Remove the user's upload directory recursively. This also gets rid of 
         #any test uploads.
         path = os.path.join(settings.UPLOAD_ROOT, self.user.username)
@@ -152,6 +190,9 @@ class PapersEditTest(TestCase):
         '''
         Resave the form without re-uploading a file.
         '''
+        #crocodoc information should not change. Let's save the old information:
+        old_uuid = self.p.crocodoc.uuid
+
         #Change the data slightly so that we can verify that the update occurred.
         data = self.data.copy()
         data['title'] = 'Test Title 2'
@@ -163,12 +204,21 @@ class PapersEditTest(TestCase):
         self.p = Paper.objects.get(pk = self.p.pk)
         self.assertEqual(self.p.title, data['title'])
 
+        #Make sure that crocodoc information did not change (since we didn't
+        #upload a new file).
+        self.assertEqual(old_uuid, self.p.crocodoc.uuid)
+
     def test_resave_form_with_upload(self):
         '''
         Test resaving when the only thing that changes is uploading a new file.
         The expected behavior is that the existing file is deleted and the new
         file is copied to the paper directory.
         '''
+        #crocodoc information should change. Let's save the old information:
+        old_uuid = self.p.crocodoc.uuid
+
+        #TODO: Test that the thumbnail information has changed.
+
         #This is a dummy blank pdf that's different from the dummy PDF file
         #tha we already used.
         upload_filename = 'blank2.pdf'
@@ -202,6 +252,9 @@ class PapersEditTest(TestCase):
         #      as sync.
         thumbnail_file = os.path.join(paper_dir, settings.THUMBNAIL_FILENAME % self.p.hash)
         self.assertTrue(os.path.exists(thumbnail_file))
+
+        #Make sure that crocodoc information did change
+        self.assertNotEqual(old_uuid, self.p.crocodoc.uuid)
 
 
 

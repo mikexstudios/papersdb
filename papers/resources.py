@@ -178,6 +178,9 @@ class Paper(Resource):
                         os.unlink(os.path.join(path, settings.THUMBNAIL_FILENAME % self.paper.hash))
                         self.paper.has_thumbnail = False
                         self.paper.save()
+
+                        #Also delete the existing crocodoc upload
+                        self.paper.crocodoc.delete()
                     except OSError:
                         #The file is already missing.
                         pass
