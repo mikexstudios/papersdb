@@ -104,6 +104,17 @@ class Paper(models.Model):
         #Only set local_id for new objects.
         if self.local_id == None:
             self.local_id = self.user.profile.get_next_paper_id()
+
+        #If we don't already have a generated thumbnail, call paper thumbnail
+        #generation task. Returns the AsyncResult object, which was don't use
+        #here.
+        #NOTE: We take care of the case where many calls to generate thumbnail
+        #are created before has_thumbnail has been set by having the task 
+        #perform an additional check to see if the paper has_thumbnail = True
+        #in the time it took to get to the task in the queue.
+        if not self.has_thumbnail and self.file:
+            self.generate_thumbnail()
+
         super(Paper, self).save(*args, **kwargs)
 
 

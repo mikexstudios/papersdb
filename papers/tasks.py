@@ -83,6 +83,9 @@ def generate_paper_thumbnail(paper):
     if not paper.file:
         return False
 
+    if paper.has_thumbnail:
+        return True #thumbnail already generated
+
     #Make sure that the file exists
     paper_dir = paper.get_file_dir()
     paper_file = paper.get_file_path()

@@ -119,10 +119,6 @@ class Paper(Resource):
                 p.file = data['file'].name
                 p.save()
 
-                #Call paper thumbnail generation task. Returns the AsyncResult
-                #object, which was don't use here.
-                p.generate_thumbnail()
-
             #Redirect to dashboard.
             messages.success(self.request, 'Paper was successfully added.')
             return redirect('Paper#index')
@@ -180,6 +176,8 @@ class Paper(Resource):
                     try:
                         os.unlink(os.path.join(path, p_file))
                         os.unlink(os.path.join(path, settings.THUMBNAIL_FILENAME % self.paper.hash))
+                        self.paper.has_thumbnail = False
+                        self.paper.save()
                     except OSError:
                         #The file is already missing.
                         pass
@@ -189,10 +187,6 @@ class Paper(Resource):
 
                 self.form.file = data['file'].name
                 self.paper = self.form.save() #save first so that we can generate thumbnail
-
-                #Call paper thumbnail generation task. Returns the AsyncResult
-                #object, which was don't use here.
-                self.paper.generate_thumbnail()
 
             self.form.save()
 
