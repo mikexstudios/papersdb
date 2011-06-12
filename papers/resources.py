@@ -200,5 +200,21 @@ class Paper(Resource):
         #Otherwise, invalid form. Re-render the edit page with form errors.
         return self.edit.render()
 
+
+    @action
+    def quickview(self, paper_id):
+        self.paper = get_object_or_404(models.Paper, user = self.request.user, local_id = paper_id)
+
+        #Redirect to Crocodoc's public viewing url, if exists
+        if self.paper.crocodoc and self.paper.crocodoc.short_id:
+            return redirect(self.paper.crocodoc.embeddable_url())
+
+        #Otherwise, redirect back to individual show page
+        return redirect('Paper#show', paper_id)
+
+
+
+
+
 #All pages in paper must require prior login.
 Paper = Paper._decorate(login_required)

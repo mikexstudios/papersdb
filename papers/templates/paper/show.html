@@ -26,14 +26,14 @@
 
 <div id="thumbnail">
     {% if self.paper.has_thumbnail %}
-    <a href="{{ self.paper.crocodoc.url }}" target="_blank">
+    <a href="{% url Paper#quickview self.paper.local_id %}" target="_blank">
         <img src="{% thumbnailurl self.paper %}" width="180" class="paper" />
     </a>
     {% else %}
     {# If the paper does not have thumbnail but has the file, then the #}
     {# thumbnail is in the process of generating and we show a placeholder. #}
         {% if self.paper.file %}
-        <a href="{{ self.paper.crocodoc.url }}" target="_blank">
+        <a href="{% url Paper#quickview self.paper.local_id %}" target="_blank">
             <img src="{{ MEDIA_URL }}images/paper-generate.gif" width="180" class="generating" />
         </a>
         {% else %}
@@ -46,7 +46,7 @@
     
     <div id="actions">
         {% if self.paper.file %}
-        <a href="{{ self.paper.crocodoc.url }}" target="_blank" class="quickview">Quickview</a> |
+        <a href="{% url Paper#quickview self.paper.local_id %}" target="_blank" class="quickview">Quickview</a> |
         <a href="{{ self.paper.get_file_url }}" class="download">Download</a> |
         {% else %}
         <a href="{% url Paper#edit self.paper.local_id %}#upload" class="upload">Upload Paper</a> | 
