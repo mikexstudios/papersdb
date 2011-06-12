@@ -212,6 +212,16 @@ class Paper(Resource):
         #Otherwise, redirect back to individual show page
         return redirect('Paper#show', paper_id)
 
+    @action
+    def download(self, paper_id):
+        self.paper = get_object_or_404(models.Paper, user = self.request.user, local_id = paper_id)
+
+        #Redirect to the file for download, if exists
+        if self.paper.file:
+            return redirect(self.paper.get_file_url())
+
+        #Otherwise, redirect back to individual show page
+        return redirect('Paper#show', paper_id)
 
 
 

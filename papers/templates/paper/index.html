@@ -50,7 +50,7 @@
             <ul class="actions">
                 {% if p.file %}
                 <li><a href="{% url Paper#quickview p.local_id %}" target="_blank">Quick View</a></li>
-                <li><a href="{{ p.get_file_url }}">Download</a></li>
+                <li><a href="{% url Paper#download p.local_id %}">Download</a></li>
                 {% else %}
                 <li><a href="" class="upload">Upload</a></li>
                 {% endif %}

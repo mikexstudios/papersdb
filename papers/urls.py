@@ -32,9 +32,8 @@ urlpatterns = patterns('papers.resources',
     url(r'^(\d+)/quickview/$', 'Paper', 
         kwargs = {'action': 'quickview'},
         name='Paper#quickview'),
-
-    #url(r'^(\d+)/download/$', 'Paper', 
-    #    kwargs = {'action': 'download'},
-    #    name='Paper#download'),
+    url(r'^(\d+)/download/$', 'Paper', 
+        kwargs = {'action': 'download'},
+        name='Paper#download'),
 
 )
