@@ -144,7 +144,7 @@ def crocodoc_upload_paper(paper, method = 'url'):
     except KeyError, exc:
         #Means that the document was not sucessfully uploaded or perhaps we
         #ran into a rate limiting issue. So let's try again.
-        return upload_paper_to_crocodoc.retry(exc = exc)
+        return crocodoc_upload_paper.retry(exc = exc)
 
     #Also obtain a session_id for the document.
     crocodoc_get_session_id(paper)
