@@ -16,6 +16,12 @@ import re
 import os
 import shutil #for copy2
 
+
+#############################################################################
+# NOTE: There is no easy way to "unit test" views. So we just do integration
+# tests on all the views instead.
+#############################################################################
+
 class AddPaperManualViewTest(TestCase):
 
     def setUp(self):
@@ -256,6 +262,97 @@ class PapersEditTest(TestCase):
         #Make sure that crocodoc information did change
         self.assertNotEqual(old_uuid, self.p.crocodoc.uuid)
 
+
+class PaperShowTest(TestCase):
+
+    def setUp(self):
+        #Bypass the celery daemon and directly test synchronously.
+        settings.CELERY_ALWAYS_EAGER = True
+
+        #Set Crocodoc upload method to POST
+        settings.CROCODOC_UPLOAD_METHOD = 'post'
+
+        #Create and login test user.
+        self.user = User.objects.create_user('test', 'test@example.com', 'test')
+        self.client.login(username = 'test', password = 'test')
+
+        #Create a new paper entry with associated file.
+        upload_filename = 'blank.pdf'
+        self.data = {'user': self.user, 'title': 'Test Title', 'url':
+                'http://example.com', 'journal': 'Journal of Test', 'year':
+                '2011', 'volume': '1', 'authors': 
+                "Author One\nAuthor Two\nAuthor Three", 'issue': '2', 'pages':
+                '3-4', 'file': upload_filename }
+
+        self.p = Paper(**self.data) #unpack dictionary to arguments
+        self.p.save()
+
+        #Now let's copy the dummy upload file from the test files location path
+        #to the uploaded file location
+        to_path = os.path.join(settings.UPLOAD_ROOT, self.p.user.username, self.p.hash)
+        from_path = os.path.join(settings.SITE_ROOT, 'papers', 'tests',
+                                 'files')
+        os.makedirs(to_path, mode = 0755)
+        shutil.copy2(os.path.join(from_path, upload_filename), to_path)
+        self.uploaded_file = os.path.join(to_path, upload_filename)
+
+        #Generate thumbnail and upload to crocodoc
+        self.p.save()
+
+        #Reload data
+        self.p = Paper.objects.get(pk = self.p.id)
+
+    def tearDown(self):
+        #Delete the crocodoc uploaded paper
+        try:
+            self.p.crocodoc.delete()
+        except AssertionError:
+            #If we try to delete an already deleted object (like when we test
+            #delete), we need to catch this error so that the test doesn't 
+            #fail.
+            pass
+
+        #Remove the user's upload directory recursively. This also gets rid of 
+        #any test uploads.
+        path = os.path.join(settings.UPLOAD_ROOT, self.user.username)
+        shutil.rmtree(path)
+    
+    def test_quickview_download_link_shown(self):
+        '''
+        If the paper has a crocodoc upload, then quickview link should be shown.
+        If the paper has a file uploaded, then the download link should be shown.
+        '''
+        r = self.client.get('/papers/%i/' % self.p.local_id, {})
+        self.assertContains(r, reverse('Paper#quickview', args=[self.p.local_id]))
+        self.assertContains(r, reverse('Paper#download', args=[self.p.local_id]))
+
+    def test_quickview_link_not_shown(self):
+        '''
+        If the paper does not have a crocodoc object, then quickview link should
+        not be shown. The download link should still be shown.
+        '''
+        #Manually delete crocodoc object.
+        self.p.crocodoc.delete()
+        self.p = Paper.objects.get(pk = self.p.id)
+
+        r = self.client.get('/papers/%i/' % self.p.local_id, {})
+        self.assertNotContains(r, reverse('Paper#quickview', args=[self.p.local_id]))
+        self.assertContains(r, reverse('Paper#download', args=[self.p.local_id]))
+
+    def test_download_link_not_shown(self):
+        '''
+        If the paper does not have an upload associated with it, then neither
+        quickview nor download links should be shown.
+        '''
+        #Delete crocodoc and clear uploaded file.
+        self.p.crocodoc.delete()
+        self.p.file = ''
+        self.p.save()
+        self.p = Paper.objects.get(pk = self.p.id)
+        
+        r = self.client.get('/papers/%i/' % self.p.local_id, {})
+        self.assertNotContains(r, reverse('Paper#quickview', args=[self.p.local_id]))
+        self.assertNotContains(r, reverse('Paper#download', args=[self.p.local_id]))
 
 
 class DashboardViewTest(TestCase):
