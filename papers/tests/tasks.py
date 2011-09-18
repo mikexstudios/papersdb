@@ -89,6 +89,17 @@ class CrocodocTests(TestCase):
 
         #Set Crocodoc upload method to POST
         settings.CROCODOC_UPLOAD_METHOD = 'post'
+        
+        #We want to mock the crocodoc API library so that our tests don't have
+        #to actually issue HTTP requests.
+        self.patcher = mock.patch('crocodoc.Crocodoc')
+        Mock = self.patcher.start()
+        self.crocodoc_instance = Mock.return_value
+        self.crocodoc_instance.upload.return_value = {'shortId': 'yQZpPm', 
+                'uuid': '8e5b0721-26c4-11df-b354-002170de47d3'}
+        self.crocodoc_instance.get_session.return_value = {'sessionId': 
+                'fgH9qWEwnsJUeB0'}
+        self.crocodoc_instance.delete.return_value = True
 
         #Create and login test user.
         self.user = User.objects.create_user('test', 'test@example.com', 'test')
@@ -119,17 +130,6 @@ class CrocodocTests(TestCase):
         #We should re-save the Paper here to automatically generate thumbnail
         #and upload to crocodoc. But we don't since we are testing the
         #uploading to crocodoc.
-        
-        #We want to mock the crocodoc API library so that our tests don't have
-        #to actually issue HTTP requests.
-        self.patcher = mock.patch('crocodoc.Crocodoc')
-        Mock = self.patcher.start()
-        self.crocodoc_instance = Mock.return_value
-        self.crocodoc_instance.upload.return_value = {'shortId': 'yQZpPm', 
-                'uuid': '8e5b0721-26c4-11df-b354-002170de47d3'}
-        self.crocodoc_instance.get_session.return_value = {'sessionId': 
-                'fgH9qWEwnsJUeB0'}
-        self.crocodoc_instance.delete.return_value = True
 
     def tearDown(self):
         #Delete the crocodoc uploaded paper
