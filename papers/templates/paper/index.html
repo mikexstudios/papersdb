@@ -49,7 +49,7 @@
             <div class="year">{{ p.year|default:'' }}</div>
             <ul class="actions">
                 {% if p.file %}
-                <li><a href="{% url Paper#quickview p.local_id %}" target="_blank">Quick View</a></li>
+                {% if p.crocodoc.uuid %}<li><a href="{% url Paper#quickview p.local_id %}" target="_blank">Quick View</a></li>{% endif %}
                 <li><a href="{% url Paper#download p.local_id %}">Download</a></li>
                 {% else %}
                 <li><a href="" class="upload">Upload</a></li>
