@@ -15,25 +15,25 @@ urlpatterns = patterns('papers.resources',
         name='Paper#create_status'),
 
     url(r'^new/manual/$', 'Paper', 
-        kwargs = {'action': 'new_manual'},
+        kwargs = {'methods': {'GET': 'new_manual'}},
         name='Paper#new_manual'),
     url(r'^new/manual/([-\w]+)/$', 'Paper', 
-        kwargs = {'action': 'new_manual'},
+        kwargs = {'methods': {'GET': 'new_manual'}},
         name='Paper#new_manual'),
     url(r'^create/manual/$', 'Paper', 
-        kwargs = {'action': 'create_manual'},
+        kwargs = {'methods': {'POST': 'create_manual'}},
         name='Paper#create_manual'),
 
     url(r'^import/url/([-\w]+)/$', 'Paper', 
-        kwargs = {'action': 'import_url_poll'},
+        kwargs = {'methods': {'GET': 'import_url_poll'}},
         name='Paper#import_url_poll'),
 
     #Additional actions on paper
     url(r'^(\d+)/quickview/$', 'Paper', 
-        kwargs = {'action': 'quickview'},
+        kwargs = {'methods': {'GET': 'quickview'}},
         name='Paper#quickview'),
     url(r'^(\d+)/download/$', 'Paper', 
-        kwargs = {'action': 'download'},
+        kwargs = {'methods': {'GET': 'download'}},
         name='Paper#download'),
 
 )

@@ -51,4 +51,4 @@ django-kombu
 #docutils
 
 #Rails-style resources for django
--e git://github.com/zacharyvoase/dagny.git#egg=dagny
+-e git://github.com/zacharyvoase/dagny.git@v0.2.2#egg=dagny
