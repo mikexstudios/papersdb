@@ -16,6 +16,8 @@ import re
 import os
 import shutil #for copy2
 
+import mock #for mocking corocodoc API
+
 
 #############################################################################
 # NOTE: There is no easy way to "unit test" views. So we just do integration
@@ -31,6 +33,17 @@ class AddPaperManualViewTest(TestCase):
         #Set Crocodoc upload method to POST
         settings.CROCODOC_UPLOAD_METHOD = 'post'
 
+        #We want to mock the crocodoc API library so that our tests don't have
+        #to actually issue HTTP requests.
+        self.patcher = mock.patch('crocodoc.Crocodoc')
+        Mock = self.patcher.start()
+        self.crocodoc_instance = Mock.return_value
+        self.crocodoc_instance.upload.return_value = {'shortId': 'yQZpPm', 
+                'uuid': '8e5b0721-26c4-11df-b354-002170de47d3'}
+        self.crocodoc_instance.get_session.return_value = {'sessionId': 
+                'fgH9qWEwnsJUeB0'}
+        self.crocodoc_instance.delete.return_value = True
+
         #Create and login test user.
         self.user = User.objects.create_user('test', 'test@example.com', 'test')
         self.client.login(username = 'test', password = 'test')
@@ -40,6 +53,9 @@ class AddPaperManualViewTest(TestCase):
         #any test uploads.
         path = os.path.join(settings.UPLOAD_ROOT, self.user.username)
         shutil.rmtree(path)
+
+        #Stop patching process
+        self.patcher.stop()
 
     def test_valid_form_manual(self):
         '''
@@ -120,6 +136,17 @@ class AddPaperAutoViewTest(TestCase):
         #Set Crocodoc upload method to POST
         settings.CROCODOC_UPLOAD_METHOD = 'post'
 
+        #We want to mock the crocodoc API library so that our tests don't have
+        #to actually issue HTTP requests.
+        self.patcher = mock.patch('crocodoc.Crocodoc')
+        Mock = self.patcher.start()
+        self.crocodoc_instance = Mock.return_value
+        self.crocodoc_instance.upload.return_value = {'shortId': 'yQZpPm', 
+                'uuid': '8e5b0721-26c4-11df-b354-002170de47d3'}
+        self.crocodoc_instance.get_session.return_value = {'sessionId': 
+                'fgH9qWEwnsJUeB0'}
+        self.crocodoc_instance.delete.return_value = True
+
         #Create and login test user.
         self.user = User.objects.create_user('test', 'test@example.com', 'test')
         self.client.login(username = 'test', password = 'test')
@@ -129,6 +156,9 @@ class AddPaperAutoViewTest(TestCase):
         #any test uploads.
         path = os.path.join(settings.UPLOAD_ROOT, self.user.username)
         shutil.rmtree(path)
+
+        #Stop patching process
+        self.patcher.stop()
 
     def test_valid_import_url_form(self):
         '''
@@ -149,6 +179,17 @@ class PapersEditTest(TestCase):
 
         #Set Crocodoc upload method to POST
         settings.CROCODOC_UPLOAD_METHOD = 'post'
+
+        #We want to mock the crocodoc API library so that our tests don't have
+        #to actually issue HTTP requests.
+        self.patcher = mock.patch('crocodoc.Crocodoc')
+        Mock = self.patcher.start()
+        self.crocodoc_instance = Mock.return_value
+        self.crocodoc_instance.upload.return_value = {'shortId': 'yQZpPm', 
+                'uuid': '8e5b0721-26c4-11df-b354-002170de47d3'}
+        self.crocodoc_instance.get_session.return_value = {'sessionId': 
+                'fgH9qWEwnsJUeB0'}
+        self.crocodoc_instance.delete.return_value = True
 
         #Create and login test user.
         self.user = User.objects.create_user('test', 'test@example.com', 'test')
@@ -191,6 +232,9 @@ class PapersEditTest(TestCase):
         #any test uploads.
         path = os.path.join(settings.UPLOAD_ROOT, self.user.username)
         shutil.rmtree(path)
+
+        #Stop patching process
+        self.patcher.stop()
 
     def test_resave_form_no_upload(self):
         '''
@@ -235,6 +279,9 @@ class PapersEditTest(TestCase):
         data = self.data.copy()
         data['file'] = f
 
+        #Set another return value for mock crocodoc upload since updating.
+        self.crocodoc_instance.upload.return_value = {'shortId': 'yQZpPn', 
+                'uuid': '8e5b0721-26c4-11df-b354-002170de47d4'}
         r = self.client.post(reverse('Paper#update', args=[self.p.local_id]), data)
         self.assertRedirects(r, reverse('Paper#show', args=[self.p.local_id]))
         f.close()
@@ -271,6 +318,17 @@ class PaperShowTest(TestCase):
 
         #Set Crocodoc upload method to POST
         settings.CROCODOC_UPLOAD_METHOD = 'post'
+
+        #We want to mock the crocodoc API library so that our tests don't have
+        #to actually issue HTTP requests.
+        self.patcher = mock.patch('crocodoc.Crocodoc')
+        Mock = self.patcher.start()
+        self.crocodoc_instance = Mock.return_value
+        self.crocodoc_instance.upload.return_value = {'shortId': 'yQZpPm', 
+                'uuid': '8e5b0721-26c4-11df-b354-002170de47d3'}
+        self.crocodoc_instance.get_session.return_value = {'sessionId': 
+                'fgH9qWEwnsJUeB0'}
+        self.crocodoc_instance.delete.return_value = True
 
         #Create and login test user.
         self.user = User.objects.create_user('test', 'test@example.com', 'test')
@@ -311,6 +369,9 @@ class PaperShowTest(TestCase):
             #delete), we need to catch this error so that the test doesn't 
             #fail.
             pass
+
+        #Stop patching process
+        self.patcher.stop()
 
         #Remove the user's upload directory recursively. This also gets rid of 
         #any test uploads.
@@ -358,6 +419,17 @@ class PaperShowTest(TestCase):
 class DashboardViewTest(TestCase):
 
     def setUp(self):
+        #We want to mock the crocodoc API library so that our tests don't have
+        #to actually issue HTTP requests.
+        self.patcher = mock.patch('crocodoc.Crocodoc')
+        Mock = self.patcher.start()
+        self.crocodoc_instance = Mock.return_value
+        self.crocodoc_instance.upload.return_value = {'shortId': 'yQZpPm', 
+                'uuid': '8e5b0721-26c4-11df-b354-002170de47d3'}
+        self.crocodoc_instance.get_session.return_value = {'sessionId': 
+                'fgH9qWEwnsJUeB0'}
+        self.crocodoc_instance.delete.return_value = True
+
         #Create and login test user.
         self.user = User.objects.create_user('test', 'test@example.com', 'test')
         self.client.login(username = 'test', password = 'test')
@@ -376,6 +448,9 @@ class DashboardViewTest(TestCase):
         #any test uploads.
         path = os.path.join(settings.UPLOAD_ROOT, self.user.username)
         shutil.rmtree(path)
+
+        #Stop patching process
+        self.patcher.stop()
 
     def test_that_paper_is_listed(self):
         '''
