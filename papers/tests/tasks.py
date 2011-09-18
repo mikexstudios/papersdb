@@ -29,6 +29,17 @@ class GenerateThumbnailTest(TestCase):
         #Set Crocodoc upload method to POST
         settings.CROCODOC_UPLOAD_METHOD = 'post'
 
+        #We want to mock the crocodoc API library so that our tests don't have
+        #to actually issue HTTP requests.
+        self.patcher = mock.patch('crocodoc.Crocodoc')
+        Mock = self.patcher.start()
+        self.crocodoc_instance = Mock.return_value
+        self.crocodoc_instance.upload.return_value = {'shortId': 'yQZpPm', 
+                'uuid': '8e5b0721-26c4-11df-b354-002170de47d3'}
+        self.crocodoc_instance.get_session.return_value = {'sessionId': 
+                'fgH9qWEwnsJUeB0'}
+        self.crocodoc_instance.delete.return_value = True
+
         #Create and login test user.
         self.user = User.objects.create_user('test', 'test@example.com', 'test')
         self.client.login(username = 'test', password = 'test')
@@ -40,7 +51,6 @@ class GenerateThumbnailTest(TestCase):
                 '2011', 'volume': '1', 'authors': 
                 "Author One\nAuthor Two\nAuthor Three", 'issue': '2', 'pages':
                 '3-4', 'file': upload_filename }
-
         self.p = Paper(**self.data) #unpack dictionary to arguments
         self.p.save()
 
@@ -58,6 +68,9 @@ class GenerateThumbnailTest(TestCase):
         #any test uploads.
         path = os.path.join(settings.UPLOAD_ROOT, self.user.username)
         shutil.rmtree(path)
+
+        #Stop patching process
+        self.patcher.stop()
 
     def test_generate_thumbnail(self):
         '''
