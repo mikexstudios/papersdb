@@ -21,7 +21,7 @@
 
 {% block subcontent %}
 <div id="actionsbar">
-    Select: <a href="">All</a>, <a href="">None</a> | 
+    <!-- Select: <a href="">All</a>, <a href="">None</a> | -->
     <strong>Sort by:</strong> 
     <a href="{% url Paper#index %}?sort_by={{ self.sort_state.added|add:'added' }}">Date Added{% if self.sort_current == 'added' %}{{ self.sort_state.added|pm_to_arrow }}{% endif %}</a>,
     <a href="{% url Paper#index %}?sort_by={{ self.sort_state.year|add:'year' }}">Year{% if self.sort_current == 'year' %}{{ self.sort_state.year|pm_to_arrow }}{% endif %}</a>, 
@@ -32,9 +32,11 @@
 <tbody>
     {% for p in self.papers %}
     <tr class="{% cycle 'odd' 'even' %}">
+        <!--
         <td class="left">
             <input type="checkbox" name="ch[]" value="{{ p.id }}" />
         </td>
+        -->
         <td class="middle">
             <div class="title"><a href="{% url Paper#show  p.local_id %}">{{ p.title }}</a></div>
             <div class="authors">
