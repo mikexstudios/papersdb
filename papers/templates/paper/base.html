@@ -43,13 +43,12 @@
         <a href="{% url home %}" class="logo">{{ SITENAME }}</a>
     </h1>
     <ul id="navigation">
-        <li id="home"><a href="{% url home %}">home</a></li>
         <!-- <li><a href="">tour</a></li> -->
         <!-- <li><a href="">pricing</a></li> -->
         <!-- <li><a href="">blog</a></li> -->
-        <li><a href="">documentation</a></li>
+        <!-- <li><a href="">documentation</a></li> -->
         <!-- <li><a href="">support</a></li> -->
-        <li>|</li>
+        <!-- <li>|</li> -->
         {% if user.is_authenticated %}
         <li><a href="">dashboard</a></li>
         <li><a href="{% url auth_logout %}" class="logout">logout</a></li>
