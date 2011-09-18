@@ -16,6 +16,9 @@ from papers import tasks
 import re
 import os
 import shutil #for copy2
+import random, string #for mocking string ids
+
+import mock #for mocking corocodoc API
 
 class GenerateThumbnailTest(TestCase):
 
@@ -116,6 +119,17 @@ class CrocodocTests(TestCase):
         #We should re-save the Paper here to automatically generate thumbnail
         #and upload to crocodoc. But we don't since we are testing the
         #uploading to crocodoc.
+        
+        #We want to mock the crocodoc API library so that our tests don't have
+        #to actually issue HTTP requests.
+        self.patcher = mock.patch('crocodoc.Crocodoc')
+        Mock = self.patcher.start()
+        self.crocodoc_instance = Mock.return_value
+        self.crocodoc_instance.upload.return_value = {'shortId': 'yQZpPm', 
+                'uuid': '8e5b0721-26c4-11df-b354-002170de47d3'}
+        self.crocodoc_instance.get_session.return_value = {'sessionId': 
+                'fgH9qWEwnsJUeB0'}
+        self.crocodoc_instance.delete.return_value = True
 
     def tearDown(self):
         #Delete the crocodoc uploaded paper
@@ -131,6 +145,9 @@ class CrocodocTests(TestCase):
         #any test uploads.
         path = os.path.join(settings.UPLOAD_ROOT, self.user.username)
         shutil.rmtree(path)
+
+        #Stop patching process
+        self.patcher.stop()
 
     def test_crocodoc_upload_paper_post(self):
         '''
@@ -162,6 +179,8 @@ class CrocodocTests(TestCase):
         self.test_crocodoc_upload_paper_post()
         old_session_id = self.p.crocodoc.session_id
 
+        self.crocodoc_instance.get_session.return_value = {'sessionId': 
+                'fgH9qWEwnsJUeB1'} #set a different session ID
         r = self.p.crocodoc.refresh_session_id()
         self.assertTrue(r.get())
 
