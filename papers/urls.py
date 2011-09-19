@@ -11,7 +11,7 @@ from django.conf.urls.defaults import *
 urlpatterns = patterns('papers.resources',
 
     url(r'^create/status/([-\w]+)/$', 'Paper', 
-        kwargs = {'action': 'create_status'},
+        kwargs = {'methods': {'GET': 'create_status'}},
         name='Paper#create_status'),
 
     url(r'^new/manual/$', 'Paper', 
