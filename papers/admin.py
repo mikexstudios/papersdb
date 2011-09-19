@@ -7,8 +7,8 @@ class CrocodocInline(admin.TabularInline):
 
 class PaperAdmin(admin.ModelAdmin):
     list_display = ('id', 'local_id', 'user', 'title', 'authors', 'journal',
-                    'year', 'volume', 'issue', 'pages', 'url', 'file', 'hash',
-                    'updated', 'created')
+                    'year', 'is_asap', 'volume', 'issue', 'pages', 'url',
+                    'file', 'hash', 'updated', 'created')
     list_display_links = ('id', 'title')
 
     inlines = [

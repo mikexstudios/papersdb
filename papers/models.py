@@ -31,6 +31,9 @@ class Paper(models.Model):
     authors = models.TextField()
     journal = models.CharField(blank = True, max_length = 255)
     year = models.PositiveSmallIntegerField(null = True, blank = True)
+    #If asap is set to True, then in the future, we should go back and update
+    #this paper with the correct information.
+    is_asap = models.BooleanField(default = False)
     #NOTE: Volume and issue may not necessarily be numbers.
     volume = models.CharField(blank = True, max_length = 255)
     issue = models.CharField(blank = True, max_length = 255)
