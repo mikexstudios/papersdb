@@ -63,6 +63,12 @@ class Paper(Resource):
             result = tasks.import_paper_url.AsyncResult(task_id)
             if result.ready() and result.successful():
                 data = result.result
+                
+                #Try to detect if the paper is a preprint/ASAP article and warn
+                #user to check the ASAP box if so.
+                if not data.get('year', False):
+                    self.is_asap_detected = True
+
                 #In-place merge of data into post array. Will overwrite any existing
                 #conflicting POST data.
                 POST.update(data)
