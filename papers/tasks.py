@@ -25,7 +25,7 @@ def import_paper_url(url):
     '''
     parser = os.path.join(settings.PARSER_PATH, 'driver.tcl')
     #TODO: urlencode url to remove special characters
-    command = "%s parse '%s'" % (parser, url)
+    command = "tclsh %s parse '%s'" % (parser, url)
     output = Popen(command, stdout=PIPE, shell=True,
              close_fds=True).stdout.read()
     #print output
@@ -65,11 +65,20 @@ def import_paper_url(url):
 
     #Simplify start and end pages to a single field: pages
     #We assume that we'll always have a start page.
-    citation['pages'] = '%s-%s' % (citation.get('start_page'), 
-                                   citation.get('end_page'))
+    citation['pages'] = '%s-%s' % (citation.get('start_page', ''), 
+                                   citation.get('end_page', ''))
     #If either of the pages is empty, we reduce the surrounding characters.
     #ex. '1482 - ' -> '1482'
     citation['pages'] = citation['pages'].strip('- ')
+
+    #Apply some corrections to the data, mainly for ASAP documents. If any of
+    #the given fields has <= 0 numerical value, then we blank the field.
+    for k in ['year', 'volume', 'issue', 'pages']:
+        try:
+            if int(citation[k]) <= 0:
+                del citation[k]
+        except ValueError: #can't cast to int
+            continue
     
     return citation
 
