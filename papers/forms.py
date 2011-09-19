@@ -14,8 +14,8 @@ class PaperForm(forms.ModelForm):
     class Meta:
         model = Paper
         #Files that will appear in form.
-        fields = ('title', 'authors', 'journal', 'year', 'volume', 'issue', 
-                  'pages', 'url', 'file', )
+        fields = ('title', 'authors', 'journal', 'year', 'is_asap', 'volume',
+                  'issue', 'pages', 'url', 'file', )
 
     def clean_authors(self):
         '''
