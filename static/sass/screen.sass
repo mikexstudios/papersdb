@@ -484,6 +484,9 @@ body#new_paper, body#papers_edit
   
 
 body#papers_view
+  #title
+    line-height: 1.3
+    margin-bottom: 0.5em
   #thumbnail
     float: left
     //Push the image down to preserve the layout's whitespace below the searchbar.
@@ -500,20 +503,26 @@ body#papers_view
       border: none
   #paper_info
     margin-left: 200px
-  #title
-    line-height: 1.3
-    margin-bottom: 0.5em
   #information
     line-height: 1.5
+    //We need this overflow so that the clear only applies to this inner float
+    //instead of to the thumbnail float as well.
+    overflow: hidden
     dt
       float: left
+      clear: left
       text-align: right
       width: 60px
     dt:after
       content: ':'
     dd
-      margin-left: 70px
+      margin-left: 80px
       margin-bottom: 0.5em
+      //If we don't have any text in the dd, then we need to set some height 
+      //such that the whitespace there is still preserved or else non-text lines
+      //will have different heights than with-text lines. Set to same as
+      //line-height.
+      min-height: 1.5em
     dt.title
       display: none
     dd.title
