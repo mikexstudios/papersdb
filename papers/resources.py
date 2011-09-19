@@ -130,6 +130,11 @@ class Paper(Resource):
             return redirect('Paper#index')
 
         #Otherwise, invalid form. Re-render the new_manual page with form errors.
+        #Try to detect if the paper is a preprint/ASAP article and warn user
+        #to check the ASAP box if so.
+        if not self.request.POST.get('is_asap', False) and \
+           not self.request.POST.get('year', False):
+            self.is_asap_detected = True
         return self.new_manual.render()
 
     @action
@@ -160,6 +165,11 @@ class Paper(Resource):
     def edit(self, paper_id):
         self.paper = get_object_or_404(models.Paper, user = self.request.user, local_id = paper_id)
         self.form = forms.PaperForm(instance = self.paper)
+
+        #Try to detect if the paper is a preprint/ASAP article and warn
+        #user to check the ASAP box if so.
+        if not self.paper.is_asap and not self.paper.year:
+            self.is_asap_detected = True
 
     @action
     def update(self, paper_id):
@@ -204,6 +214,11 @@ class Paper(Resource):
             return redirect('Paper#show', paper_id)
 
         #Otherwise, invalid form. Re-render the edit page with form errors.
+        #Try to detect if the paper is a preprint/ASAP article and warn user
+        #to check the ASAP box if so.
+        if not self.request.POST.get('is_asap', False) and \
+           not self.request.POST.get('year', False):
+            self.is_asap_detected = True
         return self.edit.render()
 
 

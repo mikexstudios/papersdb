@@ -10,6 +10,7 @@
             //10 sec delay.
             $('#messages').delay(10000).fadeOut('slow');
 
+            {# NOTE: This is also duplicated in edit.html! #}
             var asap_fields = ['#id_year', '#id_volume', '#id_issue', '#id_pages'];
             $('#id_is_asap').change(function() {
                 if (this.checked == true) {

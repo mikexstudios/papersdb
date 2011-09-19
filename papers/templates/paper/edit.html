@@ -11,6 +11,30 @@
             //10 sec delay.
             $('#messages').delay(10000).fadeOut('slow');
 
+            {# NOTE: This is also duplicated in new_manual.html! #}
+            var asap_fields = ['#id_year', '#id_volume', '#id_issue', '#id_pages'];
+            $('#id_is_asap').change(function() {
+                if (this.checked == true) {
+                    //We want to grey out the year, volume, issue, and pages field's
+                    //textboxes
+                    $.each(asap_fields, function (i, v) {
+                        $(v).css('background-color', '#eee');
+                        $(v).css('color', '#999');
+                    });
+
+                    //Set the year box to current year only if it is empty
+                    if ($('#id_year').val().trim() == '') {
+                        $('#id_year').val((new Date()).getFullYear());
+                    }
+                } else {
+                    //Remove the styles
+                    $.each(asap_fields, function (i, v) {
+                        $(v).css('background-color', '');
+                        $(v).css('color', '');
+                    });
+                }
+            });
+
         });
     </script>
 {% endblock %}
@@ -54,11 +78,26 @@
         </div>
     </div>
 
+    {% if self.is_asap_detected %}
+    <div id="asap_detected">
+        <ul class="messages">
+            <li class="notice">It seems like this may be a preprint or ASAP paper.
+            If so, make sure to check the preprint/ASAP box below!</li>
+        </ul>
+    </div>
+    {% endif %}
+
     <div class="field">
         <label for="id_year" class="optional">Year</label> 
         <div class="right">
             {{ self.form.year.errors }}
+            {{ self.form.is_asap.errors }}
+
             {{ self.form.year }}
+            <span id="is_asap">
+                Is preprint/ASAP? {{ self.form.is_asap }}
+                <small>(i.e. check box if article was published in advance of a print version)</small>
+            </span>
         </div>
     </div>
 
