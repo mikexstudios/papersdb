@@ -17,16 +17,35 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'development.db',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+
+#For dotcloud only
+import json
+try:
+    with open('/home/dotcloud/environment.json') as f:
+      env = json.load(f)
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'papersdb',
+            'USER': env['DOTCLOUD_DB_SQL_LOGIN'],
+            'PASSWORD': env['DOTCLOUD_DB_SQL_PASSWORD'],
+            'HOST': env['DOTCLOUD_DB_SQL_HOST'],
+            'PORT': int(env['DOTCLOUD_DB_SQL_PORT']),
+        }
     }
-}
+except IOError:
+    #We are developing on local environment or non-dotcloud server
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'development.db',
+            'USER': '',
+            'PASSWORD': '',
+            'HOST': '',
+            'PORT': '',
+        }
+    }
+
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
