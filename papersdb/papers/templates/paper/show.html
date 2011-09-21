@@ -32,11 +32,11 @@
         {% if self.paper.has_thumbnail %}
             <img src="{% thumbnailurl self.paper %}" width="180" class="paper" />
         {% else %}
-            <img src="{{ MEDIA_URL }}images/paper-generate.gif" width="180" class="generating" />
+            <img src="{{ STATIC_URL }}images/paper-generate.gif" width="180" class="generating" />
         {% endif %}
         {% if self.paper.crocodoc.uuid %}</a>{% endif %}
     {% else %}
-    <a href="{% url Paper#edit self.paper.local_id %}#upload"><img src="{{ MEDIA_URL }}images/placeholder.png" width="180" class="placeholder" /></a>
+    <a href="{% url Paper#edit self.paper.local_id %}#upload"><img src="{{ STATIC_URL }}images/placeholder.png" width="180" class="placeholder" /></a>
     {% endif %}
 </div>
 
