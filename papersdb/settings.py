@@ -28,7 +28,7 @@ try:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'papersdb',
+            'NAME': 'template1', #default dotcloud database
             'USER': env['DOTCLOUD_DB_SQL_LOGIN'],
             'PASSWORD': env['DOTCLOUD_DB_SQL_PASSWORD'],
             'HOST': env['DOTCLOUD_DB_SQL_HOST'],
