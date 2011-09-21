@@ -15,9 +15,12 @@
 #For easy deployment
 #fabric
 
+#For mock objects during testing
+mock
+
 #For testing
-django-test-utils
--e git://github.com/mikexstudios/django-autotest.git#egg=django_autotest
+#django-test-utils
+#-e git://github.com/mikexstudios/django-autotest.git#egg=django_autotest
 
 #For python 2.5:
 #multiprocessing
