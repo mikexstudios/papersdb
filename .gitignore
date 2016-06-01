@@ -2,6 +2,7 @@
 /development.db
 /src
 /celeryd.log
+/celeryd.pid
 /celerybeat-schedule*
 
 # Byte-compiled / optimized / DLL files

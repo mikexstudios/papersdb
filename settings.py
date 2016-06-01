@@ -183,7 +183,7 @@ UPLOAD_ROOT = os.path.join(SITE_ROOT, 'uploads')
 UPLOAD_URL = MEDIA_URL + 'papers'
 
 #CiteULike parser driver.tcl path (no trailing /):
-PARSER_PATH = ''
+PARSER_PATH = 'citeulike-parser-master'
 
 #ImageMagick command (put in %(document)s and $(thumbnail)s):
 IMAGEMAGICK_CMD = "convert -colorspace rgb %(document)s[0] -resize '180' " +\

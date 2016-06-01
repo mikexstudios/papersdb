@@ -13,6 +13,24 @@ free time. I moved to Mendeley instead, and it works pretty well.
 [m]: https://www.mendeley.com/
 [p]: http://papersapp.com/
 
+## Usage
+
+1. After cloning this repository, copy `local_settings.py.sample` to 
+   `local_settings.py`.
+
+2. Build the `Dockerfile`. Note, this `Dockerfile` uses SQLite and Django's
+   development server:
+
+   `docker build -t mikexstudios/papersdb .`
+
+2. Run it like:
+
+   `docker run -d -p 80:80 mikexstudios/papersdb`
+
+   If you want to develop while running the script, mount the current 
+   directory by:
+
+   `docker run -d -p 80:80 -v `pwd`:/usr/src/app mikexstudios/papersdb`
 
 ## Motivation
 
@@ -69,25 +87,6 @@ browser. Users can work from any computer/platform, and all library changes are
 synced automatically between computers. Users can search for papers like they
 naturally do on Google or on the journal websites. Importing papers into the
 website is envisioned as a single click from the browser.
-
-## Usage
-
-1. After cloning this repository, copy `local_settings.py.sample` to 
-   `local_settings.py`.
-
-2. Build the `Dockerfile`. Note, this `Dockerfile` uses SQLite and Django's
-   development server:
-
-   `docker build -t mikexstudios/papersdb .`
-
-2. Run it like:
-
-   `docker run -d -p 80:80 -v .:/usr/src/app mikexstudios/papersdb`
-
-   If you want to develop while running the script, mount the current 
-   directory by:
-
-   `docker run -d -p 80:80 -v `pwd`:/usr/src/app mikexstudios/papersdb`
 
 ## Additional work
 

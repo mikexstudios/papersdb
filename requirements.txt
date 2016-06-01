@@ -34,12 +34,12 @@ django-registration == 0.8
 
 #Messaging/work queue (depends on amqplib, anyjson, billiard, carrot, importlib,
 #and python-dateutil).
-celery == 2.2.10
+celery == 2.2.4
 django-picklefield==0.1.6
 django-celery == 2.2.4
 #For using Django's ORM as a ghetto queue.
 kombu == 1.0.4
-django-kombu == 0.9.2
+django-kombu == 0.9.4
 
 #Interfacing with Crocodoc's API
 -e git://github.com/mikexstudios/bolacha.git@586e1bd0da4db4c21da816f841d7d94d69aebfda#egg=bolacha-dev
