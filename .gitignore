@@ -1,10 +1,19 @@
-.DS_Store
-*.swp
-env/
+/env
+/development.db
+/src
+/celeryd.log
+/celerybeat-schedule*
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django stuff:
+*.log
 local_settings.py
-*.pyc
+/pip-log.txt
+
+# Deployment
 pip-log.txt
 fcgi.pid
-celeryd.log
-celerybeat-schedule*
-development.db
