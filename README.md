@@ -30,7 +30,7 @@ free time. I moved to Mendeley instead, and it works pretty well.
    If you want to develop while running the script, mount the current 
    directory by:
 
-   `docker run -d -p 80:80 -v `pwd`:/usr/src/app mikexstudios/papersdb`
+   ```docker run -d -p 80:80 -v `pwd`:/usr/src/app mikexstudios/papersdb```
 
 ## Motivation
 
