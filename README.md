@@ -1,6 +1,10 @@
 PapersDB
 ==========
 
+**This is no longer developed with last commits in 2011.**
+
+<img src="https://github.com/mikexstudios/papersdb/blob/master/screenshots/add-success.png" width="60%">
+
 PapersDB is an elegant scientific paper management webapp similar to [Mendeley][m]
 or [Papers][p] but operating completely in browser.
 
@@ -12,6 +16,66 @@ free time. I moved to Mendeley instead, and it works pretty well.
 
 [m]: https://www.mendeley.com/
 [p]: http://papersapp.com/
+
+## Screenshots
+
+<table>
+<tr>
+  <td align="center" width="33%">
+   <img src="https://github.com/mikexstudios/papersdb/blob/master/screenshots/home.png" width="100%">
+   <p><strong>Home</strong></p>
+  </td>
+  <td align="center" width="33%">
+    <img src="https://github.com/mikexstudios/papersdb/blob/master/screenshots/login.png" width="100%">
+    <p><strong>Login</strong></p>
+  </td>
+  <td align="center" width="33%">
+    <img src="https://github.com/mikexstudios/papersdb/blob/master/screenshots/signup.png" width="100%">
+    <p><strong>Sign up</strong></p>
+  </td>
+</tr>
+<tr>
+  <td align="center" width="33%">
+   <img src="https://github.com/mikexstudios/papersdb/blob/master/screenshots/dashboard-blank.png" width="100%">
+   <p><strong>Dashboard (blank)</strong></p>
+  </td>
+  <td align="center" width="33%">
+    <img src="https://github.com/mikexstudios/papersdb/blob/master/screenshots/add-auto-url.png" width="100%">
+    <p><strong>Add URL automatically</strong></p>
+  </td>
+  <td align="center" width="33%">
+    <img src="https://github.com/mikexstudios/papersdb/blob/master/screenshots/add-auto-retrieve.png" width="100%">
+    <p><strong>Retriving paper information...</strong></p>
+  </td>
+</tr>
+<tr>
+  <td align="center" width="33%">
+   <img src="https://github.com/mikexstudios/papersdb/blob/master/screenshots/add-auto-filled.png" width="100%">
+   <p><strong>Automatically filled information</strong></p>
+  </td>
+  <td align="center" width="33%">
+    <img src="https://github.com/mikexstudios/papersdb/blob/master/screenshots/add-manual.png" width="100%">
+    <p><strong>Add a paper manually</strong></p>
+  </td>
+  <td align="center" width="33%">
+    <img src="https://github.com/mikexstudios/papersdb/blob/master/screenshots/add-success.png" width="100%">
+    <p><strong>Successfully added paper</strong></p>
+  </td>
+</tr>
+<tr>
+  <td align="center" width="33%">
+   <img src="https://github.com/mikexstudios/papersdb/blob/master/screenshots/paper-entry.png" width="100%">
+   <p><strong>Paper entry view</strong></p>
+  </td>
+  <td align="center" width="33%">
+    <img src="https://github.com/mikexstudios/papersdb/blob/master/screenshots/paper-edit.png" width="100%">
+    <p><strong>Edit paper entry</strong></p>
+  </td>
+  <td align="center" width="33%">
+
+  </td>
+</tr>
+</table>
 
 ## Usage
 
